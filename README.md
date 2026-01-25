@@ -1,171 +1,178 @@
-# shine.js
+# shinejs-react
 
-A library for pretty shadows.
+A modern ESM-only TypeScript package for creating beautiful text and box shadows, optimized for React/Next.js projects.
 
-See the working demo at [http://bigspaceship.github.io/shine.js/](http://bigspaceship.github.io/shine.js/).
+## Installation
 
-## Get Started [![Inline docs](http://inch-ci.org/github/bigspaceship/shine.js.svg?branch=master)](http://inch-ci.org/github/bigspaceship/shine.js)
-
-Install using bower: `bower install shine` or [download as zip](https://github.com/bigspaceship/shine.js/archive/master.zip) or [fork on GitHub](https://github.com/bigspaceship/shine.js).
-
-Create a Shine.js instance for each DOM element you'd like to shine:
-
-```javascript
-var shine = new Shine(document.getElementById('my-shine-object'));
+```bash
+npm install shinejs-react
+# or
+yarn add shinejs-react
 ```
 
-Change the light position and make sure to redraw:
+## Usage
 
-```javascript
-shine.light.position.x = window.innerWidth * 0.5;
-shine.light.position.y = window.innerHeight * 0.5;
-shine.draw(); // make sure to re-draw
+The `shinejs-react` library provides a `useShine` React hook to easily apply dynamic text and box shadows to your components.
+
+### `useShine(ref, config)`
+
+This hook initializes the `Shine` effect on a DOM element referenced by `ref`.
+
+- `ref`: A `React.RefObject<HTMLElement>` pointing to the DOM element you want to apply the effect to.
+- `config`: (Optional) An object to customize the shadow appearance. This corresponds to the `ShineConfigSettings` interface.
+
+The hook also sets up a `mousemove` event listener on `window` to update the light source's position, making the shadow follow the mouse by default.
+
+### Example
+
+```tsx
+import * as React from "react";
+import { useRef } from "react";
+import { useShine } from "shinejs-react";
+
+function MyShiningText() {
+  const textRef = useRef<HTMLHeadingElement>(null);
+  useShine(textRef, {
+    numSteps: 10,
+    opacity: 0.2,
+    offset: 0.2,
+    blur: 60,
+    shadowRGB: { r: 255, g: 255, b: 0 } // Yellow shadow
+  });
+
+  return (
+    <h1 ref={textRef} style={{ fontSize: "4em", color: "white", position: "relative" }}>
+      Hello Shine!
+    </h1>
+  );
+}
+
+export default MyShiningText;
+```
+
+### Custom Light Animation
+
+For more advanced light source control (like the auto-pilot demo), you can instantiate the `Shine` class directly and manage its `light.position` and `draw()` calls.
+
+```tsx
+import * as React from "react";
+import { useEffect, useRef, useState } from "react";
+import { Shine, ShineConfigSettings } from "shinejs-react";
+
+function AutoPilotText({ config }: { config?: ShineConfigSettings }) {
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const [shineInstance, setShineInstance] = useState<Shine | null>(null);
+  const animationFrameId = useRef<number>();
+
+  useEffect(() => {
+    if (headlineRef.current) {
+      const instance = new Shine(headlineRef.current, config);
+      setShineInstance(instance);
+
+      const handleMouseMove = (event: MouseEvent) => {
+        if (instance.light) {
+          instance.light.position.x = event.clientX;
+          instance.light.position.y = event.clientY;
+          instance.draw();
+        }
+      };
+
+      window.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
+        instance.destroy();
+      };
+    }
+  }, [config]);
+
+  useEffect(() => {
+    if (shineInstance) {
+      const update = () => {
+        const time = new Date().getTime();
+        const speed = 0.00025;
+        const phase = time * speed * 2.0 * Math.PI;
+        const radiusX = window.innerWidth * 0.5;
+        const radiusY = window.innerHeight * 0.5;
+
+        shineInstance.light.position.x = radiusX + radiusX * Math.cos(phase);
+        shineInstance.light.position.y = radiusY + radiusY * Math.sin(phase * 0.7);
+        shineInstance.draw();
+
+        animationFrameId.current = window.requestAnimationFrame(update);
+      };
+
+      animationFrameId.current = window.requestAnimationFrame(update);
+
+      return () => {
+        if (animationFrameId.current) {
+          window.cancelAnimationFrame(animationFrameId.current);
+        }
+      };
+    }
+  }, [shineInstance]);
+
+  return (
+    <h1 ref={headlineRef} style={{ fontSize: "4em", color: "white", position: "relative" }}>
+      Auto-Pilot
+    </h1>
+  );
+}
+
+export default AutoPilotText;
 ```
 
 ## Configuration
 
-Each shine instance has a property pointing to an instance of `shinejs.Config`. One config can be shared amongst multiple shine instances.
+The `useShine` hook and `Shine` class accept an optional configuration object to customize the shadow effect:
 
-When a config value changes, `shine.draw()` needs to be called to re-draw with the new settings.
-
-Change the shadow of a shine instance:
-
-```javascript
-shine.config.opacity = 0.1;
-shine.config.blur = 0.2;
-shine.draw(); // make sure to re-draw
+```typescript
+type ShineConfigSettings = {
+  numSteps?: number; // Number of shadow layers
+  opacity?: number; // Base opacity of shadows (0.0 - 1.0)
+  opacityPow?: number; // Power for opacity falloff
+  offset?: number; // Base offset distance for shadows
+  offsetPow?: number; // Power for offset falloff
+  blur?: number; // Base blur radius for shadows
+  blurPow?: number; // Power for blur falloff
+  shadowRGB?: Color; // RGB color for the shadows (e.g., { r: 0, g: 0, b: 0 } for black)
+};
 ```
 
-Create a shared `shinejs.Config` instance:
+## Development
 
-```javascript
-// all parameters are optional and can be changed later
-var config = new shinejs.Config({
-  numSteps: 4,
-  opacity: 0.2,
-  shadowRGB: new shinejs.Color(255, 0, 0)
-});
+### Build
 
-// pass the config in the constructor
-var shineA = new Shine(document.getElementById('my-shine-object-a'), config);
-var shineB = new Shine(document.getElementById('my-shine-object-b'), config);
-
-// or assign it to an instance later
-var shineC = new Shine(document.getElementById('my-shine-object-c'));
-shineC.config = config;
-shineC.draw(); // make sure to re-draw
-
+```bash
+npm run build
 ```
 
-## Shine API
+This will compile the TypeScript code and generate ESM JavaScript files and type declarations in the `dist` directory.
 
-*Note: `Shine` is also mapped to `shinejs.Shine`. Use the long version if `Shine` is already defined.*
+### Test
 
-### Shine(domElement, optConfig, optClassPrefix, optShadowProperty)
+```bash
+npm test
+```
 
-The Shine constructor. Instantiate as `new Shine(...)` to create a new instance.
+Runs the test suite using `vitest`.
 
-| Parameter | Type | Description
-| --- | --- | ---
-| **domElement** | `!HTMLElement` | The DOM element to apply the shine effect to.
-| **optConfig** | `?shinejs.Config=` | Optional config instance. If no instance is passed it a new instance with default values will be stored in the `config` property.
-| **optClassPrefix** | `?string=` | Optional class prefix that will be applied to all shine DOM elements. Defaults to `shine-`.
-| **optShadowProperty** | `?string=` | Optional property name that the shadow will be applied to. Overrides the automatic detection for use of either `textShadow` or `boxShadow`. The value will be applied as `element.style[shadowProperty] = '...'` and automatically prefixed for legacy browsers (e.g. `MozBoxShadow`).
+### Lint
 
-### Shine.prototype.draw()
+```bash
+npm run lint
+```
 
-Draws all shadows based on the current light position. Call this method whenever a shine parameter is changed.
+Lints the codebase using ESLint.
 
-### Shine.prototype.destroy()
+### Run Demos
 
-Releases all resources and removes event listeners. Destroyed instance can't be reused and must be discarded.
+```bash
+npm run dev
+```
 
-### Shine.prototype.updateContent(optText)
+Starts the Next.js development server for the demo application. Access the demos at `http://localhost:3000`.
 
-Re-initializes all shadows. Use this when you want to change the text or the domElement's contents have changed.
+## License
 
-| Parameter | Type | Description
-| --- | --- | ---
-| **optText** | `?string=` | If defined, will replace the DOM element's textContent. If omitted, the content will be read from the DOM element.
-
-### Shine.prototype.enableAutoUpdates()
-
-Adds DOM event listeners to automatically update all properties.
-
-### Shine.prototype.disableAutoUpdates()
-
-Removes DOM event listeners to automatically update all properties.
-
-### Shine Properties
-
-| Property | Type | Description
-| --- | --- | ---
-| **domElement** | `HTMLElement` | The DOM element to apply the shine effect to.
-| **config** | `shinejs.Config` | Stores all config parameters.
-| **light** | `shinejs.Light` | Stores the light position and intensity.
-
-## shinejs.Config API
-
-### shinejs.Config(optSettings)
-
-The shine config constructor. Pass an optional settings object from which to read values.
-
-| Parameter | Type | Description
-| --- | --- | ---
-| **optSettings** | `?Object=` | An optional object containing config parameters.
-
-### shinejs.Config Properties
-
-| Property | Type | Default | Description
-| --- | --- | --- | ---
-|**numSteps** | `number` | `8` | The number of steps drawn in each shadow
-|**opacity** | `number` | `0.1` | The opacity of each shadow (range: 0...1)
-|**opacityPow** | `number` | `1.2` | The exponent applied to each step's opacity (1.0 = linear opacity).
-|**offset** | `number` | `0.15` | Larger offsets create longer shadows
-|**offsetPow** | `number` | `1.8` | The exponent applied to each step's offset (1.0 = linear offset).
-|**blur** | `number` | `40` | The strength of the shadow blur.
-|**blurPow** | `number` | `1.4` | The exponent applied to each step's blur (1.0 = linear blur).
-|**shadowRGB** | `shinejs.Color` | `new shinejs.Color(0, 0, 0)` | The shadow color in r, g, b (0...255)
-
-## shinejs.Light API
-
-### shinejs.Light(optPosition)
-
-The light constructor. Pass an optional position to apply by default.
-
-| Parameter | Type | Description
-| --- | --- | ---
-| **optPosition** | `?shinejs.Point=` | An position. Defaults to `new shinejs.Point(0, 0)`.
-
-### shinejs.Light Properties
-
-| Property | Type | Default | Description
-| --- | --- | --- | ---
-|**position** | `shinejs.Point` | `new shinejs.Point(0, 0)` | The position of this light.
-|**intensity** | `number` | `1.0` | The intensity of this light. Gets multiplied with shadow opacity.
-
-## shinejs.Point API
-
-### shinejs.Point(x, y)
-
-A 2D point class.
-
-| Parameter | Type | Description
-| --- | --- | ---
-| **x** | `number=` | The x-coordinate. Defaults to `0`.
-| **y** | `number=` | The y-coordinate. Defaults to `0`.
-
-### shinejs.Point Properties
-
-| Property | Type | Default | Description
-| --- | --- | --- | ---
-|**x** | `number` | `0` | The x-coordinate.
-|**y** | `number` | `0` | The y-coordinate.
-
-### shinejs.Point.prototype.delta(p)
-
-Returns a new instance of `shinejs.Point` with the x- and y-distance between this instance and the point `p`.
-
-| Parameter | Type | Description
-| --- | --- | ---
-| **p** | `shinejs.Point` | The point to which to calculate the distance to. Distance will be expressed as `this.x - p.x` and `this.y - p.y`.
+MIT
