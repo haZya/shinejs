@@ -5,13 +5,13 @@ import { Color } from "./color";
 import { Shine } from "./shine";
 
 export type UseShineSettings = ShineConfigSettings & {
-  followMouse?: boolean;
+  lightPosition?: { x: number; y: number } | "followMouse";
 };
 
 export type ShineUpdaterConfig = {
   content?: string;
   light?: {
-    position?: { x: number; y: number };
+    position?: { x: number; y: number } | "followMouse";
     intensity?: number;
   };
   config?: {
@@ -28,30 +28,26 @@ export type ShineUpdaterConfig = {
 
 export function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSettings) {
   const [shineInstance, setShineInstance] = useState<Shine | null>(null);
+  const [isFollowingMouse, setIsFollowingMouse] = useState(false);
 
   const configJson = config ? JSON.stringify(config) : "{}";
 
   useEffect(() => {
     if (ref.current) {
-      const { followMouse = true, ...shineConfig } = JSON.parse(configJson);
+      const { lightPosition: initialLightPosition = "followMouse", ...shineConfig }: UseShineSettings = JSON.parse(configJson);
       const instance = new Shine(ref.current, shineConfig);
       setShineInstance(instance);
 
-      if (followMouse) {
-        const handleMouseMove = (event: MouseEvent) => {
-          if (instance.light) {
-            instance.light.position.x = event.clientX;
-            instance.light.position.y = event.clientY;
-            instance.draw();
-          }
-        };
-
-        window.addEventListener("mousemove", handleMouseMove);
-
-        return () => {
-          window.removeEventListener("mousemove", handleMouseMove);
-          instance.destroy();
-        };
+      if (initialLightPosition === "followMouse") {
+        setIsFollowingMouse(true);
+      }
+      else if (typeof initialLightPosition === "object" && initialLightPosition.x !== undefined && initialLightPosition.y !== undefined) {
+        setIsFollowingMouse(false);
+        instance.light.position.x = initialLightPosition.x;
+        instance.light.position.y = initialLightPosition.y;
+      }
+      else {
+        setIsFollowingMouse(false);
       }
 
       return () => {
@@ -59,6 +55,27 @@ export function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSe
       };
     }
   }, [ref, configJson]);
+
+  useEffect(() => {
+    if (!shineInstance)
+      return;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      if (shineInstance.light) {
+        shineInstance.light.position.x = event.clientX;
+        shineInstance.light.position.y = event.clientY;
+        shineInstance.draw();
+      }
+    };
+
+    if (isFollowingMouse) {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [shineInstance, isFollowingMouse]);
 
   const update = useCallback((newConfig: ShineUpdaterConfig) => {
     if (!shineInstance)
@@ -72,9 +89,14 @@ export function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSe
     }
 
     if (newConfig.light) {
-      if (newConfig.light.position) {
+      if (newConfig.light.position === "followMouse") {
+        setIsFollowingMouse(true);
+        needsRedraw = true; // Still needs redraw to reflect potential new state
+      }
+      else if (newConfig.light.position) {
         shineInstance.light.position.x = newConfig.light.position.x;
         shineInstance.light.position.y = newConfig.light.position.y;
+        setIsFollowingMouse(false); // Disable mouse follow if position is explicitly set
         needsRedraw = true;
       }
       if (typeof newConfig.light.intensity === "number") {
@@ -99,7 +121,7 @@ export function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSe
     if (needsRedraw) {
       shineInstance.draw();
     }
-  }, [shineInstance]);
+  }, [shineInstance, setIsFollowingMouse]);
 
   return { shine: shineInstance, update };
 }
