@@ -13,7 +13,7 @@ const DynamicDemo: React.FC = () => {
   const [intensity, setIntensity] = useState(1);
 
   const { update } = useShine(headlineRef, {
-    followMouse: true,
+    lightPosition: "followMouse",
     shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
   });
 

@@ -9,7 +9,6 @@ const ChangeTextDemo: React.FC = () => {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   
   const { update } = useShine(headlineRef, {
-    followMouse: true, // true by default, but explicitly stating for clarity
     shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
   });
 

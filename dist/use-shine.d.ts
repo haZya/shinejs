@@ -2,7 +2,10 @@ import type { RefObject } from "react";
 import type { ShineConfigSettings } from "./config";
 import { Shine } from "./shine";
 export type UseShineSettings = ShineConfigSettings & {
-    followMouse?: boolean;
+    lightPosition?: {
+        x: number;
+        y: number;
+    } | "followMouse";
 };
 export type ShineUpdaterConfig = {
     content?: string;
@@ -10,7 +13,7 @@ export type ShineUpdaterConfig = {
         position?: {
             x: number;
             y: number;
-        };
+        } | "followMouse";
         intensity?: number;
     };
     config?: {
