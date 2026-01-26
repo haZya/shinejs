@@ -6,7 +6,9 @@ export declare class Splitter {
     wordElements: HTMLSpanElement[];
     elements: HTMLElement[];
     text: string;
+    originalHTML: string;
     constructor(domElement: HTMLElement, classPrefix?: string);
+    destroy(): void;
     split(optText?: string, preserveChildren?: boolean): void;
     private splitChildren;
     private splitText;

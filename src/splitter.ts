@@ -6,12 +6,20 @@ export class Splitter {
   wordElements: HTMLSpanElement[] = [];
   elements: HTMLElement[] = [];
   text: string = "";
+  originalHTML: string;
 
   constructor(domElement: HTMLElement, classPrefix = "") {
     this.domElement = domElement;
     this.classPrefix = classPrefix;
     this.wrapperElement = document.createElement("div");
     this.maskElement = document.createElement("div");
+    this.originalHTML = domElement.innerHTML;
+  }
+
+  destroy(): void {
+    if (this.domElement) {
+      this.domElement.innerHTML = this.originalHTML;
+    }
   }
 
   split(optText?: string, preserveChildren?: boolean): void {
@@ -23,6 +31,7 @@ export class Splitter {
 
     if (optText) {
       this.domElement.textContent = this.text;
+      this.originalHTML = this.domElement.innerHTML;
     }
 
     if (preserveChildren) {
