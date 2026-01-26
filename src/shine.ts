@@ -51,7 +51,12 @@ export class Shine {
     this.disableAutoUpdates();
     this.disableMouseTracking();
     this.shadows = [];
-    this.splitter = null!;
+
+    if (this.splitter) {
+      this.splitter.destroy();
+      this.splitter = null!;
+    }
+
     this.handleAutoUpdate = null!;
     this.light = null!;
     this.config = null!;
