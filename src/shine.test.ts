@@ -50,11 +50,13 @@ describe("shine", () => {
     shine.destroy();
   });
 
-  it("should call draw on all child shadows", () => {
+  it("should call draw on all child shadows", async () => {
     const shine = new Shine(element);
     const spies = shine.shadows.map(s => vi.spyOn(s, "draw"));
 
     shine.draw();
+
+    await new Promise(resolve => requestAnimationFrame(resolve));
 
     spies.forEach(spy => expect(spy).toHaveBeenCalled());
     shine.destroy();

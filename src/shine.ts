@@ -4,6 +4,7 @@ import { Light } from "./light";
 import { Shadow } from "./shadow";
 import { Splitter } from "./splitter";
 import { StyleInjector } from "./style-injector";
+import { debounce } from "./timing";
 
 export type ShadowProperty = "textShadow" | "boxShadow";
 
@@ -16,7 +17,9 @@ export class Shine {
   shadows: Shadow[] = [];
   splitter: Splitter;
   areAutoUpdatesEnabled = true;
-  private fnDrawHandler: (() => void) | null = null;
+
+  private rafId: number | null = null;
+  private handleAutoUpdate: () => void;
 
   constructor(
     domElement: HTMLElement,
@@ -34,24 +37,40 @@ export class Shine {
     this.shadowProperty = optShadowProperty || (this.elementHasTextOnly(domElement) ? "textShadow" : "boxShadow");
     this.splitter = new Splitter(domElement, this.classPrefix);
 
+    this.handleAutoUpdate = debounce(() => {
+      this.recalculatePositions();
+      this.draw();
+    }, 1000 / 15);
+
     this.updateContent();
   }
 
   destroy(): void {
     this.disableAutoUpdates();
-    this.shadows.forEach(shadow => shadow.destroy());
     this.shadows = [];
     this.splitter = null!;
-    this.fnDrawHandler = null;
+    this.handleAutoUpdate = null!;
     this.light = null!;
     this.config = null!;
     this.domElement = null!;
   }
 
   draw(): void {
-    if (!this.light || !this.config)
+    if (!this.light || !this.config || !this.shadows.length)
       return;
-    this.shadows.forEach(shadow => shadow.draw(this.light, this.config));
+
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+    }
+
+    this.rafId = requestAnimationFrame(() => {
+      this.shadows.forEach(shadow => shadow.draw(this.light, this.config));
+      this.rafId = null;
+    });
+  }
+
+  recalculatePositions(): void {
+    this.shadows.forEach(shadow => shadow.recalculatePosition());
   }
 
   updateContent(optText?: string): void {
@@ -60,22 +79,21 @@ export class Shine {
 
     StyleInjector.getInstance().inject(this.getCSS());
 
-    this.shadows.forEach(shadow => shadow.destroy());
     this.shadows = [];
 
     this.splitter.split(optText, !optText && !this.elementHasTextOnly(this.domElement));
 
-    const shadowProperty = this.getPrefixed(this.shadowProperty);
-
     this.splitter.elements.forEach((element) => {
       const shadow = new Shadow(element);
-      shadow.shadowProperty = shadowProperty;
+      shadow.shadowProperty = this.shadowProperty;
       this.shadows.push(shadow);
     });
 
     if (wereAutoUpdatesEnabled) {
       this.enableAutoUpdates();
     }
+    // Force a position update since we just created new shadows
+    this.recalculatePositions();
     this.draw();
   }
 
@@ -83,24 +101,17 @@ export class Shine {
     this.disableAutoUpdates();
     this.areAutoUpdatesEnabled = true;
 
-    this.fnDrawHandler = this.draw.bind(this);
-
-    window.addEventListener("scroll", this.fnDrawHandler, false);
-    window.addEventListener("resize", this.fnDrawHandler, false);
-
-    this.shadows.forEach(shadow => shadow.enableAutoUpdates());
+    window.addEventListener("scroll", this.handleAutoUpdate, false);
+    window.addEventListener("resize", this.handleAutoUpdate, false);
   }
 
   disableAutoUpdates(): void {
     this.areAutoUpdatesEnabled = false;
 
-    if (this.fnDrawHandler) {
-      window.removeEventListener("scroll", this.fnDrawHandler, false);
-      window.removeEventListener("resize", this.fnDrawHandler, false);
-      this.fnDrawHandler = null;
+    if (this.handleAutoUpdate) {
+      window.removeEventListener("scroll", this.handleAutoUpdate, false);
+      window.removeEventListener("resize", this.handleAutoUpdate, false);
     }
-
-    this.shadows.forEach(shadow => shadow.disableAutoUpdates());
   }
 
   private getCSS(): string {
@@ -126,21 +137,6 @@ export class Shine {
         bottom: 0;
       }
     `;
-  }
-
-  private getPrefixed(property: string): string {
-    const style = this.domElement.style;
-    const prefixes = ["webkit", "ms", "Moz", "O"];
-    const suffix = property.charAt(0).toUpperCase() + property.substring(1);
-
-    for (const prefix of prefixes) {
-      const prefixed = `${prefix}${suffix}`;
-      if (prefixed in style) {
-        return prefixed;
-      }
-    }
-
-    return property;
   }
 
   private elementHasTextOnly(element: HTMLElement): boolean {

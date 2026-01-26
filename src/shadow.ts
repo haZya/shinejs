@@ -2,34 +2,15 @@ import type { Color } from "./color";
 import type { ShineConfig } from "./config";
 import type { Light } from "./light";
 import { Point } from "./point";
-import * as Timing from "./timing";
 
 export class Shadow {
   position: Point = new Point(0, 0);
   domElement: HTMLElement;
-  shadowProperty = "textShadow";
-
-  private fnHandleViewportUpdate: () => void;
-  private fnHandleWindowLoaded: () => void;
+  shadowProperty: "textShadow" | "boxShadow" = "textShadow";
 
   constructor(domElement: HTMLElement) {
     this.domElement = domElement;
-    this.fnHandleWindowLoaded = this.handleWindowLoaded.bind(this);
-
-    // fnHandleViewportUpdate is bound in enableAutoUpdates
-    this.fnHandleViewportUpdate = () => {}; // Placeholder
-
-    this.enableAutoUpdates();
-    this.handleViewportUpdate();
-
-    window.addEventListener("load", this.fnHandleWindowLoaded, false);
-  }
-
-  destroy(): void {
-    window.removeEventListener("load", this.fnHandleWindowLoaded, false);
-    this.disableAutoUpdates();
-    this.domElement = null!;
-    this.position = null!;
+    this.recalculatePosition();
   }
 
   draw(light: Light, config: ShineConfig): void {
@@ -63,36 +44,14 @@ export class Shadow {
   }
 
   drawShadows(shadows: string[]): void {
-    (this.domElement.style as any)[this.shadowProperty] = shadows.join(", ");
+    this.domElement.style[this.shadowProperty] = shadows.join(", ");
   }
 
-  enableAutoUpdates(): void {
-    this.disableAutoUpdates();
-    this.fnHandleViewportUpdate = Timing.debounce(this.handleViewportUpdate, 1000 / 15, this);
-    document.addEventListener("resize", this.fnHandleViewportUpdate, false);
-    window.addEventListener("resize", this.fnHandleViewportUpdate, false);
-    window.addEventListener("scroll", this.fnHandleViewportUpdate, false);
-  }
-
-  disableAutoUpdates(): void {
-    if (!this.fnHandleViewportUpdate) {
-      return;
-    }
-    document.removeEventListener("resize", this.fnHandleViewportUpdate, false);
-    window.removeEventListener("resize", this.fnHandleViewportUpdate, false);
-    window.removeEventListener("scroll", this.fnHandleViewportUpdate, false);
-    this.fnHandleViewportUpdate = () => {}; // Clear out the debounced function
-  }
-
-  private handleViewportUpdate(): void {
+  recalculatePosition(): void {
     if (!this.domElement)
       return;
     const boundingRect = this.domElement.getBoundingClientRect();
     this.position.x = boundingRect.left + boundingRect.width * 0.5;
     this.position.y = boundingRect.top + boundingRect.height * 0.5;
-  }
-
-  private handleWindowLoaded(): void {
-    this.handleViewportUpdate();
   }
 }
