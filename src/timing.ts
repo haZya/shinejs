@@ -15,4 +15,3 @@ export function debounce(fnCallback: AnyFunction, delay = 0, context?: any): Any
     }, delay);
   };
 }
-

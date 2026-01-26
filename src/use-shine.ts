@@ -1,17 +1,18 @@
 import type { RefObject } from "react";
 import type { ShineConfigSettings } from "./config";
+import type { Point } from "./point";
 import { useCallback, useEffect, useState } from "react";
 import { Color } from "./color";
 import { Shine } from "./shine";
 
 export type UseShineSettings = ShineConfigSettings & {
-  lightPosition?: { x: number; y: number } | "followMouse";
+  lightPosition?: Point | "followMouse";
 };
 
 export type ShineUpdaterConfig = {
   content?: string;
   light?: {
-    position?: { x: number; y: number } | "followMouse";
+    position?: Point | "followMouse";
     intensity?: number;
   };
   config?: {
@@ -22,7 +23,7 @@ export type ShineUpdaterConfig = {
     offsetPow?: number;
     blur?: number;
     blurPow?: number;
-    shadowRGB?: { r: number; g: number; b: number };
+    shadowRGB?: Color;
   };
 };
 
