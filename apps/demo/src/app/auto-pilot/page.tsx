@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { Color, useShine } from 'shinejs-react';
+import { Color, Point, useShine } from 'shinejs-react';
 import usePrefersDarkMode from '../hooks/use-dark-mode';
 
 const AutoPilotDemo: React.FC = () => {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const { shine, update } = useShine(headlineRef, {
-    lightPosition: { x: 0, y: 0 },
+    lightPosition: new Point(),
     shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
    });
   const animationFrameId = useRef<number>(null);
@@ -25,7 +25,7 @@ const AutoPilotDemo: React.FC = () => {
         const newX = radiusX + radiusX * Math.cos(phase);
         const newY = radiusY + radiusY * Math.sin(phase * 0.7);
 
-        update({ light: { position: { x: newX, y: newY } } });
+        update({ light: { position: new Point(newX, newY) } });
 
         animationFrameId.current = window.requestAnimationFrame(animate);
       };
