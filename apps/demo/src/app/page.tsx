@@ -31,6 +31,11 @@ export default function Home() {
               Dynamic Properties Demo
             </Link>
           </li>
+          <li>
+            <Link href="/class-demo" className="text-blue-400 hover:text-blue-600">
+              Direct Class Usage Demo
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

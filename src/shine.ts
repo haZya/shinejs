@@ -2,6 +2,7 @@ import type { ShineConfigSettings } from "./config";
 import { ShineConfig } from "./config";
 import { Light } from "./light";
 import { Shadow } from "./shadow";
+import { sharedMouseMonitor } from "./shared-mouse-monitor";
 import { Splitter } from "./splitter";
 import { StyleInjector } from "./style-injector";
 import { debounce } from "./timing";
@@ -20,6 +21,7 @@ export class Shine {
 
   private rafId: number | null = null;
   private handleAutoUpdate: () => void;
+  private unsubscribeMouseMonitor: (() => void) | null = null;
 
   constructor(
     domElement: HTMLElement,
@@ -47,6 +49,7 @@ export class Shine {
 
   destroy(): void {
     this.disableAutoUpdates();
+    this.disableMouseTracking();
     this.shadows = [];
     this.splitter = null!;
     this.handleAutoUpdate = null!;
@@ -111,6 +114,27 @@ export class Shine {
     if (this.handleAutoUpdate) {
       window.removeEventListener("scroll", this.handleAutoUpdate, false);
       window.removeEventListener("resize", this.handleAutoUpdate, false);
+    }
+  }
+
+  enableMouseTracking(): void {
+    if (this.unsubscribeMouseMonitor) {
+      return;
+    }
+
+    this.unsubscribeMouseMonitor = sharedMouseMonitor.subscribe((x, y) => {
+      if (this.light) {
+        this.light.position.x = x;
+        this.light.position.y = y;
+        this.draw();
+      }
+    });
+  }
+
+  disableMouseTracking(): void {
+    if (this.unsubscribeMouseMonitor) {
+      this.unsubscribeMouseMonitor();
+      this.unsubscribeMouseMonitor = null;
     }
   }
 

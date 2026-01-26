@@ -15,6 +15,7 @@ export declare class Shine {
     areAutoUpdatesEnabled: boolean;
     private rafId;
     private handleAutoUpdate;
+    private unsubscribeMouseMonitor;
     constructor(domElement: HTMLElement, optConfig?: ShineConfigSettings, optClassPrefix?: string, optShadowProperty?: ShadowProperty);
     destroy(): void;
     draw(): void;
@@ -22,6 +23,8 @@ export declare class Shine {
     updateContent(optText?: string): void;
     enableAutoUpdates(): void;
     disableAutoUpdates(): void;
+    enableMouseTracking(): void;
+    disableMouseTracking(): void;
     private getCSS;
     private elementHasTextOnly;
 }

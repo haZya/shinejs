@@ -89,4 +89,38 @@ describe("shine", () => {
 
     shine.destroy();
   });
+
+  it("should add and remove event listeners for mouse tracking", () => {
+    const addSpy = vi.spyOn(window, "addEventListener");
+    const removeSpy = vi.spyOn(window, "removeEventListener");
+
+    const shine = new Shine(element);
+
+    // First subscriber should trigger window listener
+    shine.enableMouseTracking();
+    expect(addSpy).toHaveBeenCalledWith("mousemove", expect.any(Function));
+
+    // Cleanup should remove window listener (assuming it's the only subscriber)
+    shine.disableMouseTracking();
+    expect(removeSpy).toHaveBeenCalledWith("mousemove", expect.any(Function));
+
+    shine.destroy();
+  });
+
+  it("should update light position and draw on mouse move when tracking is enabled", async () => {
+    const shine = new Shine(element);
+    const drawSpy = vi.spyOn(shine, "draw");
+
+    shine.enableMouseTracking();
+
+    // Simulate mouse move
+    const event = new MouseEvent("mousemove", { clientX: 100, clientY: 200 });
+    window.dispatchEvent(event);
+
+    expect(shine.light.position.x).toBe(100);
+    expect(shine.light.position.y).toBe(200);
+    expect(drawSpy).toHaveBeenCalled();
+
+    shine.destroy();
+  });
 });

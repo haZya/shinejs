@@ -1,10 +1,10 @@
 import type { RefObject } from "react";
 import type { ShineConfigSettings } from "./config";
 import type { Point } from "./point";
-import { Color } from "./color";
 import { Shine } from "./shine";
 export type UseShineSettings = ShineConfigSettings & {
     lightPosition?: Point | "followMouse";
+    lightIntensity?: number;
 };
 export type ShineUpdaterConfig = {
     content?: string;
@@ -12,16 +12,7 @@ export type ShineUpdaterConfig = {
         position?: Point | "followMouse";
         intensity?: number;
     };
-    config?: {
-        numSteps?: number;
-        opacity?: number;
-        opacityPow?: number;
-        offset?: number;
-        offsetPow?: number;
-        blur?: number;
-        blurPow?: number;
-        shadowRGB?: Color;
-    };
+    config?: ShineConfigSettings;
 };
 export declare function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSettings): {
     shine: Shine | null;
