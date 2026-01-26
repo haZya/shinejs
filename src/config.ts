@@ -32,10 +32,29 @@ export class ShineConfig {
       return;
     }
 
-    for (const key in this) {
-      if (key in settings) {
-        (this as any)[key] = (settings as any)[key];
-      }
+    if (settings.numSteps !== undefined) {
+      this.numSteps = settings.numSteps;
+    }
+    if (settings.opacity !== undefined) {
+      this.opacity = settings.opacity;
+    }
+    if (settings.opacityPow !== undefined) {
+      this.opacityPow = settings.opacityPow;
+    }
+    if (settings.offset !== undefined) {
+      this.offset = settings.offset;
+    }
+    if (settings.offsetPow !== undefined) {
+      this.offsetPow = settings.offsetPow;
+    }
+    if (settings.blur !== undefined) {
+      this.blur = settings.blur;
+    }
+    if (settings.blurPow !== undefined) {
+      this.blurPow = settings.blurPow;
+    }
+    if (settings.shadowRGB !== undefined) {
+      this.shadowRGB = settings.shadowRGB;
     }
   }
 }

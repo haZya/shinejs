@@ -13,14 +13,15 @@ export declare class Shine {
     shadows: Shadow[];
     splitter: Splitter;
     areAutoUpdatesEnabled: boolean;
-    private fnDrawHandler;
+    private rafId;
+    private handleAutoUpdate;
     constructor(domElement: HTMLElement, optConfig?: ShineConfigSettings, optClassPrefix?: string, optShadowProperty?: ShadowProperty);
     destroy(): void;
     draw(): void;
+    recalculatePositions(): void;
     updateContent(optText?: string): void;
     enableAutoUpdates(): void;
     disableAutoUpdates(): void;
     private getCSS;
-    private getPrefixed;
     private elementHasTextOnly;
 }
