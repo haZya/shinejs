@@ -55,7 +55,7 @@ export class Splitter {
       this.elements.push(element);
     });
 
-    this.finalizeSplit();
+    this.finalizeSplit(false);
   }
 
   private splitText(): void {
@@ -93,13 +93,19 @@ export class Splitter {
       }
     }
 
-    this.finalizeSplit();
+    this.finalizeSplit(true);
   }
 
-  private finalizeSplit(): void {
+  private finalizeSplit(isTextSplit: boolean): void {
     this.maskElement.innerHTML = this.wrapperElement.innerHTML;
     this.maskElement.className = `${this.classPrefix}mask`;
+    this.maskElement.setAttribute("aria-hidden", "true");
     this.wrapperElement.appendChild(this.maskElement);
+
+    if (isTextSplit && this.text) {
+      this.domElement.setAttribute("aria-label", this.text);
+      this.wrapperElement.setAttribute("aria-hidden", "true");
+    }
 
     this.domElement.innerHTML = "";
     this.domElement.appendChild(this.wrapperElement);
