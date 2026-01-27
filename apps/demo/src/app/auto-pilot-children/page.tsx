@@ -1,30 +1,35 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
-import { useShine } from 'shinejs-react';
+import { Point, useShine } from 'shinejs-react';
+import img1 from "./img-1.jpg";
+import img2 from "./img-2.jpg";
+import img3 from "./img-3.jpg";
 
 const AutoPilotChildrenDemo: React.FC = () => {
   const headlineRef = useRef<HTMLDivElement>(null);
-  const shineInstance = useShine(headlineRef);
-  const animationFrameId = useRef<number>();
+  const { shine, update } = useShine(headlineRef, { lightIntensity: 5 });
+  const animationFrameId = useRef<number | null>(null);
 
   useEffect(() => {
-    if (shineInstance) {
-      const update = () => {
+    if (shine) {
+      const animate = () => {
         const time = new Date().getTime();
         const speed = 0.00025;
         const phase = time * speed * 2.0 * Math.PI;
         const radiusX = window.innerWidth * 0.5;
         const radiusY = window.innerHeight * 0.5;
 
-        shineInstance.light.position.x = radiusX + radiusX * Math.cos(phase);
-        shineInstance.light.position.y = radiusY + radiusY * Math.sin(phase * 0.7);
-        shineInstance.draw();
+        const newX = radiusX + radiusX * Math.cos(phase);
+        const newY = radiusY + radiusY * Math.sin(phase * 0.7);
+        
+        update({ light: { position: new Point(newX, newY) } });
 
-        animationFrameId.current = window.requestAnimationFrame(update);
+        animationFrameId.current = window.requestAnimationFrame(animate);
       };
 
-      animationFrameId.current = window.requestAnimationFrame(update);
+      animationFrameId.current = window.requestAnimationFrame(animate);
 
       return () => {
         if (animationFrameId.current) {
@@ -32,15 +37,13 @@ const AutoPilotChildrenDemo: React.FC = () => {
         }
       };
     }
-  }, [shineInstance]);
+  }, [shine, update]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-900 text-white">
-      <div id="headline" ref={headlineRef} className="flex space-x-4">
-        <img src="https://via.placeholder.com/150/ffcc99" alt="Placeholder 1" />
-        <img src="https://via.placeholder.com/150/ccff99" alt="Placeholder 2" />
-        <img src="https://via.placeholder.com/150/cc99ff" alt="Placeholder 3" />
-      </div>
+    <div id="headline" ref={headlineRef} className="min-h-screen grid md:grid-cols-3 place-items-center gap-6 p-16">
+      <Image src={img1} alt="Placeholder 1" />
+      <Image src={img2} alt="Placeholder 2" />
+      <Image src={img3} alt="Placeholder 3" />
     </div>
   );
 };
