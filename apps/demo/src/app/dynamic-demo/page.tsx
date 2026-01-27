@@ -13,8 +13,10 @@ const DynamicDemo: React.FC = () => {
   const [intensity, setIntensity] = useState(1);
 
   const { update } = useShine(headlineRef, {
-    lightPosition: "followMouse",
-    shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+    light: { position: "followMouse" },
+    config: {
+      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+    }
   });
 
   const handleBlurChange = (event: React.ChangeEvent<HTMLInputElement>) => {

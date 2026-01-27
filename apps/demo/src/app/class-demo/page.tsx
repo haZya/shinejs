@@ -12,7 +12,9 @@ const ClassDirectUsageDemo: React.FC = () => {
     if (headlineRef.current) {
       // Direct instantiation of Shine class
       const shine = new Shine(headlineRef.current, {
-        shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
+        config: {
+          shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
+        }
       });
 
       // Enable mouse tracking directly

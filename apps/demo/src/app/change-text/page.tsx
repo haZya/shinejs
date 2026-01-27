@@ -9,7 +9,9 @@ const ChangeTextDemo: React.FC = () => {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   
   const { update } = useShine(headlineRef, {
-    shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
+    config: {
+      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
+    }
   });
 
   return (

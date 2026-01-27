@@ -1,6 +1,7 @@
 import type { ShineConfigSettings } from "./config";
 import { ShineConfig } from "./config";
 import { Light } from "./light";
+import { Point } from "./point";
 import { Shadow } from "./shadow";
 import { sharedMouseMonitor } from "./shared-mouse-monitor";
 import { Splitter } from "./splitter";
@@ -8,6 +9,17 @@ import { StyleInjector } from "./style-injector";
 import { debounce } from "./timing";
 
 export type ShadowProperty = "textShadow" | "boxShadow";
+
+export type ShineOptions = {
+  config?: ShineConfigSettings;
+  light?: {
+    position?: Point | "followMouse";
+    intensity?: number;
+  };
+  classPrefix?: string;
+  shadowProperty?: ShadowProperty;
+  content?: string;
+};
 
 export class Shine {
   light = new Light();
@@ -23,20 +35,15 @@ export class Shine {
   private handleAutoUpdate: () => void;
   private unsubscribeMouseMonitor: (() => void) | null = null;
 
-  constructor(
-    domElement: HTMLElement,
-    optConfig?: ShineConfigSettings,
-    optClassPrefix?: string,
-    optShadowProperty?: ShadowProperty,
-  ) {
+  constructor(domElement: HTMLElement, options?: ShineOptions) {
     if (!domElement) {
       throw new Error("No valid DOM element passed as the first parameter");
     }
 
     this.domElement = domElement;
-    this.config = new ShineConfig(optConfig);
-    this.classPrefix = optClassPrefix || "shine-";
-    this.shadowProperty = optShadowProperty || (this.elementHasTextOnly(domElement) ? "textShadow" : "boxShadow");
+    this.config = new ShineConfig(options?.config);
+    this.classPrefix = options?.classPrefix || "shine-";
+    this.shadowProperty = options?.shadowProperty || (this.elementHasTextOnly(domElement) ? "textShadow" : "boxShadow");
     this.splitter = new Splitter(domElement, this.classPrefix);
 
     this.handleAutoUpdate = debounce(() => {
@@ -44,7 +51,21 @@ export class Shine {
       this.draw();
     }, 1000 / 15);
 
-    this.updateContent();
+    if (options?.light) {
+      if (options.light.intensity !== undefined) {
+        this.light.intensity = options.light.intensity;
+      }
+
+      if (options.light.position === "followMouse") {
+        this.enableMouseTracking();
+      }
+      else if (options.light.position instanceof Point) {
+        this.light.position.x = options.light.position.x;
+        this.light.position.y = options.light.position.y;
+      }
+    }
+
+    this.updateContent(options?.content);
   }
 
   destroy(): void {

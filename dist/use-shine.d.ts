@@ -1,20 +1,7 @@
 import type { RefObject } from "react";
-import type { ShineConfigSettings } from "./config";
-import type { Point } from "./point";
+import type { ShineOptions } from "./shine";
 import { Shine } from "./shine";
-export type UseShineSettings = ShineConfigSettings & {
-    lightPosition?: Point | "followMouse";
-    lightIntensity?: number;
-};
-export type ShineUpdaterConfig = {
-    content?: string;
-    light?: {
-        position?: Point | "followMouse";
-        intensity?: number;
-    };
-    config?: ShineConfigSettings;
-};
-export declare function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSettings): {
+export declare function useShine(ref: RefObject<HTMLElement | null>, config?: ShineOptions): {
     shine: Shine | null;
-    update: (newConfig: ShineUpdaterConfig) => void;
+    update: (newConfig: ShineOptions) => void;
 };

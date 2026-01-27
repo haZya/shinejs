@@ -8,8 +8,10 @@ const MouseFollowDemo: React.FC = () => {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   useShine(headlineRef, {
-    lightPosition: "followMouse", // true by default, but explicitly stating for clarity
-    shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
+    light: { position: "followMouse" },
+    config: {
+      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
+    }
   });
 
   return (

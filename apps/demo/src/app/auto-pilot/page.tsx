@@ -8,8 +8,9 @@ const AutoPilotDemo: React.FC = () => {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const { shine, update } = useShine(headlineRef, {
-    lightPosition: new Point(),
-    shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+    config: {
+      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+    }
    });
   const animationFrameId = useRef<number>(null);
 
