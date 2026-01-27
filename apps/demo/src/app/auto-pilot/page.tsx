@@ -43,7 +43,7 @@ const AutoPilotDemo: React.FC = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-16">
-      <h1 id="headline" ref={headlineRef} className="text-9xl text-center font-extrabold uppercase text-[#E4EBF5] dark:text-[#0a0a0a]">
+      <h1 id="headline" ref={headlineRef} className="text-7xl sm:text-9xl text-center font-extrabold uppercase text-[#E4EBF5] dark:text-[#0a0a0a]">
         Shine Auto-Pilot Demo
       </h1>
     </div>

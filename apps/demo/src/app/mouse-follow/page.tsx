@@ -19,7 +19,7 @@ const MouseFollowDemo: React.FC = () => {
       <h1
         id="headline"
         ref={headlineRef}
-        className="text-9xl font-extrabold text-center uppercase text-[#E4EBF5] dark:text-[#0a0a0a]"
+        className="text-7xl sm:text-9xl font-extrabold text-center uppercase text-[#E4EBF5] dark:text-[#0a0a0a]"
       >
         Shine Mouse-Follow Demo
       </h1>
