@@ -9,7 +9,7 @@ import img3 from "./img-3.jpg";
 
 const AutoPilotChildrenDemo: React.FC = () => {
   const headlineRef = useRef<HTMLDivElement>(null);
-  const { shine, update } = useShine(headlineRef, { lightIntensity: 5 });
+  const { shine, update } = useShine(headlineRef, { light: { intensity: 5 } });
   const animationFrameId = useRef<number | null>(null);
 
   useEffect(() => {

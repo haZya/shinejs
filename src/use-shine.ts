@@ -1,25 +1,11 @@
 import type { RefObject } from "react";
 import type { ShineConfigSettings } from "./config";
-import type { Point } from "./point";
+import type { ShineOptions } from "./shine";
 import { useCallback, useEffect, useState } from "react";
 import { Color } from "./color";
 import { Shine } from "./shine";
 
-export type UseShineSettings = ShineConfigSettings & {
-  lightPosition?: Point | "followMouse";
-  lightIntensity?: number;
-};
-
-export type ShineUpdaterConfig = {
-  content?: string;
-  light?: {
-    position?: Point | "followMouse";
-    intensity?: number;
-  };
-  config?: ShineConfigSettings;
-};
-
-export function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSettings) {
+export function useShine(ref: RefObject<HTMLElement | null>, config?: ShineOptions) {
   const [shineInstance, setShineInstance] = useState<Shine | null>(null);
 
   // Simple deep-ish compare for config to prevent unnecessary re-initializations
@@ -27,35 +13,10 @@ export function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSe
 
   useEffect(() => {
     if (ref.current) {
-      const {
-        lightPosition: initialLightPosition = "followMouse",
-        lightIntensity,
-        ...shineConfig
-      }: UseShineSettings = JSON.parse(configJson);
-
+      const shineConfig: ShineOptions = JSON.parse(configJson);
       const instance = new Shine(ref.current, shineConfig);
 
-      if (lightIntensity !== undefined) {
-        instance.light.intensity = lightIntensity;
-      }
-
       setShineInstance(instance);
-
-      if (initialLightPosition === "followMouse") {
-        instance.enableMouseTracking();
-      }
-      else if (
-        typeof initialLightPosition === "object"
-        && initialLightPosition.x !== undefined
-        && initialLightPosition.y !== undefined
-      ) {
-        instance.light.position.x = initialLightPosition.x;
-        instance.light.position.y = initialLightPosition.y;
-        instance.draw();
-      }
-      else {
-        instance.draw();
-      }
 
       return () => {
         instance.destroy();
@@ -64,13 +25,13 @@ export function useShine(ref: RefObject<HTMLElement | null>, config?: UseShineSe
   }, [ref, configJson]);
 
   const update = useCallback(
-    (newConfig: ShineUpdaterConfig) => {
+    (newConfig: ShineOptions) => {
       if (!shineInstance)
         return;
 
       let needsRedraw = false;
 
-      if (newConfig.content) {
+      if (newConfig.content !== undefined) {
         shineInstance.updateContent(newConfig.content);
         // updateContent calls draw() internally
       }
