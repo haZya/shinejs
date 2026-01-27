@@ -19,9 +19,9 @@ const ChangeTextDemo: React.FC = () => {
       <div className="mb-8">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-          onClick={() => update({ content:'Shine Mouse-Follow Demo' })}
+          onClick={() => update({ content:'Change Text Demo' })}
         >
-          Shine Mouse-Follow Demo
+          Change Text Demo
         </button>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -37,7 +37,7 @@ const ChangeTextDemo: React.FC = () => {
         </button>
       </div>
       <h1 id="headline" ref={headlineRef} className="text-9xl font-extrabold text-center uppercase text-[#E4EBF5] dark:text-[#0a0a0a]">
-        Shine Change-Text Demo
+        Change Text Demo
       </h1>
     </div>
   );
