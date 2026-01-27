@@ -51,11 +51,9 @@ export class Splitter {
       }
       const element = child as HTMLElement;
       element.className += ` ${this.classPrefix}letter`;
-      this.wrapperElement.insertBefore(element, this.wrapperElement.firstChild);
+      this.wrapperElement.appendChild(element);
       this.elements.push(element);
     });
-
-    this.elements.reverse(); // maintain original order
 
     this.finalizeSplit();
   }

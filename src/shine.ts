@@ -145,25 +145,64 @@ export class Shine {
 
   private getCSS(): string {
     return `
-      .shine-wrapper {
-        display: inline-block;
+      .${this.classPrefix}wrapper {
+        display: inherit;
+        flex-direction: inherit;
+        flex-wrap: inherit;
+        align-items: inherit;
+        justify-content: inherit;
+        align-content: inherit;
+        gap: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        grid-template-columns: inherit;
+        grid-template-rows: inherit;
+        grid-template-areas: inherit;
+        grid-auto-columns: inherit;
+        grid-auto-rows: inherit;
+        grid-auto-flow: inherit;
+        justify-items: inherit;
+        place-items: inherit;
+        place-content: inherit;
         position: relative;
-        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
       }
-      .shine-word {
+      .${this.classPrefix}word {
         display: inline-block;
         white-space: nowrap;
       }
-      .shine-letter {
+      .${this.classPrefix}letter {
         position: relative;
         display: inline-block;
       }
-      .shine-mask {
+      .${this.classPrefix}mask {
+        display: inherit;
+        flex-direction: inherit;
+        flex-wrap: inherit;
+        align-items: inherit;
+        justify-content: inherit;
+        align-content: inherit;
+        gap: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        grid-template-columns: inherit;
+        grid-template-rows: inherit;
+        grid-template-areas: inherit;
+        grid-auto-columns: inherit;
+        grid-auto-rows: inherit;
+        grid-auto-flow: inherit;
+        justify-items: inherit;
+        place-items: inherit;
+        place-content: inherit;
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
+        pointer-events: none;
       }
     `;
   }
