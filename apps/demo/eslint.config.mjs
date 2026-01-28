@@ -7,6 +7,7 @@ export default antfu(
     react: true,
     nextjs: true,
     formatters: true,
+    isInEditor: false,
     stylistic: {
       indent: 2,
       semi: true,
