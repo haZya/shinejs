@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   description: "Mouse-follow demo for shinejs-react",
 };
 
-export default function RootLayout({
+export default function MouseFollowLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <main>{children}</main>
+    <>{children}</>
   );
 }

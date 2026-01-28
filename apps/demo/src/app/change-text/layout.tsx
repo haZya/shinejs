@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   description: "Change-text demo for shinejs-react",
 };
 
-export default function RootLayout({
+export default function ChangeTextLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <main>{children}</main>
+    <>{children}</>
   );
 }

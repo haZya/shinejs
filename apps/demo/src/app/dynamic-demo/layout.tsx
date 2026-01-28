@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   description: "Demo showing the dynamic usage of Shine config options",
 };
 
-export default function DynamicDemoLayout({ children }: { children: React.ReactNode }) {
-  return <main>{children}</main>;
+export default function DynamicDemoLayout({
+  children,
+}:
+{
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
 }

@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   description: "Auto-pilot demo for shinejs-react",
 };
 
-export default function RootLayout({
+export default function AutoPilotLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <main>{children}</main>
+    <>{children}</>
   );
 }
