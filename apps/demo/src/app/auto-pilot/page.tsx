@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { Color, Point, useShine } from "shinejs-react";
 
@@ -43,8 +44,11 @@ function AutoPilotDemo() {
   }, [shine, update]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-16">
-      <h1 id="headline" ref={headlineRef} className="text-7xl sm:text-9xl text-center font-extrabold uppercase text-[#E4EBF5] dark:text-[#0a0a0a]">
+    <div className="relative flex min-h-screen flex-col items-center justify-center p-16">
+      <Link href="/" className="absolute top-16 left-16 text-blue-500 hover:text-blue-700 font-medium">
+        ← Back to Home
+      </Link>
+      <h1 id="headline" ref={headlineRef} className="mt-16 text-7xl sm:text-9xl text-center font-extrabold uppercase">
         Shine Auto-Pilot Demo
       </h1>
     </div>

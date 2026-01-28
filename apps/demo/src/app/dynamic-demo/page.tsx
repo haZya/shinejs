@@ -2,6 +2,7 @@
 
 import type { ChangeEvent } from "react";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { Color, useShine } from "shinejs-react";
 
@@ -87,8 +88,11 @@ function DynamicDemo() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-20 p-16">
-      <div className="grid sm:grid-cols-2 gap-6 w-full">
+    <div className="relative flex min-h-screen flex-col items-center justify-center gap-16 p-16">
+      <Link href="/" className="absolute top-16 left-16 text-blue-500 hover:text-blue-700 font-medium">
+        ← Back to Home
+      </Link>
+      <div className="grid sm:grid-cols-2 gap-6 w-full mt-16">
         <div className="flex flex-col space-y-2">
           <label htmlFor="blur" className="font-medium">
             Blur:
@@ -211,7 +215,7 @@ function DynamicDemo() {
           />
         </div>
       </div>
-      <h1 id="headline" ref={headlineRef} className="text-7xl sm:text-9xl text-center font-extrabold uppercase text-[#E4EBF5] dark:text-[#0a0a0a]">
+      <h1 id="headline" ref={headlineRef} className="text-7xl sm:text-9xl text-center font-extrabold uppercase">
         Shine Dynamic Demo
       </h1>
     </div>

@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-5xl font-extrabold mb-8">Shine.js React Demos</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center gap-12 p-24">
+      <h1 className="title dark:invert text-5xl text-center font-extrabold">Shine.js React Demos</h1>
       <nav>
         <ul className="text-2xl space-y-4">
           <li>
