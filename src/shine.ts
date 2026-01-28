@@ -199,6 +199,7 @@ export class Shine {
       .${this.classPrefix}letter {
         position: relative;
         display: inline-block;
+        transform: translate3d(0, 0, 0);
       }
       .${this.classPrefix}mask {
         display: inherit;
