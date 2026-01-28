@@ -1,16 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { Point, useShine } from "shinejs-react";
+import { Color, Point, useShine } from "shinejs-react";
 
+import usePrefersDarkMode from "../hooks/use-dark-mode";
 import img1 from "./img-1.jpg";
 import img2 from "./img-2.jpg";
 import img3 from "./img-3.jpg";
 
 function AutoPilotChildrenDemo() {
+  const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLDivElement>(null);
-  const { shine, update } = useShine(headlineRef, { light: { intensity: 5 } });
+  const { shine, update } = useShine(headlineRef, {
+    light: { intensity: isDarkMode ? 1 : 3 },
+    config: {
+      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+    },
+  });
   const animationFrameId = useRef<number | null>(null);
 
   useEffect(() => {
@@ -41,10 +49,16 @@ function AutoPilotChildrenDemo() {
   }, [shine, update]);
 
   return (
-    <div id="headline" ref={headlineRef} className="min-h-screen grid md:grid-cols-3 place-items-center gap-6 p-16">
-      <Image src={img1} alt="Placeholder 1" />
-      <Image src={img2} alt="Placeholder 2" />
-      <Image src={img3} alt="Placeholder 3" />
+    <div className="relative min-h-screen flex flex-col items-center justify-center p-16">
+      <Link href="/" className="absolute top-16 left-16 text-blue-500 hover:text-blue-700 font-medium z-10">
+        ← Back to Home
+      </Link>
+      <h2 className="title dark:invert text-4xl text-center font-bold my-16">Auto-Pilot Demo (Children - Box Shadow)</h2>
+      <div id="headline" ref={headlineRef} className="grid md:grid-cols-3 place-items-center gap-6">
+        <Image src={img1} alt="Placeholder 1" />
+        <Image src={img2} alt="Placeholder 2" />
+        <Image src={img3} alt="Placeholder 3" />
+      </div>
     </div>
   );
 }

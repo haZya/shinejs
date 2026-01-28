@@ -7,8 +7,7 @@ export const metadata: Metadata = {
 
 export default function DynamicDemoLayout({
   children,
-}:
-{
+}: {
   children: React.ReactNode;
 }) {
   return <>{children}</>;
