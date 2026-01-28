@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Shine Change-Text Demo',
-  description: 'Change-text demo for shinejs-react',
+  title: "Shine Change-Text Demo",
+  description: "Change-text demo for shinejs-react",
 };
 
 export default function RootLayout({

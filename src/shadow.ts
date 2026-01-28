@@ -1,6 +1,7 @@
 import type { Color } from "./color";
 import type { ShineConfig } from "./config";
 import type { Light } from "./light";
+
 import { Point } from "./point";
 
 export class Shadow {

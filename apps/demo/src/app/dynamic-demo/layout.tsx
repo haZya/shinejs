@@ -1,7 +1,10 @@
-import React from 'react';
+import type { Metadata } from "next";
 
-const DynamicDemoLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <>{children}</>;
+export const metadata: Metadata = {
+  title: "Shine Dynamic Demo",
+  description: "Demo showing the dynamic usage of Shine config options",
 };
 
-export default DynamicDemoLayout;
+export default function DynamicDemoLayout({ children }: { children: React.ReactNode }) {
+  return <main>{children}</main>;
+}

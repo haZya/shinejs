@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import React, { useRef } from 'react';
-import { Color, useShine } from 'shinejs-react';
-import usePrefersDarkMode from '../hooks/use-dark-mode';
+import { useRef } from "react";
+import { Color, useShine } from "shinejs-react";
 
-const ChangeTextDemo: React.FC = () => {
+import usePrefersDarkMode from "../hooks/use-dark-mode";
+
+function ChangeTextDemo() {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLHeadingElement>(null);
-  
+
   const { update } = useShine(headlineRef, {
     config: {
-      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
-    }
+      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+    },
   });
 
   return (
@@ -19,19 +20,19 @@ const ChangeTextDemo: React.FC = () => {
       <div className="flex flex-wrap gap-3">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => update({ content:'Change Text Demo' })}
+          onClick={() => update({ content: "Change Text Demo" })}
         >
           Change Text Demo
         </button>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => update({ content:'Hello World' })}
+          onClick={() => update({ content: "Hello World" })}
         >
           Hello World
         </button>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => update({ content:'Lorem Ipsum' })}
+          onClick={() => update({ content: "Lorem Ipsum" })}
         >
           Lorem Ipsum
         </button>
@@ -41,6 +42,6 @@ const ChangeTextDemo: React.FC = () => {
       </h1>
     </div>
   );
-};
+}
 
 export default ChangeTextDemo;
