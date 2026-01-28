@@ -1,6 +1,6 @@
 export class SharedMouseMonitor {
   private subscribers = new Set<(x: number, y: number) => void>();
-  private handleMouseMove = (event: MouseEvent) => {
+  private handleMouseMove = (event: MouseEvent): void => {
     this.subscribers.forEach(cb => cb(event.clientX, event.clientY));
   };
 

@@ -8,7 +8,10 @@ import type { ShineOptions } from "./shine";
 import { Color } from "./color";
 import { Shine } from "./shine";
 
-export function useShine(ref: RefObject<HTMLElement | null>, config?: ShineOptions) {
+export function useShine(
+  ref: RefObject<HTMLElement | null>,
+  config?: ShineOptions,
+): { shine: Shine | null; update: (newConfig: ShineOptions) => void } {
   const [shineInstance, setShineInstance] = useState<Shine | null>(null);
 
   // Simple deep-ish compare for config to prevent unnecessary re-initializations
