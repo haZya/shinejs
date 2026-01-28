@@ -45,10 +45,10 @@ function AutoPilotDemo() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center p-16">
-      <Link href="/" className="absolute top-16 left-16 text-blue-500 hover:text-blue-700 font-medium">
+      <Link href="/" className="absolute top-16 left-16 font-medium text-blue-500 hover:text-blue-700">
         ← Back to Home
       </Link>
-      <h1 id="headline" ref={headlineRef} className="mt-16 text-7xl sm:text-9xl text-center font-extrabold uppercase">
+      <h1 id="headline" ref={headlineRef} className="mt-16 text-center text-7xl font-extrabold uppercase sm:text-9xl">
         Shine Auto-Pilot Demo
       </h1>
     </div>

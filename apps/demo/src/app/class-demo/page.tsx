@@ -34,12 +34,12 @@ function ClassDirectUsageDemo() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center p-16">
-      <Link href="/" className="absolute top-16 left-16 text-blue-500 hover:text-blue-700 font-medium">
+      <Link href="/" className="absolute top-16 left-16 font-medium text-blue-500 hover:text-blue-700">
         ← Back to Home
       </Link>
-      <div className="max-w-2xl text-center my-16">
-        <h2 className="title dark:invert text-4xl text-center font-bold mb-6">Direct Class Usage</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+      <div className="my-16 max-w-2xl text-center">
+        <h2 className="title mb-6 text-center text-4xl font-bold text-pretty dark:invert">Direct Class Usage</h2>
+        <p className="text-pretty text-gray-600 dark:text-gray-400">
           This demo instantiates the
           {" "}
           <code>Shine</code>
@@ -63,7 +63,7 @@ function ClassDirectUsageDemo() {
       <h1
         id="headline"
         ref={headlineRef}
-        className="text-7xl sm:text-9xl font-extrabold text-center uppercase"
+        className="text-center text-7xl font-extrabold uppercase sm:text-9xl"
       >
         Class Shine Demo
       </h1>
