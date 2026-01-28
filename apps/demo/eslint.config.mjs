@@ -1,4 +1,5 @@
 import antfu from "@antfu/eslint-config";
+import betterTailwindcss from "eslint-plugin-better-tailwindcss";
 
 export default antfu(
   {
@@ -21,7 +22,12 @@ export default antfu(
     ],
   },
   {
+    ...betterTailwindcss.configs.recommended,
+  },
+  {
     rules: {
+      "better-tailwindcss/enforce-consistent-line-wrapping": "off",
+      "better-tailwindcss/no-unknown-classes": "off",
       "ts/no-redeclare": "off",
       "ts/consistent-type-definitions": ["error", "type"],
       "no-console": ["warn", { allow: ["info", "warn", "error"] }],

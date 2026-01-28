@@ -3,9 +3,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-12 p-24">
-      <h1 className="title dark:invert text-5xl text-center font-extrabold">Shine.js React Demos</h1>
+      <h1 className="title text-center text-5xl font-extrabold dark:invert">Shine.js React Demos</h1>
       <nav>
-        <ul className="text-2xl space-y-4">
+        <ul className="space-y-4 text-2xl">
           <li>
             <Link href="/auto-pilot" className="text-blue-400 hover:text-blue-600">
               Auto-Pilot Demo (Text)

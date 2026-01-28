@@ -89,10 +89,10 @@ function DynamicDemo() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center gap-16 p-16">
-      <Link href="/" className="absolute top-16 left-16 text-blue-500 hover:text-blue-700 font-medium">
+      <Link href="/" className="absolute top-16 left-16 font-medium text-blue-500 hover:text-blue-700">
         ← Back to Home
       </Link>
-      <div className="grid sm:grid-cols-2 gap-6 w-full mt-16">
+      <div className="mt-16 grid w-full gap-6 sm:grid-cols-2">
         <div className="flex flex-col space-y-2">
           <label htmlFor="blur" className="font-medium">
             Blur:
@@ -215,7 +215,7 @@ function DynamicDemo() {
           />
         </div>
       </div>
-      <h1 id="headline" ref={headlineRef} className="text-7xl sm:text-9xl text-center font-extrabold uppercase">
+      <h1 id="headline" ref={headlineRef} className="text-center text-7xl font-extrabold uppercase sm:text-9xl">
         Shine Dynamic Demo
       </h1>
     </div>

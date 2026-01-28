@@ -49,12 +49,12 @@ function AutoPilotChildrenDemo() {
   }, [shine, update]);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center p-16">
-      <Link href="/" className="absolute top-16 left-16 text-blue-500 hover:text-blue-700 font-medium z-10">
+    <div className="relative flex min-h-screen flex-col items-center justify-center p-16">
+      <Link href="/" className="absolute top-16 left-16 z-10 font-medium text-blue-500 hover:text-blue-700">
         ← Back to Home
       </Link>
-      <h2 className="title dark:invert text-4xl text-center font-bold my-16">Auto-Pilot Demo (Children - Box Shadow)</h2>
-      <div id="headline" ref={headlineRef} className="grid md:grid-cols-3 place-items-center gap-6">
+      <h2 className="title my-16 text-center text-4xl font-bold text-pretty dark:invert">Auto-Pilot Demo (Children - Box Shadow)</h2>
+      <div id="headline" ref={headlineRef} className="grid place-items-center gap-6 md:grid-cols-3">
         <Image src={img1} alt="Placeholder 1" />
         <Image src={img2} alt="Placeholder 2" />
         <Image src={img3} alt="Placeholder 3" />
