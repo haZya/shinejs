@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   description: "Demo showing direct usage of Shine class without the useShine hook",
 };
 
-export default function RootLayout({
+export default function ClassDemoLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <main>{children}</main>
+    <>{children}</>
   );
 }
