@@ -1,24 +1,25 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef } from 'react';
-import { Color, Point, useShine } from 'shinejs-react';
-import usePrefersDarkMode from '../hooks/use-dark-mode';
+import { useEffect, useRef } from "react";
+import { Color, Point, useShine } from "shinejs-react";
 
-const AutoPilotDemo: React.FC = () => {
+import usePrefersDarkMode from "../hooks/use-dark-mode";
+
+function AutoPilotDemo() {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const { shine, update } = useShine(headlineRef, {
     config: {
       shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
-    }
-   });
+    },
+  });
   const animationFrameId = useRef<number>(null);
 
   useEffect(() => {
     if (shine && update) {
       const animate = () => {
         const time = new Date().getTime();
-        const speed = 0.00025;  // 1 = 1000 rotations/s
+        const speed = 0.00025; // 1 = 1000 rotations/s
         const phase = time * speed * 2.0 * Math.PI;
         const radiusX = window.innerWidth * 0.5;
         const radiusY = window.innerHeight * 0.5;
@@ -48,6 +49,6 @@ const AutoPilotDemo: React.FC = () => {
       </h1>
     </div>
   );
-};
+}
 
 export default AutoPilotDemo;

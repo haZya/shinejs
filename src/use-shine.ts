@@ -1,7 +1,10 @@
 import type { RefObject } from "react";
+
+import { useCallback, useEffect, useState } from "react";
+
 import type { ShineConfigSettings } from "./config";
 import type { ShineOptions } from "./shine";
-import { useCallback, useEffect, useState } from "react";
+
 import { Color } from "./color";
 import { Shine } from "./shine";
 

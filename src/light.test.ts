@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { Light } from "./light";
 import { Point } from "./point";
 

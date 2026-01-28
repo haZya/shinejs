@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Shine Class Direct Usage Demo',
-  description: 'Demo showing direct usage of Shine class without the useShine hook',
+  title: "Shine Class Direct Usage Demo",
+  description: "Demo showing direct usage of Shine class without the useShine hook",
 };
 
 export default function RootLayout({

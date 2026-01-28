@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import React, { useEffect, useRef } from 'react';
-import { Point, useShine } from 'shinejs-react';
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { Point, useShine } from "shinejs-react";
+
 import img1 from "./img-1.jpg";
 import img2 from "./img-2.jpg";
 import img3 from "./img-3.jpg";
 
-const AutoPilotChildrenDemo: React.FC = () => {
+function AutoPilotChildrenDemo() {
   const headlineRef = useRef<HTMLDivElement>(null);
   const { shine, update } = useShine(headlineRef, { light: { intensity: 5 } });
   const animationFrameId = useRef<number | null>(null);
@@ -23,7 +24,7 @@ const AutoPilotChildrenDemo: React.FC = () => {
 
         const newX = radiusX + radiusX * Math.cos(phase);
         const newY = radiusY + radiusY * Math.sin(phase * 0.7);
-        
+
         update({ light: { position: new Point(newX, newY) } });
 
         animationFrameId.current = window.requestAnimationFrame(animate);
@@ -46,6 +47,6 @@ const AutoPilotChildrenDemo: React.FC = () => {
       <Image src={img3} alt="Placeholder 3" />
     </div>
   );
-};
+}
 
 export default AutoPilotChildrenDemo;

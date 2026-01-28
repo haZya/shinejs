@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Shine Mouse-Follow Demo',
-  description: 'Mouse-follow demo for shinejs-react',
+  title: "Shine Mouse-Follow Demo",
+  description: "Mouse-follow demo for shinejs-react",
 };
 
 export default function RootLayout({
@@ -11,6 +11,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-      <main>{children}</main>
+    <main>{children}</main>
   );
 }

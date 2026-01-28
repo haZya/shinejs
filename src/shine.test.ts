@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { Shine } from "./shine";
 import { StyleInjector } from "./style-injector";
 

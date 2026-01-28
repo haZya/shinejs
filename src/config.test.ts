@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { Color } from "./color";
 import { ShineConfig } from "./config";
 

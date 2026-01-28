@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import React, { useRef } from 'react';
-import { Color, useShine } from 'shinejs-react';
-import usePrefersDarkMode from '../hooks/use-dark-mode';
+import { useRef } from "react";
+import { Color, useShine } from "shinejs-react";
 
-const MouseFollowDemo: React.FC = () => {
+import usePrefersDarkMode from "../hooks/use-dark-mode";
+
+function MouseFollowDemo() {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   useShine(headlineRef, {
     light: { position: "followMouse" },
     config: {
-      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0)
-    }
+      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+    },
   });
 
   return (
@@ -25,6 +26,6 @@ const MouseFollowDemo: React.FC = () => {
       </h1>
     </div>
   );
-};
+}
 
 export default MouseFollowDemo;

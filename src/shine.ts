@@ -1,4 +1,5 @@
 import type { ShineConfigSettings } from "./config";
+
 import { ShineConfig } from "./config";
 import { Light } from "./light";
 import { Point } from "./point";
