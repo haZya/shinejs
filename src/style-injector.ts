@@ -19,7 +19,6 @@ export class StyleInjector {
     }
 
     const domElement = document.createElement("style");
-    domElement.type = "text/css";
     domElement.innerHTML = css;
 
     const head = doc.getElementsByTagName("head")[0];
