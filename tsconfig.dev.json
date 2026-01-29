@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "shinejs-core": ["./packages/shinejs-core/src/index.ts"],
+      "shinejs-react": ["./packages/shinejs-react/src/index.ts"]
+    }
+  }
+}

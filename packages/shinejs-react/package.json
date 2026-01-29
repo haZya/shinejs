@@ -1,0 +1,33 @@
+{
+  "name": "shinejs-react",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "React hooks for shinejs",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rimraf dist && npm run build:types && npm run build:js",
+    "build:js": "esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js --minify --external:react --external:react-dom --external:shinejs-core",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "dependencies": {
+    "shinejs-core": "*"
+  }
+}

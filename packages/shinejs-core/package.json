@@ -1,0 +1,26 @@
+{
+  "name": "shinejs-core",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Core logic for shinejs",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rimraf dist && npm run build:types && npm run build:js",
+    "build:js": "esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js --minify",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run"
+  }
+}

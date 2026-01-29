@@ -1,56 +1,23 @@
 {
-  "name": "shinejs-react",
+  "name": "shinejs-monorepo",
   "type": "module",
   "version": "1.0.0",
-  "description": "A modern ESM-only TypeScript package for creating beautiful text and box shadows, optimized for React/Next.js.",
+  "private": true,
+  "description": "Monorepo for shinejs",
   "author": "",
   "license": "MIT",
-  "homepage": "https://github.com/YourUsername/shinejs-react#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/YourUsername/shinejs-react.git"
-  },
-  "bugs": {
-    "url": "https://github.com/YourUsername/shinejs-react/issues"
-  },
-  "keywords": [
-    "react",
-    "nextjs",
-    "shine",
-    "shadow",
-    "text-shadow",
-    "box-shadow"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/shine.js"
-    }
-  },
-  "main": "./dist/shine.js",
-  "module": "./dist/shine.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "scripts": {
-    "build": "rimraf dist && npm run build:types && npm run build:js",
-    "build:js": "esbuild src/index.ts --bundle --format=esm --outfile=dist/shine.js --minify --external:react --external:react-dom",
-    "build:types": "tsc --emitDeclarationOnly --outDir dist",
-    "test": "vitest run",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "clean": "rimraf dist",
+    "clean": "npm run clean --workspaces --if-present",
     "dev": "npm run build && npm -w apps/demo run dev"
   },
   "workspaces": [
+    "packages/*",
     "apps/*"
   ],
-  "peerDependencies": {
-    "react": ">=17.0.0",
-    "react-dom": ">=17.0.0"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "^7.2.0",
     "@eslint-react/eslint-plugin": "^2.7.2",
