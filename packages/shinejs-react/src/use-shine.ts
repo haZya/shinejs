@@ -1,12 +1,8 @@
 import type { RefObject } from "react";
+import type { ShineConfigSettings, ShineOptions } from "shinejs-core";
 
 import { useCallback, useEffect, useState } from "react";
-
-import type { ShineConfigSettings } from "./config";
-import type { ShineOptions } from "./shine";
-
-import { Color } from "./color";
-import { Shine } from "./shine";
+import { Color, Shine } from "shinejs-core";
 
 export function useShine(
   ref: RefObject<HTMLElement | null>,
