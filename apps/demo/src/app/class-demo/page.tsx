@@ -15,7 +15,7 @@ function ClassDirectUsageDemo() {
       // Direct instantiation of Shine class
       const shine = new Shine(headlineRef.current, {
         config: {
-          shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+          shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(),
         },
       });
 

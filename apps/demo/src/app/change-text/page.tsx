@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { Color, useShine } from "shinejs-react";
+import { useShine } from "shinejs-react";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 
@@ -12,7 +12,7 @@ function ChangeTextDemo() {
 
   const { update } = useShine(headlineRef, {
     config: {
-      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 },
     },
   });
 

@@ -4,19 +4,19 @@ import type { ChangeEvent } from "react";
 
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { Color, useShine } from "shinejs-react";
+import { useShine } from "shinejs-react";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 
 function hexToRgb(hex: string) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
-    ? new Color(
-        Number.parseInt(result[1], 16),
-        Number.parseInt(result[2], 16),
-        Number.parseInt(result[3], 16),
-      )
-    : new Color(0, 0, 0);
+    ? {
+        r: Number.parseInt(result[1], 16),
+        g: Number.parseInt(result[2], 16),
+        b: Number.parseInt(result[3], 16),
+      }
+    : { r: 0, g: 0, b: 0 };
 }
 
 function DynamicDemo() {
@@ -35,7 +35,7 @@ function DynamicDemo() {
   const { update } = useShine(headlineRef, {
     light: { position: "followMouse" },
     config: {
-      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 },
     },
   });
 

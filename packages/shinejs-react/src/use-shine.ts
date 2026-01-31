@@ -1,8 +1,8 @@
 import type { RefObject } from "react";
-import type { ShineConfigSettings, ShineOptions } from "shinejs-core";
+import type { ShineOptions } from "shinejs-core";
 
 import { useCallback, useEffect, useState } from "react";
-import { Color, Shine } from "shinejs-core";
+import { Shine } from "shinejs-core";
 
 export function useShine(
   ref: RefObject<HTMLElement | null>,
@@ -56,14 +56,7 @@ export function useShine(
       }
 
       if (newConfig.config) {
-        const { shadowRGB, ...restConfig } = newConfig.config;
-        const settingsToApply: ShineConfigSettings = { ...restConfig };
-
-        if (shadowRGB) {
-          settingsToApply.shadowRGB = new Color(shadowRGB.r, shadowRGB.g, shadowRGB.b);
-        }
-
-        shineInstance.config.applyValues(settingsToApply);
+        shineInstance.config.applyValues(newConfig.config);
         needsRedraw = true;
       }
 

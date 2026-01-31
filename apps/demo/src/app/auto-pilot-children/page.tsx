@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { Color, Point, useShine } from "shinejs-react";
+import { useShine } from "shinejs-react";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 import img1 from "./img-1.jpg";
@@ -16,7 +16,7 @@ function AutoPilotChildrenDemo() {
   const { shine, update } = useShine(headlineRef, {
     light: { intensity: isDarkMode ? 1 : 3 },
     config: {
-      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 },
     },
   });
   const animationFrameId = useRef<number | null>(null);
@@ -33,7 +33,7 @@ function AutoPilotChildrenDemo() {
         const newX = radiusX + radiusX * Math.cos(phase);
         const newY = radiusY + radiusY * Math.sin(phase * 0.7);
 
-        update({ light: { position: new Point(newX, newY) } });
+        update({ light: { position: { x: newX, y: newY } } });
 
         animationFrameId.current = window.requestAnimationFrame(animate);
       };
