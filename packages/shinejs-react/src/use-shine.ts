@@ -28,40 +28,8 @@ export function useShine(
 
   const update = useCallback(
     (newConfig: ShineOptions) => {
-      if (!shineInstance)
-        return;
-
-      let needsRedraw = false;
-
-      if (newConfig.content !== undefined) {
-        shineInstance.updateContent(newConfig.content);
-        // updateContent calls draw() internally
-      }
-
-      if (newConfig.light) {
-        if (newConfig.light.position === "followMouse") {
-          shineInstance.enableMouseTracking();
-        }
-        else if (newConfig.light.position) {
-          shineInstance.disableMouseTracking();
-          shineInstance.light.position.x = newConfig.light.position.x;
-          shineInstance.light.position.y = newConfig.light.position.y;
-          needsRedraw = true;
-        }
-
-        if (typeof newConfig.light.intensity === "number") {
-          shineInstance.light.intensity = newConfig.light.intensity;
-          needsRedraw = true;
-        }
-      }
-
-      if (newConfig.config) {
-        shineInstance.config.applyValues(newConfig.config);
-        needsRedraw = true;
-      }
-
-      if (needsRedraw) {
-        shineInstance.draw();
+      if (shineInstance) {
+        shineInstance.update(newConfig);
       }
     },
     [shineInstance],
