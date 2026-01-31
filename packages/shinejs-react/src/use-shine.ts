@@ -24,7 +24,7 @@ export function useShine(
         instance.destroy();
       };
     }
-  }, [ref, configJson]);
+  }, [configJson, ref]);
 
   const update = useCallback(
     (newConfig: ShineOptions) => {
