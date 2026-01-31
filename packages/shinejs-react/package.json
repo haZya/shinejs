@@ -21,6 +21,8 @@
     "build": "rimraf dist && npm run build:types && npm run build:js",
     "build:js": "esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js --minify --external:react --external:react-dom --external:shinejs-core",
     "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run"
   },
   "peerDependencies": {
@@ -29,5 +31,8 @@
   },
   "dependencies": {
     "shinejs-core": "*"
+  },
+  "devDependencies": {
+    "@shinejs/eslint-config": "^0.0.1"
   }
 }
