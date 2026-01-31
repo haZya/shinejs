@@ -51,21 +51,7 @@ export class Shine {
       this.draw();
     }, 1000 / 15);
 
-    if (options?.light) {
-      if (options.light.intensity !== undefined) {
-        this.light.intensity = options.light.intensity;
-      }
-
-      if (options.light.position === "followMouse") {
-        this.enableMouseTracking();
-      }
-      else if (options.light.position) {
-        this.light.position.x = options.light.position.x;
-        this.light.position.y = options.light.position.y;
-      }
-    }
-
-    this.updateContent(options?.content);
+    this.update(options);
   }
 
   destroy(): void {
@@ -82,6 +68,45 @@ export class Shine {
     this.light = null!;
     this.config = null!;
     this.domElement = null!;
+  }
+
+  update(options?: ShineOptions): void {
+    let needsRedraw = false;
+
+    if (options?.content !== undefined) {
+      this.updateContent(options.content);
+      // updateContent calls draw() internally
+    }
+    else if (!this.shadows.length) {
+      // Initialize content if not already done
+      this.updateContent();
+    }
+
+    if (options?.light) {
+      if (options.light.position === "followMouse") {
+        this.enableMouseTracking();
+      }
+      else if (options.light.position) {
+        this.disableMouseTracking();
+        this.light.position.x = options.light.position.x;
+        this.light.position.y = options.light.position.y;
+        needsRedraw = true;
+      }
+
+      if (typeof options.light.intensity === "number") {
+        this.light.intensity = options.light.intensity;
+        needsRedraw = true;
+      }
+    }
+
+    if (options?.config) {
+      this.config.applyValues(options.config);
+      needsRedraw = true;
+    }
+
+    if (needsRedraw) {
+      this.draw();
+    }
   }
 
   draw(): void {

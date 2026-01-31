@@ -31,6 +31,7 @@ export declare class Shine {
     private unsubscribeMouseMonitor;
     constructor(domElement: HTMLElement, options?: ShineOptions);
     destroy(): void;
+    update(options?: ShineOptions): void;
     draw(): void;
     recalculatePositions(): void;
     updateContent(optText?: string): void;
