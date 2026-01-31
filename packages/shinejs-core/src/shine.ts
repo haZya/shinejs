@@ -2,7 +2,6 @@ import type { ShineConfigSettings } from "./config";
 
 import { ShineConfig } from "./config";
 import { Light } from "./light";
-import { Point } from "./point";
 import { Shadow } from "./shadow";
 import { sharedMouseMonitor } from "./shared-mouse-monitor";
 import { Splitter } from "./splitter";
@@ -14,7 +13,7 @@ export type ShadowProperty = "textShadow" | "boxShadow";
 export type ShineOptions = {
   config?: ShineConfigSettings;
   light?: {
-    position?: Point | "followMouse";
+    position?: { x: number; y: number } | "followMouse";
     intensity?: number;
   };
   classPrefix?: string;
@@ -60,7 +59,7 @@ export class Shine {
       if (options.light.position === "followMouse") {
         this.enableMouseTracking();
       }
-      else if (options.light.position instanceof Point) {
+      else if (options.light.position) {
         this.light.position.x = options.light.position.x;
         this.light.position.y = options.light.position.y;
       }

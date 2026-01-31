@@ -1,14 +1,16 @@
 import type { ShineConfigSettings } from "./config";
 import { ShineConfig } from "./config";
 import { Light } from "./light";
-import { Point } from "./point";
 import { Shadow } from "./shadow";
 import { Splitter } from "./splitter";
 export type ShadowProperty = "textShadow" | "boxShadow";
 export type ShineOptions = {
     config?: ShineConfigSettings;
     light?: {
-        position?: Point | "followMouse";
+        position?: {
+            x: number;
+            y: number;
+        } | "followMouse";
         intensity?: number;
     };
     classPrefix?: string;

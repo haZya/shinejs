@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { Color, Point, useShine } from "shinejs-react";
+import { useShine } from "shinejs-react";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 
@@ -11,7 +11,7 @@ function AutoPilotDemo() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const { shine, update } = useShine(headlineRef, {
     config: {
-      shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(0, 0, 0),
+      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 },
     },
   });
   const animationFrameId = useRef<number>(null);
@@ -28,7 +28,7 @@ function AutoPilotDemo() {
         const newX = radiusX + radiusX * Math.cos(phase);
         const newY = radiusY + radiusY * Math.sin(phase * 0.7);
 
-        update({ light: { position: new Point(newX, newY) } });
+        update({ light: { position: { x: newX, y: newY } } });
 
         animationFrameId.current = window.requestAnimationFrame(animate);
       };

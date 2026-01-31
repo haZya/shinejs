@@ -8,7 +8,7 @@ export type ShineConfigSettings = {
   offsetPow?: number;
   blur?: number;
   blurPow?: number;
-  shadowRGB?: Color;
+  shadowRGB?: { r: number; g: number; b: number };
 };
 
 export class ShineConfig {
@@ -19,7 +19,7 @@ export class ShineConfig {
   offsetPow = 1.8;
   blur = 40;
   blurPow = 1.0;
-  shadowRGB: Color = new Color(0, 0, 0);
+  shadowRGB: Color = new Color();
 
   constructor(settings?: ShineConfigSettings) {
     if (settings) {
@@ -54,7 +54,7 @@ export class ShineConfig {
       this.blurPow = settings.blurPow;
     }
     if (settings.shadowRGB !== undefined) {
-      this.shadowRGB = settings.shadowRGB;
+      this.shadowRGB = new Color(settings.shadowRGB.r, settings.shadowRGB.g, settings.shadowRGB.b);
     }
   }
 }

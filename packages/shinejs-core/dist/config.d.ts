@@ -7,7 +7,11 @@ export type ShineConfigSettings = {
     offsetPow?: number;
     blur?: number;
     blurPow?: number;
-    shadowRGB?: Color;
+    shadowRGB?: {
+        r: number;
+        g: number;
+        b: number;
+    };
 };
 export declare class ShineConfig {
     numSteps: number;

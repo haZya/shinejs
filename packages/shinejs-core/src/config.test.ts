@@ -17,7 +17,7 @@ describe("shineConfig", () => {
     const settings = {
       numSteps: 10,
       opacity: 0.5,
-      shadowRGB: new Color(255, 0, 0),
+      shadowRGB: { r: 255, g: 0, b: 0 },
     };
     const config = new ShineConfig(settings);
     expect(config.numSteps).toBe(10);
