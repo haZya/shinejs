@@ -1,1 +1,0 @@
-import{useCallback as c,useEffect as u,useState as h}from"react";import{Shine as f}from"shinejs-core";function S(n,i){let[e,r]=h(null),o=i?JSON.stringify(i):"{}";u(()=>{if(n.current){let t=JSON.parse(o),s=new f(n.current,t);return r(s),()=>{s.destroy()}}},[o,n]);let p=c(t=>{e&&e.update(t)},[e]);return{shine:e,update:p}}export*from"shinejs-core";export{S as useShine};
