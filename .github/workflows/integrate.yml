@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node + Install
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: 22.x
+      - name: Run ESLint
+        run: npm run lint
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node + Install
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: 22.x
+      - name: Run Test
+        run: npm run test
+
+  Build:
+    needs: [Test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node + Install
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: 22.x
+      - name: Build packages and apps
+        run: npm run build

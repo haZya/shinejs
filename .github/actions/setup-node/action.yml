@@ -1,0 +1,17 @@
+name: Setup Node + Install
+description: Checks out, sets up Node, and runs npm ci
+inputs:
+  node-version:
+    description: Node.js version
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: npm
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
