@@ -1,0 +1,29 @@
+name: Lint PR Commit Message
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+    branches: [main]
+
+jobs:
+  CommitLint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: Install commitlint
+        run: npm install conventional-changelog-conventionalcommits commitlint@latest
+      - name: Validate PR Title
+        run: |
+          # Simulate commit message from PR title and body
+          echo "$PR_TITLE" > commit-msg
+          echo "" >> commit-msg  # Add empty line between subject and body
+          echo "$PR_BODY" >> commit-msg
+          npx commitlint --verbose --edit commit-msg
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
