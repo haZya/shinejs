@@ -16,7 +16,7 @@
     "shinejs-react": "*"
   },
   "devDependencies": {
-    "@shinejs/eslint-config": "^0.0.1",
+    "@shinejs/eslint-config": "*",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^25",
     "@types/react": "^19",

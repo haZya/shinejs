@@ -33,6 +33,6 @@
     "shinejs-core": "*"
   },
   "devDependencies": {
-    "@shinejs/eslint-config": "^0.0.1"
+    "@shinejs/eslint-config": "*"
   }
 }

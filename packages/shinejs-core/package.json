@@ -26,6 +26,6 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@shinejs/eslint-config": "^0.0.1"
+    "@shinejs/eslint-config": "*"
   }
 }
