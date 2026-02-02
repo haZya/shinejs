@@ -1,13 +1,17 @@
 {
-  "name": "shinejs-react",
+  "name": "shinejs",
   "type": "module",
   "version": "1.0.0",
-  "description": "React hooks for shinejs",
+  "description": "Create pretty text-shadows and box-shadows with React support",
   "license": "MIT",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
     }
   },
   "main": "./dist/index.js",
@@ -19,7 +23,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && npm run build:types && npm run build:js",
-    "build:js": "esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js --minify --external:react --external:react-dom --external:shinejs-core",
+    "build:js": "esbuild src/index.ts src/react/index.ts --bundle --format=esm --outdir=dist --minify --external:react --external:react-dom",
     "build:types": "tsc --emitDeclarationOnly --outDir dist",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
@@ -29,10 +33,19 @@
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },
-  "dependencies": {
-    "shinejs-core": "*"
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@shinejs/eslint-config": "*"
+    "@shinejs/eslint-config": "*",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }

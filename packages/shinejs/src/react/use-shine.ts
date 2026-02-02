@@ -1,8 +1,10 @@
 import type { RefObject } from "react";
-import type { ShineOptions } from "shinejs-core";
 
 import { useCallback, useEffect, useState } from "react";
-import { Shine } from "shinejs-core";
+
+import type { ShineOptions } from "../index";
+
+import { Shine } from "../index";
 
 /**
  * React hook to apply the Shine effect to an element.

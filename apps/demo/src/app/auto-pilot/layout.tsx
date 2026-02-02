@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Shine Auto-Pilot Demo",
-  description: "Auto-pilot demo for shinejs-react",
+  description: "Auto-pilot demo for shinejs",
 };
 
 export default function AutoPilotLayout({
