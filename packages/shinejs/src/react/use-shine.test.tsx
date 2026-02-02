@@ -1,14 +1,14 @@
 import * as React from "react";
 import { act, useRef } from "react";
 import { createRoot } from "react-dom/client";
-import { Shine } from "shinejs-core";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { Shine } from "../index";
 import { useShine } from "./use-shine";
 
-// Mock shinejs-core
-vi.mock("shinejs-core", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("shinejs-core")>();
+// Mock shinejs
+vi.mock("../index", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("../index")>();
   return {
     ...actual,
     Shine: vi.fn(function (this: any) {

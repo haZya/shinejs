@@ -1,18 +1,18 @@
-# shinejs-react
+# shinejs
 
 A modern ESM-only TypeScript package for creating beautiful text and box shadows, optimized for React/Next.js projects.
 
 ## Installation
 
 ```bash
-npm install shinejs-react
+npm install shinejs
 # or
-yarn add shinejs-react
+yarn add shinejs
 ```
 
 ## Usage
 
-The `shinejs-react` library provides a `useShine` React hook to easily apply dynamic text and box shadows to your components.
+The `shinejs` library provides a `useShine` React hook to easily apply dynamic text and box shadows to your components.
 
 ### `useShine(ref, config)`
 
@@ -28,7 +28,7 @@ The hook also sets up a `mousemove` event listener on `window` to update the lig
 ```tsx
 import * as React from "react";
 import { useRef } from "react";
-import { useShine } from "shinejs-react";
+import { useShine } from "shinejs/react";
 
 function MyShiningText() {
   const textRef = useRef<HTMLHeadingElement>(null);
@@ -57,7 +57,7 @@ For more advanced light source control (like the auto-pilot demo), you can insta
 ```tsx
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
-import { Shine, ShineConfigSettings } from "shinejs-react";
+import { Shine, ShineConfigSettings } from "shinejs";
 
 function AutoPilotText({ config }: { config?: ShineConfigSettings }) {
   const headlineRef = useRef<HTMLHeadingElement>(null);

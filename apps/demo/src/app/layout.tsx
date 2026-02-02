@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Shine.js React Demos",
-  description: "Demos for shinejs-react library",
+  description: "Demos for shinejs library",
 };
 
 export default function RootLayout({

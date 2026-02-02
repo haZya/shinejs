@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { useShine } from "shinejs-react";
+import { useShine } from "shinejs/react";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 import img1 from "./img-1.jpg";
