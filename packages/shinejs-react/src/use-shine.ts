@@ -4,6 +4,13 @@ import type { ShineOptions } from "shinejs-core";
 import { useCallback, useEffect, useState } from "react";
 import { Shine } from "shinejs-core";
 
+/**
+ * React hook to apply the Shine effect to an element.
+ *
+ * @param ref Reference to the target HTML element.
+ * @param config Optional configuration for the Shine effect.
+ * @returns An object containing the Shine instance and an update function.
+ */
 export function useShine(
   ref: RefObject<HTMLElement | null>,
   config?: ShineOptions,

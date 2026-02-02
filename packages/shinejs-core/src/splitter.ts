@@ -1,3 +1,8 @@
+/**
+ * Splits text content into individual words and letters for granular animation control.
+ * Wraps content in spans and handles accessibility attributes.
+ * @internal
+ */
 export class Splitter {
   domElement: HTMLElement;
   classPrefix: string;
@@ -8,6 +13,11 @@ export class Splitter {
   text: string = "";
   originalHTML: string;
 
+  /**
+   * Creates a new Splitter instance.
+   * @param domElement The element to split.
+   * @param classPrefix Prefix for generated CSS classes.
+   */
   constructor(domElement: HTMLElement, classPrefix = "") {
     this.domElement = domElement;
     this.classPrefix = classPrefix;
@@ -16,12 +26,20 @@ export class Splitter {
     this.originalHTML = domElement.innerHTML;
   }
 
+  /**
+   * Reverts the DOM to its original state (approximately).
+   */
   destroy(): void {
     if (this.domElement) {
       this.domElement.innerHTML = this.originalHTML;
     }
   }
 
+  /**
+   * Performs the splitting operation.
+   * @param optText Optional text to replace current content with.
+   * @param preserveChildren If true, wraps existing children instead of splitting text characters.
+   */
   split(optText?: string, preserveChildren?: boolean): void {
     this.text = optText || this.domElement.textContent || "";
     this.wordElements = [];

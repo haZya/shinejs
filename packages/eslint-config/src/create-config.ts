@@ -2,6 +2,9 @@ import type { OptionsConfig, TypedFlatConfigItem } from "@antfu/eslint-config";
 
 import antfu from "@antfu/eslint-config";
 
+/**
+ * Shared ESLint options for shinejs packages.
+ */
 export const sharedOptions: OptionsConfig = {
   type: "lib",
   typescript: true,
@@ -14,6 +17,9 @@ export const sharedOptions: OptionsConfig = {
   },
 };
 
+/**
+ * Shared ESLint rules for shinejs packages.
+ */
 export const sharedRules: TypedFlatConfigItem = {
   rules: {
     "ts/no-redeclare": "off",
@@ -38,6 +44,13 @@ export const sharedRules: TypedFlatConfigItem = {
   },
 };
 
+/**
+ * Creates an ESLint configuration based on antfu's config with shinejs defaults.
+ *
+ * @param options Configuration options for @antfu/eslint-config.
+ * @param userConfigs Additional flat config items.
+ * @returns A promise resolving to the ESLint configuration array.
+ */
 export async function createConfig(
   options: OptionsConfig = {},
   ...userConfigs: (TypedFlatConfigItem | TypedFlatConfigItem[])[]

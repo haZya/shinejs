@@ -8,19 +8,35 @@ import { Splitter } from "./splitter";
 import { StyleInjector } from "./style-injector";
 import { debounce } from "./timing";
 
+/**
+ * Specifies which CSS property to use for the shadow.
+ */
 export type ShadowProperty = "textShadow" | "boxShadow";
 
+/**
+ * Options for initializing or updating a Shine instance.
+ */
 export type ShineOptions = {
+  /** Configuration settings for the shine effect. */
   config?: ShineConfigSettings;
+  /** Light source configuration. */
   light?: {
+    /** Fixed position {x, y} or "followMouse" to track the cursor. */
     position?: { x: number; y: number } | "followMouse";
+    /** Light intensity. */
     intensity?: number;
   };
+  /** Prefix for CSS classes injected by the library. Defaults to "shine-". */
   classPrefix?: string;
+  /** Explicitly set the shadow property ("textShadow" or "boxShadow"). Auto-detected if omitted. */
   shadowProperty?: ShadowProperty;
+  /** Content text to display. If provided, replaces the element's content. */
   content?: string;
 };
 
+/**
+ * The main class for creating and managing the shine effect on a DOM element.
+ */
 export class Shine {
   light = new Light();
   config: ShineConfig;
@@ -35,6 +51,11 @@ export class Shine {
   private handleAutoUpdate: () => void;
   private unsubscribeMouseMonitor: (() => void) | null = null;
 
+  /**
+   * Creates a new Shine instance.
+   * @param domElement The DOM element to apply the effect to.
+   * @param options Optional configuration options.
+   */
   constructor(domElement: HTMLElement, options?: ShineOptions) {
     if (!domElement) {
       throw new Error("No valid DOM element passed as the first parameter");
@@ -54,6 +75,10 @@ export class Shine {
     this.update(options);
   }
 
+  /**
+   * Destroys the Shine instance, removing event listeners and cleaning up references.
+   * Does NOT revert DOM changes made by the splitter (text wrapping).
+   */
   destroy(): void {
     this.disableAutoUpdates();
     this.disableMouseTracking();
@@ -70,6 +95,10 @@ export class Shine {
     this.domElement = null!;
   }
 
+  /**
+   * Updates the Shine instance with new options.
+   * @param options The new options to apply.
+   */
   update(options?: ShineOptions): void {
     let needsRedraw = false;
 
@@ -109,6 +138,10 @@ export class Shine {
     }
   }
 
+  /**
+   * Triggers a redraw of the shadows.
+   * Uses requestAnimationFrame for performance.
+   */
   draw(): void {
     if (!this.light || !this.config || !this.shadows.length)
       return;
@@ -123,10 +156,18 @@ export class Shine {
     });
   }
 
+  /**
+   * Recalculates the positions of all shadow elements.
+   * Useful when the layout changes.
+   */
   recalculatePositions(): void {
     this.shadows.forEach(shadow => shadow.recalculatePosition());
   }
 
+  /**
+   * Updates the text content of the element and re-initializes the effect.
+   * @param optText Optional new text content.
+   */
   updateContent(optText?: string): void {
     const wereAutoUpdatesEnabled = this.areAutoUpdatesEnabled;
     this.disableAutoUpdates();
@@ -151,6 +192,9 @@ export class Shine {
     this.draw();
   }
 
+  /**
+   * Enables automatic updates on scroll and resize events.
+   */
   enableAutoUpdates(): void {
     this.disableAutoUpdates();
     this.areAutoUpdatesEnabled = true;
@@ -159,6 +203,9 @@ export class Shine {
     window.addEventListener("resize", this.handleAutoUpdate, false);
   }
 
+  /**
+   * Disables automatic updates on scroll and resize events.
+   */
   disableAutoUpdates(): void {
     this.areAutoUpdatesEnabled = false;
 
@@ -168,6 +215,9 @@ export class Shine {
     }
   }
 
+  /**
+   * Enables mouse tracking for the light source.
+   */
   enableMouseTracking(): void {
     if (this.unsubscribeMouseMonitor) {
       return;
@@ -182,6 +232,9 @@ export class Shine {
     });
   }
 
+  /**
+   * Disables mouse tracking.
+   */
   disableMouseTracking(): void {
     if (this.unsubscribeMouseMonitor) {
       this.unsubscribeMouseMonitor();

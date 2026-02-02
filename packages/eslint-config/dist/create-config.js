@@ -1,4 +1,7 @@
 import antfu from "@antfu/eslint-config";
+/**
+ * Shared ESLint options for shinejs packages.
+ */
 export const sharedOptions = {
     type: "lib",
     typescript: true,
@@ -10,6 +13,9 @@ export const sharedOptions = {
         quotes: "double",
     },
 };
+/**
+ * Shared ESLint rules for shinejs packages.
+ */
 export const sharedRules = {
     rules: {
         "ts/no-redeclare": "off",
@@ -33,6 +39,13 @@ export const sharedRules = {
         ],
     },
 };
+/**
+ * Creates an ESLint configuration based on antfu's config with shinejs defaults.
+ *
+ * @param options Configuration options for @antfu/eslint-config.
+ * @param userConfigs Additional flat config items.
+ * @returns A promise resolving to the ESLint configuration array.
+ */
 export async function createConfig(options = {}, ...userConfigs) {
     return antfu({
         ...sharedOptions,
