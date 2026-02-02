@@ -42,9 +42,12 @@
     }
   },
   "devDependencies": {
+    "@eslint-react/eslint-plugin": "^2.9.3",
     "@shinejs/eslint-config": "*",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
