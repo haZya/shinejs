@@ -23,8 +23,8 @@
   ],
   "scripts": {
     "build": "rimraf dist && npm run build:types && npm run build:js",
-    "build:js": "esbuild src/index.ts src/react/index.ts --bundle --format=esm --outdir=dist --minify --external:react --external:react-dom",
     "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "build:js": "esbuild src/index.ts src/react/index.ts --bundle --format=esm --outdir=dist --minify --external:react --external:react-dom",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "test": "vitest run"
@@ -50,7 +50,6 @@
     "eslint-plugin-react-refresh": "^0.4.26",
     "jsdom": "^28.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "vitest": "^4.0.18"
+    "react-dom": "^19.0.0"
   }
 }
