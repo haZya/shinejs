@@ -1,4 +1,5 @@
 import antfu from "@antfu/eslint-config";
+import cspellPlugin from "@cspell/eslint-plugin";
 /**
  * Shared ESLint options for shinejs packages.
  */
@@ -13,6 +14,18 @@ export const sharedOptions = {
         quotes: "double",
     },
 };
+/**
+ * Shared ESLint plugins for shinejs packages.
+ */
+export const sharedPlugins = [{
+        plugins: { "@cspell": cspellPlugin },
+        rules: {
+            "@cspell/spellchecker": [
+                "warn",
+                { cspell: { allowCompoundWords: true }, customWordListFile: "./custom-words.txt" },
+            ],
+        },
+    }];
 /**
  * Shared ESLint rules for shinejs packages.
  */
@@ -50,5 +63,5 @@ export async function createConfig(options = {}, ...userConfigs) {
     return antfu({
         ...sharedOptions,
         ...options,
-    }, sharedRules, ...userConfigs);
+    }, ...sharedPlugins, sharedRules, ...userConfigs);
 }

@@ -44,7 +44,6 @@
     "css",
     "less",
     "scss",
-    "pcss",
     "postcss"
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
