@@ -4,6 +4,10 @@ import type { OptionsConfig, TypedFlatConfigItem } from "@antfu/eslint-config";
  */
 export declare const sharedOptions: OptionsConfig;
 /**
+ * Shared ESLint plugins for shinejs packages.
+ */
+export declare const sharedPlugins: TypedFlatConfigItem[];
+/**
  * Shared ESLint rules for shinejs packages.
  */
 export declare const sharedRules: TypedFlatConfigItem;

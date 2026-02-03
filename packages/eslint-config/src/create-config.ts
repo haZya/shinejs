@@ -1,6 +1,7 @@
 import type { OptionsConfig, TypedFlatConfigItem } from "@antfu/eslint-config";
 
 import antfu from "@antfu/eslint-config";
+import cspellPlugin from "@cspell/eslint-plugin";
 
 /**
  * Shared ESLint options for shinejs packages.
@@ -16,6 +17,19 @@ export const sharedOptions: OptionsConfig = {
     quotes: "double",
   },
 };
+
+/**
+ * Shared ESLint plugins for shinejs packages.
+ */
+export const sharedPlugins: TypedFlatConfigItem[] = [{
+  plugins: { "@cspell": cspellPlugin },
+  rules: {
+    "@cspell/spellchecker": [
+      "warn",
+      { cspell: { allowCompoundWords: true }, customWordListFile: "./custom-words.txt" },
+    ],
+  },
+}];
 
 /**
  * Shared ESLint rules for shinejs packages.
@@ -60,6 +74,7 @@ export async function createConfig(
       ...sharedOptions,
       ...options,
     },
+    ...sharedPlugins,
     sharedRules,
     ...userConfigs,
   );
