@@ -3,7 +3,35 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Create pretty text-shadows and box-shadows with React support",
+  "author": {
+    "name": "Hasitha Wickramasinghe",
+    "url": "https://hazya.dev"
+  },
   "license": "MIT",
+  "homepage": "https://github.com/haZya/shinejs#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haZya/shinejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/haZya/shinejs/issues"
+  },
+  "keywords": [
+    "shinejs",
+    "shine",
+    "react",
+    "typescript",
+    "light",
+    "shadow",
+    "text-shadow",
+    "box-shadow",
+    "3d-effects",
+    "ui-component",
+    "neumorphism",
+    "neumorphic-text",
+    "interactive",
+    "styling"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
