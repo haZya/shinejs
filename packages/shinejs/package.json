@@ -2,7 +2,7 @@
   "name": "shinejs",
   "type": "module",
   "version": "1.0.0",
-  "description": "Create pretty text-shadows and box-shadows with React support",
+  "description": "Create pretty text-shadows and box-shadows with neumorphic aesthetics and React support",
   "author": {
     "name": "Hasitha Wickramasinghe",
     "url": "https://hazya.dev"
