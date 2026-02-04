@@ -1,6 +1,6 @@
 # shinejs
 
-A modern ESM-only TypeScript library for creating beautiful, interactive text and box shadows. Perfect for achieving **neumorphic** aesthetics, optimized for React and Next.js, but works perfectly in any modern JavaScript environment.
+A modern ESM-only TypeScript library based on [bigspaceship/shine.js](https://github.com/bigspaceship/shine.js) for creating beautiful, interactive text and box shadows. Perfect for achieving **neumorphic** aesthetics, optimized for React and Next.js, but works perfectly in any modern JavaScript environment.
 
 ## Features
 
