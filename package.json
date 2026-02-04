@@ -8,6 +8,12 @@
     "name": "Hasitha Wickramasinghe",
     "url": "https://hazya.dev"
   },
+  "contributors": [
+    {
+      "name": "Big Spaceship",
+      "url": "https://github.com/bigspaceship"
+    }
+  ],
   "license": "MIT",
   "homepage": "https://github.com/haZya/shinejs#readme",
   "repository": {
