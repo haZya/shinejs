@@ -37,7 +37,7 @@ jobs:
         uses: ./.github/actions/setup-node
         with:
           node-version: 22.x
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
 
       - name: Build
         run: npm run build
@@ -46,12 +46,12 @@ jobs:
         run: |
           PATHS='${{ needs.release-please.outputs.paths_released }}'
           echo "Released paths: $PATHS"
-          
+
           echo "$PATHS" | jq -r '.[]' | while read -r path; do
             if [ -f "$path/package.json" ]; then
               PACKAGE_NAME=$(jq -r '.name' "$path/package.json")
               IS_PRIVATE=$(jq -r '.private' "$path/package.json")
-              
+
               if [ "$IS_PRIVATE" != "true" ]; then
                 echo "Publishing $PACKAGE_NAME from $path..."
                 npm publish -w "$path" --access public --provenance
