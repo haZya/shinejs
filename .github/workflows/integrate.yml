@@ -24,6 +24,8 @@ jobs:
         uses: ./.github/actions/setup-node
         with:
           node-version: 22.x
+      - name: Build ESLint config
+        run: npm -w packages/eslint-config run build
       - name: Run ESLint
         run: npm run lint
 
