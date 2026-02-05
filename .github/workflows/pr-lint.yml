@@ -3,7 +3,7 @@ name: Lint PR Commit Message
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
-    branches: [main]
+    branches: [main, master]
 
 jobs:
   commit-lint:
