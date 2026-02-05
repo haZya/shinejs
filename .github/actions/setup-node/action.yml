@@ -7,7 +7,7 @@ inputs:
   registry-url:
     description: Registry URL for npm
     required: false
-    default: 'https://registry.npmjs.org'
+    default: "https://registry.npmjs.org"
 runs:
   using: composite
   steps:
