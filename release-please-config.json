@@ -7,6 +7,41 @@
       "package-name": "shinejs"
     }
   },
+  "changelog-sections": [
+    {
+      "type": "feat",
+      "section": "Features"
+    },
+    {
+      "type": "fix",
+      "section": "Bug Fixes"
+    },
+    {
+      "type": "refactor",
+      "section": "Refactors",
+      "hidden": false
+    },
+    {
+      "type": "docs",
+      "section": "Docs",
+      "hidden": false
+    },
+    {
+      "type": "chore",
+      "section": "Chores",
+      "hidden": false
+    },
+    {
+      "type": "ci",
+      "section": "CI",
+      "hidden": false
+    },
+    {
+      "type": "test",
+      "section": "Tests",
+      "hidden": false
+    }
+  ],
   "plugins": [
     {
       "type": "node-workspace"
