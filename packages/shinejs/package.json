@@ -51,14 +51,11 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "rimraf dist && npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly --outDir dist",
-    "build:js": "esbuild src/index.ts src/react/index.ts --bundle --format=esm --outdir=dist --minify --external:react --external:react-dom",
+    "build:js": "esbuild src/index.ts src/react/index.ts --bundle --format=esm --outdir=dist --minify --sourcemap --external:react --external:react-dom",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "test": "vitest run"
