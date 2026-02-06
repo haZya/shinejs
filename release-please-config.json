@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "2b645ff1f0717f1d12c154c087828b45568f65e6",
   "packages": {
     "packages/shinejs": {
       "release-type": "node",
