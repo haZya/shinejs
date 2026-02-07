@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 
 import defaultMdxComponents from "fumadocs-ui/mdx";
 
+import { PreviewCodeTabs } from "@/components/preview-code-tabs";
 import {
   AutoPilotPreview,
   BoxShadowChildrenPreview,
@@ -19,8 +20,7 @@ import {
   ReactUseShineGuidePreview,
   ShadowRgbPreview,
   TextVsChildrenPreview,
-} from "@/components/example-previews";
-import { PreviewCodeTabs } from "@/components/preview-code-tabs";
+} from "@/components/previews";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
