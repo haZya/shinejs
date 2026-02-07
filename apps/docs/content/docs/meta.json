@@ -17,6 +17,7 @@
     "guides/performance-and-lifecycle",
     "guides/troubleshooting",
     "---Examples---",
+    "examples/playground",
     "examples/mouse-follow",
     "examples/auto-pilot",
     "examples/box-shadow-children",

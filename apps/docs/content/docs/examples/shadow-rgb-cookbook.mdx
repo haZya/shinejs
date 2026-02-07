@@ -5,86 +5,111 @@ description: Multiple production-ready shadowRGB palettes and tuning combination
 
 Use `shadowRGB` to control shadow color with `{ r, g, b }`.
 
-```ts
-update({
+<PreviewCodeTabs
+  language="ts"
+  code={`update({
   config: {
     shadowRGB: { r: 34, g: 67, b: 112 },
   },
 });
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 1: Neutral black
 
 Use when your UI already carries color elsewhere.
 
-```ts
-{
+<PreviewCodeTabs
+  language="ts"
+  code={`{
   shadowRGB: { r: 0, g: 0, b: 0 },
   opacity: 0.15,
   blur: 36,
   intensity: 1.0,
 }
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 2: Neutral white (dark surfaces)
 
 Use for dark UIs where highlight-style shadows read better.
 
-```ts
-{
+<PreviewCodeTabs
+  language="ts"
+  code={`{
   shadowRGB: { r: 255, g: 255, b: 255 },
   opacity: 0.12,
   blur: 28,
   intensity: 1.0,
 }
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 3: Warm ambient
 
 Great for editorial and lifestyle visuals.
 
-```ts
-{
+<PreviewCodeTabs
+  language="ts"
+  code={`{
   shadowRGB: { r: 120, g: 74, b: 36 },
   opacity: 0.18,
   blur: 40,
   intensity: 1.3,
 }
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 4: Cool steel
 
 Works well for dashboards and enterprise UI.
 
-```ts
-{
+<PreviewCodeTabs
+  language="ts"
+  code={`{
   shadowRGB: { r: 36, g: 61, b: 91 },
   opacity: 0.17,
   blur: 34,
   intensity: 1.15,
 }
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 5: Cyan accent
 
 Good for product hero sections and launch pages.
 
-```ts
-{
+<PreviewCodeTabs
+  language="ts"
+  code={`{
   shadowRGB: { r: 0, g: 163, b: 224 },
   opacity: 0.2,
   blur: 42,
   intensity: 1.4,
 }
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 6: Brand-driven mapping
 
 Build from a brand hex color.
 
-```ts
-function hexToRgb(hex: string) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+<PreviewCodeTabs
+  language="ts"
+  code={`function hexToRgb(hex: string) {
+  const result = /^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i.exec(hex);
   if (!result)
     return { r: 0, g: 0, b: 0 };
 
@@ -96,22 +121,30 @@ function hexToRgb(hex: string) {
 }
 
 update({ config: { shadowRGB: hexToRgb("#1E62C9") } });
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 7: Theme-aware toggle
 
-```ts
-const shadowRGB = prefersDarkMode
+<PreviewCodeTabs
+  language="ts"
+  code={`const shadowRGB = prefersDarkMode
   ? { r: 255, g: 255, b: 255 }
   : { r: 0, g: 0, b: 0 };
 
 update({ config: { shadowRGB } });
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Preset 8: User color picker
 
-```tsx
-<input
+<PreviewCodeTabs
+  language="tsx"
+  code={`<input
   type="color"
   value={shadowColorHex}
   onChange={(event) => {
@@ -119,7 +152,10 @@ update({ config: { shadowRGB } });
     update({ config: { shadowRGB: rgb } });
   }}
 />
-```
+`}
+>
+  <ShadowRgbPreview />
+</PreviewCodeTabs>
 
 ## Practical tuning rules
 
