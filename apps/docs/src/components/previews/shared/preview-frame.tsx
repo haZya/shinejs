@@ -8,8 +8,8 @@ const panelStyle: CSSProperties = {
 
 export function PreviewFrame({ children }: { children: ReactNode }) {
   return (
-    <div style={panelStyle} className="rounded-xl border p-6">
-      <div className="flex min-h-44 items-center justify-center rounded-lg bg-white/45 p-4 shadow-inner">
+    <div style={panelStyle} className="rounded-xl border p-6 dark:invert">
+      <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
         {children}
       </div>
     </div>
