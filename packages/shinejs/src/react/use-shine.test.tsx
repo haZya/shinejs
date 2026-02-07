@@ -111,4 +111,26 @@ describe("useShine", () => {
 
     expect(shineInstance.update).toHaveBeenCalledWith(newConfig);
   });
+
+  it("should always update the latest Shine instance", async () => {
+    await act(async () => {
+      root.render(<TestComponent config={{ numSteps: 5 }} />);
+    });
+
+    const firstInstance = (Shine as any).mock.results[0].value;
+    const initialUpdate = hookResult.update;
+
+    await act(async () => {
+      root.render(<TestComponent config={{ numSteps: 10 }} />);
+    });
+
+    const secondInstance = (Shine as any).mock.results[1].value;
+
+    act(() => {
+      initialUpdate({ config: { opacity: 0.2 } });
+    });
+
+    expect(firstInstance.update).not.toHaveBeenCalledWith({ config: { opacity: 0.2 } });
+    expect(secondInstance.update).toHaveBeenCalledWith({ config: { opacity: 0.2 } });
+  });
 });
