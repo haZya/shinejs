@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "shinejs Docs",
-    template: "%s | shinejs Docs",
+    default: "ShineJS Docs",
+    template: "%s | ShineJS Docs",
   },
-  description: "Comprehensive documentation for shinejs.",
+  description: "Comprehensive documentation for ShineJS.",
 };
 
 export default function RootLayout({
