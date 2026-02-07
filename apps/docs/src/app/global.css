@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/ocean.css";
+@import "fumadocs-ui/css/preset.css";
+
+@source "../../../node_modules/fumadocs-ui/dist/**/*.js";
+
+:root {
+  --fd-layout-width: 86rem;
+}
+
+body {
+  min-height: 100vh;
+}

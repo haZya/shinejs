@@ -1,0 +1,129 @@
+---
+title: shadowRGB Cookbook
+description: Multiple production-ready shadowRGB palettes and tuning combinations.
+---
+
+Use `shadowRGB` to control shadow color with `{ r, g, b }`.
+
+```ts
+update({
+  config: {
+    shadowRGB: { r: 34, g: 67, b: 112 },
+  },
+});
+```
+
+## Preset 1: Neutral black
+
+Use when your UI already carries color elsewhere.
+
+```ts
+{
+  shadowRGB: { r: 0, g: 0, b: 0 },
+  opacity: 0.15,
+  blur: 36,
+  intensity: 1.0,
+}
+```
+
+## Preset 2: Neutral white (dark surfaces)
+
+Use for dark UIs where highlight-style shadows read better.
+
+```ts
+{
+  shadowRGB: { r: 255, g: 255, b: 255 },
+  opacity: 0.12,
+  blur: 28,
+  intensity: 1.0,
+}
+```
+
+## Preset 3: Warm ambient
+
+Great for editorial and lifestyle visuals.
+
+```ts
+{
+  shadowRGB: { r: 120, g: 74, b: 36 },
+  opacity: 0.18,
+  blur: 40,
+  intensity: 1.3,
+}
+```
+
+## Preset 4: Cool steel
+
+Works well for dashboards and enterprise UI.
+
+```ts
+{
+  shadowRGB: { r: 36, g: 61, b: 91 },
+  opacity: 0.17,
+  blur: 34,
+  intensity: 1.15,
+}
+```
+
+## Preset 5: Cyan accent
+
+Good for product hero sections and launch pages.
+
+```ts
+{
+  shadowRGB: { r: 0, g: 163, b: 224 },
+  opacity: 0.2,
+  blur: 42,
+  intensity: 1.4,
+}
+```
+
+## Preset 6: Brand-driven mapping
+
+Build from a brand hex color.
+
+```ts
+function hexToRgb(hex: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result)
+    return { r: 0, g: 0, b: 0 };
+
+  return {
+    r: Number.parseInt(result[1], 16),
+    g: Number.parseInt(result[2], 16),
+    b: Number.parseInt(result[3], 16),
+  };
+}
+
+update({ config: { shadowRGB: hexToRgb("#1E62C9") } });
+```
+
+## Preset 7: Theme-aware toggle
+
+```ts
+const shadowRGB = prefersDarkMode
+  ? { r: 255, g: 255, b: 255 }
+  : { r: 0, g: 0, b: 0 };
+
+update({ config: { shadowRGB } });
+```
+
+## Preset 8: User color picker
+
+```tsx
+<input
+  type="color"
+  value={shadowColorHex}
+  onChange={(event) => {
+    const rgb = hexToRgb(event.target.value);
+    update({ config: { shadowRGB: rgb } });
+  }}
+/>
+```
+
+## Practical tuning rules
+
+- Strong color (`shadowRGB`) -> lower `opacity` first.
+- High `intensity` -> lower `blur` to avoid haze.
+- Large typography -> higher `blur`, lower `offset`.
+- Dense UI cards -> moderate `numSteps` (`5` to `8`) for good cost/quality balance.

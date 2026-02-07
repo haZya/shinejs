@@ -1,0 +1,45 @@
+---
+title: Dynamic Updates
+description: Update content, color, and shadow parameters at runtime.
+---
+
+Use `update()` for live changes.
+
+## Update content text
+
+```ts
+update({ content: "Hello World" });
+```
+
+## Update config values
+
+```ts
+update({
+  config: {
+    blur: 48,
+    opacity: 0.22,
+    offset: 0.2,
+  },
+});
+```
+
+## Update light behavior
+
+```ts
+update({
+  light: {
+    intensity: 2,
+    position: { x: 320, y: 140 },
+  },
+});
+```
+
+## Color picker flow (`shadowRGB`)
+
+```ts
+update({
+  config: {
+    shadowRGB: { r: 26, g: 54, b: 93 },
+  },
+});
+```

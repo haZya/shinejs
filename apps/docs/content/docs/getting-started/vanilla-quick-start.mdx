@@ -1,0 +1,34 @@
+---
+title: Vanilla Quick Start
+description: Use shinejs without React via the Shine class.
+---
+
+If you are not using React, instantiate `Shine` directly.
+
+```ts
+import { Shine } from "shinejs";
+
+const element = document.getElementById("hero-title");
+
+if (element) {
+  const shine = new Shine(element, {
+    light: { position: "followMouse" },
+    config: {
+      blur: 32,
+      opacity: 0.2,
+    },
+  });
+
+  // Later, when unmounting/changing views:
+  // shine.destroy();
+}
+```
+
+## Common class methods
+
+- `update(options)`
+- `updateContent(text)`
+- `enableMouseTracking()` / `disableMouseTracking()`
+- `enableAutoUpdates()` / `disableAutoUpdates()`
+- `recalculatePositions()`
+- `destroy()`

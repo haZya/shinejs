@@ -1,0 +1,30 @@
+---
+title: Text vs Children
+description: Understand automatic shadow mode selection and when to override it.
+---
+
+`shinejs` selects the shadow property automatically:
+
+- Text-only element -> `textShadow`
+- Element with child nodes -> `boxShadow`
+
+## Example
+
+```ts
+new Shine(textOnlyElement); // textShadow
+new Shine(containerWithImages); // boxShadow
+```
+
+## Manual override
+
+You can always force behavior with `shadowProperty`.
+
+```ts
+new Shine(element, {
+  shadowProperty: "boxShadow",
+});
+```
+
+<Callout type="info" title="Children grid pattern">
+  For card/image grids, point `Shine` at the parent container and let box-shadow mode style each split child wrapper.
+</Callout>

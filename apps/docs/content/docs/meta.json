@@ -1,0 +1,32 @@
+{
+  "title": "shinejs",
+  "root": true,
+  "pages": [
+    "index",
+    "---Getting Started---",
+    "getting-started/installation",
+    "getting-started/react-quick-start",
+    "getting-started/vanilla-quick-start",
+    "getting-started/nextjs-client-components",
+    "---Guides---",
+    "guides/react-use-shine",
+    "guides/class-api",
+    "guides/text-vs-children",
+    "guides/dynamic-updates",
+    "guides/light-position-and-intensity",
+    "guides/performance-and-lifecycle",
+    "guides/troubleshooting",
+    "---Examples---",
+    "examples/mouse-follow",
+    "examples/auto-pilot",
+    "examples/box-shadow-children",
+    "examples/shadow-rgb-cookbook",
+    "examples/change-content",
+    "examples/direct-class-usage",
+    "---API Reference---",
+    "api/use-shine-hook",
+    "api/shine-options",
+    "api/shine-config-settings",
+    "api/shine-class"
+  ]
+}

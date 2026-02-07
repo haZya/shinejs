@@ -1,0 +1,38 @@
+---
+title: Installation
+description: Install shinejs and choose your integration path.
+---
+
+Use your preferred package manager.
+
+```bash
+npm install shinejs
+```
+
+```bash
+pnpm add shinejs
+```
+
+```bash
+yarn add shinejs
+```
+
+## Import paths
+
+- Core class API: `shinejs`
+- React hook API: `shinejs/react`
+
+```ts
+import { Shine } from "shinejs";
+import { useShine } from "shinejs/react";
+```
+
+## Requirements
+
+- Modern browser environment.
+- ESM-compatible tooling.
+- React + Next.js optional (only for `useShine`).
+
+<Callout type="info" title="Monorepo usage">
+  In this repository, docs and demo consume `shinejs` through npm workspace linking with `"shinejs": "*"`.
+</Callout>

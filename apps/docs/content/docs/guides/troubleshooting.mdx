@@ -1,0 +1,28 @@
+---
+title: Troubleshooting
+description: Fix common setup and runtime issues quickly.
+---
+
+## No visible effect
+
+- Confirm component is client-side in Next.js (`"use client"`).
+- Verify `ref.current` points to the expected element.
+- Ensure text color/background contrast makes shadow visible.
+
+## Wrong shadow mode
+
+- Text-only targets use `textShadow` automatically.
+- Non-text children switch to `boxShadow`.
+- Override via `shadowProperty` when needed.
+
+## Performance feels heavy
+
+- Reduce `numSteps`.
+- Reduce `blur` and `opacity` together.
+- Avoid excessive updates per frame outside RAF loops.
+
+## Mouse-follow not moving
+
+- Set `light.position: "followMouse"`.
+- Ensure no overlay blocks interaction assumptions in your layout.
+- Confirm mouse tracking is not disabled by later updates.
