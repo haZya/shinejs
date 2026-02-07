@@ -11,8 +11,8 @@ description: Add ShineJS shadows to a React element in under a minute.
   language="tsx"
   code={`"use client";
 
-import { useEffect, useRef } from "react";
-import { useShine } from "shinejs/react";
+  import { useEffect, useRef } from "react";
+  import { useShine } from "shinejs/react";
 
   export function MouseFollowPreview() {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -23,8 +23,10 @@ import { useShine } from "shinejs/react";
         position: "followMouse",
       },
       config: {
+        blur: 36,
         opacity: 0.3,
         offset: 0.08,
+        shadowRGB: { r: 24, g: 41, b: 71 },
       },
     });
 
@@ -37,7 +39,7 @@ import { useShine } from "shinejs/react";
         </div>
       </div>
     );
-}
+  }
 `}
 >
   <MouseFollowPreview />
@@ -53,7 +55,7 @@ import { useShine } from "shinejs/react";
 
 export function HeroTitle() {
   const titleRef = useRef<HTMLHeadingElement>(null);
-  
+
   useShine(titleRef, { light: { position: "followMouse" } });
 
   return <h1 ref={titleRef}>Shining Bright</h1>;

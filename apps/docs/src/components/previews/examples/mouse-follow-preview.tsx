@@ -14,8 +14,10 @@ export function MouseFollowPreview() {
       position: "followMouse",
     },
     config: {
+      blur: 36,
       opacity: 0.3,
       offset: 0.08,
+      shadowRGB: { r: 24, g: 41, b: 71 },
     },
   });
 

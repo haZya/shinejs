@@ -14,7 +14,14 @@ export function DirectClassUsagePreview() {
     }
 
     const shine = new Shine(ref.current, {
+      light: {
+        intensity: 1.2,
+        position: "followMouse",
+      },
       config: {
+        blur: 36,
+        offset: 0.08,
+        opacity: 0.3,
         shadowRGB: new Color(24, 41, 71),
       },
     });
@@ -29,7 +36,7 @@ export function DirectClassUsagePreview() {
 
   return (
     <PreviewFrame>
-      <h2 ref={ref} className="text-center text-4xl font-black tracking-tight text-slate-200">Class API Demo</h2>
+      <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">Class API Demo</h2>
     </PreviewFrame>
   );
 }
