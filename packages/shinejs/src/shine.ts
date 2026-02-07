@@ -100,6 +100,10 @@ export class Shine {
    * @param options The new options to apply.
    */
   update(options?: ShineOptions): void {
+    if (!this.splitter || !this.domElement || !this.config || !this.light) {
+      return;
+    }
+
     let needsRedraw = false;
 
     if (options?.content !== undefined) {

@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { ShineOptions } from "../index";
 
@@ -18,6 +18,7 @@ export function useShine(
   config?: ShineOptions,
 ): { shine: Shine | null; update: (newConfig: ShineOptions) => void } {
   const [shineInstance, setShineInstance] = useState<Shine | null>(null);
+  const shineInstanceRef = useRef<Shine | null>(null);
 
   // Simple deep-ish compare for config to prevent unnecessary re-initializations
   const configJson = config ? JSON.stringify(config) : "{}";
@@ -27,21 +28,26 @@ export function useShine(
       const shineConfig: ShineOptions = JSON.parse(configJson);
       const instance = new Shine(ref.current, shineConfig);
 
+      shineInstanceRef.current = instance;
       setShineInstance(instance);
 
       return () => {
+        if (shineInstanceRef.current === instance) {
+          shineInstanceRef.current = null;
+        }
         instance.destroy();
+        setShineInstance(prev => (prev === instance ? null : prev));
       };
     }
   }, [configJson, ref]);
 
   const update = useCallback(
     (newConfig: ShineOptions) => {
-      if (shineInstance) {
-        shineInstance.update(newConfig);
+      if (shineInstanceRef.current) {
+        shineInstanceRef.current.update(newConfig);
       }
     },
-    [shineInstance],
+    [],
   );
 
   return { shine: shineInstance, update };
