@@ -51,7 +51,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf dist && npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly --outDir dist",
