@@ -9,13 +9,21 @@ export function MouseFollowPreview() {
   const ref = useRef<HTMLHeadingElement>(null);
 
   useShine(ref, {
-    light: { position: "followMouse" },
-    config: { shadowRGB: { r: 0, g: 0, b: 0 } },
+    light: {
+      intensity: 1.2,
+      position: "followMouse",
+    },
+    config: {
+      opacity: 0.3,
+      offset: 0.08,
+    },
   });
 
   return (
     <PreviewFrame>
-      <h2 ref={ref} className="text-center text-4xl font-black tracking-tight text-slate-200">Shine Mouse Follow</h2>
+      <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">
+        Shine Mouse Follow
+      </h2>
     </PreviewFrame>
   );
 }

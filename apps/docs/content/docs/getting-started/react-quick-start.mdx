@@ -7,9 +7,43 @@ description: Add ShineJS shadows to a React element in under a minute.
 
 [`useShine`](/docs/guides/react-use-shine) is the fastest way to apply interactive shadows in React.
 
-<MouseFollowPreview />
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
 
-## Usage
+import { useEffect, useRef } from "react";
+import { useShine } from "shinejs/react";
+
+  export function MouseFollowPreview() {
+    const ref = useRef<HTMLHeadingElement>(null);
+
+    useShine(ref, {
+      light: {
+        intensity: 1.2,
+        position: "followMouse",
+      },
+      config: {
+        opacity: 0.3,
+        offset: 0.08,
+      },
+    });
+
+    return (
+      <div style={panelStyle} className="rounded-xl border p-6 dark:invert">
+        <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
+          <h2 ref={ref} className="text-center text-8xl font-black text-slate-200">
+            Shine Mouse Follow
+          </h2>
+        </div>
+      </div>
+    );
+}
+`}
+>
+  <MouseFollowPreview />
+</PreviewCodeTabs>
+
+## Basic Usage
 
 ```tsx
 "use client";
@@ -19,15 +53,8 @@ import { useShine } from "shinejs/react";
 
 export function HeroTitle() {
   const titleRef = useRef<HTMLHeadingElement>(null);
-
-  useShine(titleRef, {
-    light: { position: "followMouse" },
-    config: {
-      numSteps: 8,
-      opacity: 0.3,
-      blur: 40,
-    },
-  });
+  
+  useShine(titleRef, { light: { position: "followMouse" } });
 
   return <h1 ref={titleRef}>Shining Bright</h1>;
 }

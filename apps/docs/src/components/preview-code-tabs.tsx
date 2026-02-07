@@ -20,7 +20,7 @@ export async function PreviewCodeTabs({ code, language = "tsx", children }: Prev
         <div className="p-4">{children}</div>
       </Tab>
       <Tab>
-        <div className="bg-fd-secondary/35 [&_.shiki]:m-0 [&_.shiki]:rounded-none [&_.shiki]:border-0 [&_.shiki]:p-4 [&_.shiki]:text-sm">
+        <div className="bg-fd-secondary/35 overflow-auto [&_.shiki]:m-0 [&_.shiki]:rounded-none [&_.shiki]:border-0 [&_.shiki]:p-4 [&_.shiki]:text-sm">
           {highlightedCode}
         </div>
       </Tab>
