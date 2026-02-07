@@ -1,0 +1,22 @@
+---
+title: Performance and Lifecycle
+description: Keep shadows smooth and cleanup behavior predictable.
+---
+
+## Performance tips
+
+- Keep `numSteps` moderate (5-10 in most UI surfaces).
+- For large headings, increase blur before increasing steps.
+- Prefer `update()` for runtime changes over constant re-instantiation.
+- Only enable auto-updates where resize/scroll shifts geometry.
+
+## Lifecycle notes
+
+- `draw()` batches work with `requestAnimationFrame`.
+- `enableAutoUpdates()` listens to `scroll` and `resize`.
+- `enableMouseTracking()` subscribes to shared mouse monitoring.
+- `destroy()` removes listeners and tears down internal references.
+
+<Callout type="warn" title="DOM restoration">
+  `destroy()` does not restore text wrapping mutations from splitter. If full reset is required, re-render or replace node content yourself.
+</Callout>

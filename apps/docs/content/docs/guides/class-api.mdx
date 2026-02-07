@@ -1,0 +1,33 @@
+---
+title: Shine Class Guide
+description: Full control with direct class usage for non-React and advanced scenarios.
+---
+
+Use the class API when you need explicit lifecycle control.
+
+```ts
+import { Color, Shine } from "shinejs";
+
+const card = document.getElementById("card");
+
+if (card) {
+  const shine = new Shine(card, {
+    shadowProperty: "boxShadow",
+    classPrefix: "docs-",
+    config: {
+      shadowRGB: new Color(18, 35, 66),
+      blur: 28,
+    },
+  });
+
+  shine.enableMouseTracking();
+  shine.enableAutoUpdates();
+}
+```
+
+## When class API is best
+
+- Framework-agnostic integrations.
+- Manual animation loops.
+- Explicit listener and teardown handling.
+- Integration with existing imperative UI code.

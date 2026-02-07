@@ -1,0 +1,34 @@
+---
+title: React Quick Start
+description: Add shinejs shadows to a React element in under a minute.
+---
+
+`useShine` is the fastest way to apply interactive shadows in React.
+
+```tsx
+"use client";
+
+import { useRef } from "react";
+import { useShine } from "shinejs/react";
+
+export function HeroTitle() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useShine(titleRef, {
+    light: { position: "followMouse" },
+    config: {
+      numSteps: 8,
+      opacity: 0.3,
+      blur: 40,
+    },
+  });
+
+  return <h1 ref={titleRef}>Shining Bright</h1>;
+}
+```
+
+## Next steps
+
+- Use `update()` to change content or config live.
+- Add fixed position or auto-pilot light movement.
+- Tune `shadowRGB` for your brand/system palette.

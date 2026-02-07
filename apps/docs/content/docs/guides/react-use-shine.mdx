@@ -1,0 +1,40 @@
+---
+title: React useShine Guide
+description: Deep dive on useShine patterns, options, and safe update flows.
+---
+
+`useShine(ref, options)` creates and manages a `Shine` instance for your element.
+
+## Returned values
+
+- `shine`: The underlying `Shine` instance (or `null` before mount).
+- `update(newOptions)`: Merge updates at runtime without re-creating your component tree.
+
+## Typical pattern
+
+```tsx
+"use client";
+
+import { useRef } from "react";
+import { useShine } from "shinejs/react";
+
+export function InteractiveTitle() {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const { update } = useShine(ref, {
+    light: { position: "followMouse" },
+    config: { blur: 36, opacity: 0.18 },
+  });
+
+  return (
+    <button onClick={() => update({ config: { opacity: 0.28 } })}>
+      <h1 ref={ref}>Adjust Me</h1>
+    </button>
+  );
+}
+```
+
+## Important behavior
+
+- The hook initializes once the `ref.current` element exists.
+- When the hook unmounts, it automatically calls `destroy()`.
+- Changing initial config object identity may recreate the instance; use `update()` for frequent runtime changes.

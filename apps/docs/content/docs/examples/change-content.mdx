@@ -1,0 +1,27 @@
+---
+title: Change Content
+description: Replace target text at runtime with update({ content }).
+---
+
+Recreate the behavior from `apps/demo/src/app/change-text/page.tsx`.
+
+```tsx
+"use client";
+
+import { useRef } from "react";
+import { useShine } from "shinejs/react";
+
+export function ContentSwap() {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const { update } = useShine(ref);
+
+  return (
+    <>
+      <button onClick={() => update({ content: "Change Text Demo" })}>Change Text Demo</button>
+      <button onClick={() => update({ content: "Hello World" })}>Hello World</button>
+      <button onClick={() => update({ content: "Lorem Ipsum" })}>Lorem Ipsum</button>
+      <h1 ref={ref}>Change Text Demo</h1>
+    </>
+  );
+}
+```

@@ -1,0 +1,32 @@
+---
+title: Shine Class
+description: Constructor, fields, and methods for full imperative control.
+---
+
+## Constructor
+
+```ts
+new Shine(domElement: HTMLElement, options?: ShineOptions)
+```
+
+Throws if no valid DOM element is provided.
+
+## Core methods
+
+- `update(options?)`: apply option changes.
+- `draw()`: request a redraw.
+- `recalculatePositions()`: refresh element coordinates.
+- `updateContent(text?)`: rebuild split content and shadows.
+- `enableAutoUpdates()` / `disableAutoUpdates()`.
+- `enableMouseTracking()` / `disableMouseTracking()`.
+- `destroy()`: teardown listeners and internal references.
+
+## Core fields
+
+- `light`
+- `config`
+- `domElement`
+- `classPrefix`
+- `shadowProperty`
+- `shadows`
+- `areAutoUpdatesEnabled`

@@ -1,0 +1,28 @@
+---
+title: useShine Hook
+description: API contract and behavior of the React integration.
+---
+
+## Signature
+
+```ts
+useShine(
+  ref: RefObject<HTMLElement | null>,
+  config?: ShineOptions,
+): { shine: Shine | null; update: (newConfig: ShineOptions) => void }
+```
+
+## Parameters
+
+- `ref`: target element reference.
+- `config`: optional initial options.
+
+## Returns
+
+- `shine`: underlying instance (null pre-mount).
+- `update`: method to apply runtime options.
+
+## Notes
+
+- Automatically constructs and destroys `Shine` with component lifecycle.
+- Suitable for most React and Next.js use cases.
