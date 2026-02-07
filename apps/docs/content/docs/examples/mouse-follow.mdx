@@ -5,8 +5,9 @@ description: Canonical cursor-follow shadow behavior.
 
 This is the simplest interaction model and mirrors the demo route `apps/demo/src/app/mouse-follow/page.tsx`.
 
-```tsx
-"use client";
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
 
 import { useRef } from "react";
 import { useShine } from "shinejs/react";
@@ -20,4 +21,7 @@ export function MouseFollowHeadline() {
 
   return <h1 ref={ref}>Shine Mouse Follow</h1>;
 }
-```
+`}
+>
+  <MouseFollowPreview />
+</PreviewCodeTabs>

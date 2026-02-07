@@ -5,8 +5,9 @@ description: Full imperative control for listeners, updates, and cleanup.
 
 Equivalent to the class demo route: `apps/demo/src/app/class-demo/page.tsx`.
 
-```tsx
-"use client";
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
 
 import { useEffect, useRef } from "react";
 import { Color, Shine } from "shinejs";
@@ -34,4 +35,7 @@ export function ClassDemo() {
 
   return <h1 ref={ref}>Class API Demo</h1>;
 }
-```
+`}
+>
+  <DirectClassUsagePreview />
+</PreviewCodeTabs>

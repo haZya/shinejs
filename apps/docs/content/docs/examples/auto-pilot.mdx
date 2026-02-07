@@ -5,8 +5,9 @@ description: Animate light position over time with requestAnimationFrame.
 
 This recreates the auto-pilot motion from `apps/demo/src/app/auto-pilot/page.tsx`.
 
-```tsx
-"use client";
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
 
 import { useEffect, useRef } from "react";
 import { useShine } from "shinejs/react";
@@ -35,4 +36,7 @@ export function AutoPilotHeadline() {
 
   return <h1 ref={ref}>Auto Pilot</h1>;
 }
-```
+`}
+>
+  <AutoPilotPreview />
+</PreviewCodeTabs>

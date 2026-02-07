@@ -5,8 +5,9 @@ description: Replace target text at runtime with update({ content }).
 
 Recreate the behavior from `apps/demo/src/app/change-text/page.tsx`.
 
-```tsx
-"use client";
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
 
 import { useRef } from "react";
 import { useShine } from "shinejs/react";
@@ -24,4 +25,7 @@ export function ContentSwap() {
     </>
   );
 }
-```
+`}
+>
+  <ChangeContentPreview />
+</PreviewCodeTabs>
