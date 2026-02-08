@@ -20,3 +20,8 @@ description: Keep shadows smooth and cleanup behavior predictable.
 <Callout type="warn" title="DOM restoration">
   `destroy()` does not restore text wrapping mutations from splitter. If full reset is required, re-render or replace node content yourself.
 </Callout>
+
+## Accessibility notes
+
+- In text-splitting mode, Shine sets `aria-label` on the host element and marks generated wrapper layers as `aria-hidden="true"`, so assistive tech reads the original phrase once.
+- The duplicated mask layer is also `aria-hidden="true"` to avoid double announcement.

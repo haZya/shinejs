@@ -7,24 +7,24 @@ import { PreviewFrame } from "@/components/previews/shared/preview-frame";
 
 export function LightPositionFollowMousePreview() {
   const ref = useRef<HTMLHeadingElement>(null);
-  const { update } = useShine(ref, {
-    light: { position: "followMouse", intensity: 1 },
-    config: { shadowRGB: { r: 0, g: 0, b: 0 }, blur: 34 },
+  useShine(ref, {
+    light: {
+      intensity: 1.2,
+      position: "followMouse",
+    },
+    config: {
+      blur: 36,
+      offset: 0.08,
+      opacity: 0.3,
+      shadowRGB: { r: 24, g: 41, b: 71 },
+    },
   });
 
   return (
     <PreviewFrame>
-      <div className="flex w-full max-w-3xl flex-col gap-4">
-        <div className="flex justify-center">
-          <button
-            className="rounded-md border bg-white px-3 py-1.5 text-sm font-medium"
-            onClick={() => update({ light: { position: "followMouse" } })}
-          >
-            Follow Mouse
-          </button>
-        </div>
-        <h2 ref={ref} className="text-center text-4xl font-black tracking-tight text-slate-200">Light Control</h2>
-      </div>
+      <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">
+        Follow Mouse
+      </h2>
     </PreviewFrame>
   );
 }

@@ -10,7 +10,8 @@ export { MouseFollowPreview } from "@/components/previews/examples/mouse-follow-
 export { PlaygroundPreview } from "@/components/previews/examples/playground-preview";
 export { ShadowRgbPreview } from "@/components/previews/examples/shadow-rgb-preview";
 export { ReactUseShineGuidePreview } from "@/components/previews/guides/react-use-shine-guide-preview";
-export { TextVsChildrenPreview } from "@/components/previews/guides/text-vs-children-preview";
+export { ChildrenBoxShadowPreview, TextVsChildrenPreview } from "@/components/previews/guides/text-vs-children-preview";
 export { LightIntensityPreview } from "@/components/previews/light-position/light-intensity-preview";
+export { LightPositionAutoPilotPreview } from "@/components/previews/light-position/light-position-auto-pilot-preview";
 export { LightPositionFixedPointPreview } from "@/components/previews/light-position/light-position-fixed-point-preview";
 export { LightPositionFollowMousePreview } from "@/components/previews/light-position/light-position-follow-mouse-preview";

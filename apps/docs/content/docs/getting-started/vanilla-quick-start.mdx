@@ -3,9 +3,11 @@ title: Vanilla Quick Start
 description: Use ShineJS without React via the Shine class.
 ---
 
-## Overview
+## Example
 
 If you are not using React, instantiate [`Shine`](/docs/guides/class-api) directly.
+
+### Overview
 
 <PreviewCodeTabs
   language="tsx"
@@ -13,8 +15,6 @@ If you are not using React, instantiate [`Shine`](/docs/guides/class-api) direct
 
   import { useEffect, useRef } from "react";
   import { Color, Shine } from "shinejs";
-
-  import { PreviewFrame } from "@/components/previews/shared/preview-frame";
 
   export function DirectClassUsagePreview() {
     const ref = useRef<HTMLHeadingElement>(null);
@@ -46,11 +46,13 @@ If you are not using React, instantiate [`Shine`](/docs/guides/class-api) direct
     }, []);
 
     return (
-      <PreviewFrame>
-        <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">
-          Class API Demo
-        </h2>
-      </PreviewFrame>
+      <div className="rounded-xl border p-6 dark:invert">
+        <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
+          <h2 ref={ref} className="text-center text-8xl font-black text-slate-200">
+            Class API Demo
+          </h2>
+        </div>
+      </div>
     );
   }
 `}
@@ -58,7 +60,7 @@ If you are not using React, instantiate [`Shine`](/docs/guides/class-api) direct
   <DirectClassUsagePreview />
 </PreviewCodeTabs>
 
-## Basic Usage
+### Basic Usage
 
 ```ts
 import { Shine } from "shinejs";
@@ -73,7 +75,7 @@ if (element) {
 }
 ```
 
-### Common class methods
+## Common class methods
 
 - `update(options)`
 - `updateContent(text)`

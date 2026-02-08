@@ -1,30 +1,104 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useShine } from "shinejs/react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
+import { cn } from "@/lib/utils";
 
 export function DynamicUpdateLightPreview() {
   const ref = useRef<HTMLHeadingElement>(null);
+  const frame = useRef<number | null>(null);
+  const [mode, setMode] = useState<"followMouse" | "fixed" | "autoPilot">("followMouse");
 
   const { update } = useShine(ref, {
-    light: { position: "followMouse" },
-    config: { shadowRGB: { r: 36, g: 61, b: 91 }, blur: 36, opacity: 0.2 },
+    light: {
+      intensity: 1.2,
+      position: "followMouse",
+    },
+    config: {
+      blur: 36,
+      offset: 0.08,
+      opacity: 0.3,
+      shadowRGB: { r: 24, g: 41, b: 71 },
+    },
   });
+
+  const setDefaultLight = () => {
+    update({ light: { position: "followMouse" } });
+    setMode("followMouse");
+  };
+
+  const setUpdatedLight = () => {
+    update({ light: { position: { x: 320, y: 140 } } });
+    setMode("fixed");
+  };
+
+  const setAutoPilotLight = () => {
+    setMode("autoPilot");
+  };
+
+  useEffect(() => {
+    if (mode !== "autoPilot") {
+      if (frame.current !== null) {
+        window.cancelAnimationFrame(frame.current);
+        frame.current = null;
+      }
+      return;
+    }
+
+    const animate = () => {
+      const t = Date.now() * 0.00025 * Math.PI * 2;
+      const x = window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t);
+      const y = window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7);
+      update({ light: { position: { x, y } } });
+      frame.current = window.requestAnimationFrame(animate);
+    };
+
+    frame.current = window.requestAnimationFrame(animate);
+
+    return () => {
+      if (frame.current !== null) {
+        window.cancelAnimationFrame(frame.current);
+        frame.current = null;
+      }
+    };
+  }, [mode, update]);
+
+  const buttonClassName = (isActive: boolean) =>
+    cn(
+      "rounded-md border-2 border-slate-300 px-3 py-1.5 text-sm font-semibold text-black transition",
+      isActive
+        ? "bg-slate-200 text-slate-400"
+        : "cursor-pointer text-slate-900 hover:border-slate-400 hover:bg-slate-300",
+    );
 
   return (
     <PreviewFrame>
-      <div className="flex w-full max-w-3xl flex-col gap-4">
-        <div className="flex justify-center">
+      <div className="flex w-full max-w-4xl flex-col gap-8">
+        <div className="flex justify-center gap-2">
           <button
-            className="rounded-md border bg-white px-3 py-1.5 text-sm font-medium"
-            onClick={() => update({ light: { intensity: 2, position: { x: 320, y: 140 } } })}
+            className={buttonClassName(mode === "followMouse")}
+            onClick={setDefaultLight}
           >
-            Update Light
+            Follow Mouse Light
+          </button>
+          <button
+            className={buttonClassName(mode === "fixed")}
+            onClick={setUpdatedLight}
+          >
+            Fixed Light
+          </button>
+          <button
+            className={buttonClassName(mode === "autoPilot")}
+            onClick={setAutoPilotLight}
+          >
+            Auto Pilot Light
           </button>
         </div>
-        <h2 ref={ref} className="text-center text-4xl font-black tracking-tight text-slate-200">Live Updates</h2>
+        <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">
+          Live Updates
+        </h2>
       </div>
     </PreviewFrame>
   );
