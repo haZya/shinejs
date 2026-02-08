@@ -36,7 +36,7 @@ export function ReactUseShineGuidePreview() {
         </button>
         <h2
           ref={ref}
-          className="text-center text-7xl font-black tracking-tight text-slate-200"
+          className="text-center text-4xl font-black tracking-tight text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl"
         >
           Adjust Me
         </h2>

@@ -71,7 +71,7 @@ export function ShadowRgbPreview({ variant = "starter" }: ShadowRgbPreviewProps)
 
   return (
     <PreviewFrame disableGutter>
-      <div className={cn("relative flex w-full max-w-4xl flex-col gap-5 overflow-hidden rounded-lg border p-6", isDarkSurface
+      <div className={cn("relative flex w-full max-w-4xl flex-col gap-6 overflow-hidden rounded-lg border p-6", isDarkSurface
         ? "from-slate-950 via-slate-900 to-slate-950"
         : "from-sky-100 via-white to-indigo-100")}
       >
@@ -110,7 +110,7 @@ export function ShadowRgbPreview({ variant = "starter" }: ShadowRgbPreviewProps)
           )}
         </div>
 
-        <h2 ref={ref} className={cn("text-center text-6xl font-black tracking-tight", isDarkSurface ? "text-slate-100" : "text-slate-800")}>
+        <h2 ref={ref} className={cn("text-center text-4xl font-black tracking-tight lg:text-7xl", isDarkSurface ? "text-slate-100" : "text-slate-800")}>
           shadowRGB Preview
         </h2>
       </div>
