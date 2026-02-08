@@ -9,18 +9,15 @@ This is the simplest interaction model and mirrors the demo route `apps/demo/src
   language="tsx"
   code={`"use client";
 
-import { useRef } from "react";
-import { useShine } from "shinejs/react";
+  import { useRef } from "react";
+  import { useShine } from "shinejs/react";
 
-export function MouseFollowHeadline() {
-  const ref = useRef<HTMLHeadingElement>(null);
-  useShine(ref, {
-    light: { position: "followMouse" },
-    config: { shadowRGB: { r: 0, g: 0, b: 0 } },
-  });
+  export function MouseFollowHeadline() {
+    const ref = useRef<HTMLHeadingElement>(null);
+    useShine(ref, { light: { position: "followMouse" } });
 
-  return <h1 ref={ref}>Shine Mouse Follow</h1>;
-}
+    return <h1 ref={ref}>Shine Mouse Follow</h1>;
+  }
 `}
 >
   <MouseFollowPreview />

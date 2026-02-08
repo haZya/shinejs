@@ -88,7 +88,7 @@ export function PlaygroundPreview() {
             />
           </label>
           <label className="flex flex-col gap-1 rounded-lg border bg-white/80 p-3">
-            <span className="text-xs font-semibold text-slate-600">Light Position Mode</span>
+            <span className="text-xs font-semibold text-slate-600">Light Position</span>
             <select
               value={positionMode}
               onChange={event => setPositionMode(event.target.value as "followMouse" | "fixed")}
@@ -229,7 +229,7 @@ export function PlaygroundPreview() {
           <span className="text-xs text-slate-600">{rgbToHex(rgb)}</span>
         </div>
 
-        <h2 ref={ref} className="text-center text-4xl font-black tracking-tight text-slate-200">{content || "Shine Playground"}</h2>
+        <h2 ref={ref} className="mt-12! mb-6! text-center text-8xl font-black tracking-tight text-slate-200">{content || "Shine Playground"}</h2>
       </div>
     </PreviewFrame>
   );

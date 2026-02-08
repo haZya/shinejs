@@ -9,19 +9,22 @@ export function BoxShadowChildrenPreview() {
   const ref = useRef<HTMLDivElement>(null);
 
   useShine(ref, {
+    light: {
+      intensity: 1.2,
+    },
     config: {
-      shadowRGB: { r: 0, g: 0, b: 0 },
-      blur: 22,
-      opacity: 0.2,
+      blur: 36,
+      opacity: 0.3,
+      offset: 0.08,
+      shadowRGB: { r: 24, g: 41, b: 71 },
     },
   });
 
   return (
     <PreviewFrame>
-      <div ref={ref} className="grid w-full max-w-xl grid-cols-3 gap-3">
-        <div className="h-24 rounded-lg bg-linear-to-br from-cyan-100 to-cyan-300" />
-        <div className="h-24 rounded-lg bg-linear-to-br from-rose-100 to-orange-300" />
-        <div className="h-24 rounded-lg bg-linear-to-br from-emerald-100 to-teal-300" />
+      <div ref={ref} className="grid w-full max-w-xl grid-cols-2 gap-6">
+        <div className="h-24 rounded-lg bg-slate-200" />
+        <div className="h-24 rounded-lg bg-slate-200" />
       </div>
     </PreviewFrame>
   );

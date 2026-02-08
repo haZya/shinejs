@@ -7,155 +7,124 @@ Use `shadowRGB` to control shadow color with `{ r, g, b }`.
 
 <PreviewCodeTabs
   language="ts"
-  code={`update({
-  config: {
-    shadowRGB: { r: 34, g: 67, b: 112 },
-  },
-});
+  code={`
+  update({
+    config: {
+      shadowRGB: { r, g, b, },
+    },
+  });
 `}
 >
-  <ShadowRgbPreview />
+  <ShadowRgbPreview variant="starter" />
 </PreviewCodeTabs>
 
-## Preset 1: Neutral black
+<Callout type="info" title="Inverted colors in dark mode" className="not-dark:hidden">
+  Note: In the previews, the colors are inverted in the dark mode.
+</Callout>
 
-Use when your UI already carries color elsewhere.
+## Vibrant preset map
+
+Use a single preset dictionary to avoid repeating the same object shape in every example.
 
 <PreviewCodeTabs
   language="ts"
-  code={`{
-  shadowRGB: { r: 0, g: 0, b: 0 },
-  opacity: 0.15,
-  blur: 36,
-  intensity: 1.0,
-}
+  code={`
+  const shadowPresets = {
+    neonAzure: {
+      shadowRGB: { r: 0, g: 195, b: 255 },
+      opacity: 0.22,
+      blur: 44,
+      intensity: 1.45,
+    },
+    solarCoral: {
+      shadowRGB: { r: 255, g: 98, b: 72 },
+      opacity: 0.2,
+      blur: 40,
+      intensity: 1.35,
+    },
+    electricViolet: {
+      shadowRGB: { r: 123, g: 75, b: 255 },
+      opacity: 0.19,
+      blur: 38,
+      intensity: 1.3,
+    },
+    limePulse: {
+      shadowRGB: { r: 112, g: 214, b: 78 },
+      opacity: 0.17,
+      blur: 34,
+      intensity: 1.2,
+    },
+    rubyDepth: {
+      shadowRGB: { r: 205, g: 32, b: 78 },
+      opacity: 0.21,
+      blur: 42,
+      intensity: 1.4,
+    },
+  } as const;
+
+  function applyShadowPreset(name: keyof typeof shadowPresets) {
+    update({ config: shadowPresets[name] });
+  }
+
+  applyShadowPreset("neonAzure");
 `}
 >
-  <ShadowRgbPreview />
+  <ShadowRgbPreview variant="vibrant" />
 </PreviewCodeTabs>
 
-## Preset 2: Neutral white (dark surfaces)
+<Callout type="info" title="Inverted colors in dark mode" className="not-dark:hidden">
+  Note: In the previews, the colors are inverted in the dark mode.
+</Callout>
 
-Use for dark UIs where highlight-style shadows read better.
+### Suggested pairings
 
-<PreviewCodeTabs
-  language="ts"
-  code={`{
-  shadowRGB: { r: 255, g: 255, b: 255 },
-  opacity: 0.12,
-  blur: 28,
-  intensity: 1.0,
-}
-`}
->
-  <ShadowRgbPreview />
-</PreviewCodeTabs>
+- `neonAzure`: product hero sections and launch pages.
+- `solarCoral`: creator tools, media, and lifestyle interfaces.
+- `electricViolet`: feature callouts and premium states.
+- `limePulse`: success-heavy dashboards and growth metrics.
+- `rubyDepth`: alerts, sales surfaces, and dramatic branding.
 
-## Preset 3: Warm ambient
+## Dynamic color sources
 
-Great for editorial and lifestyle visuals.
-
-<PreviewCodeTabs
-  language="ts"
-  code={`{
-  shadowRGB: { r: 120, g: 74, b: 36 },
-  opacity: 0.18,
-  blur: 40,
-  intensity: 1.3,
-}
-`}
->
-  <ShadowRgbPreview />
-</PreviewCodeTabs>
-
-## Preset 4: Cool steel
-
-Works well for dashboards and enterprise UI.
-
-<PreviewCodeTabs
-  language="ts"
-  code={`{
-  shadowRGB: { r: 36, g: 61, b: 91 },
-  opacity: 0.17,
-  blur: 34,
-  intensity: 1.15,
-}
-`}
->
-  <ShadowRgbPreview />
-</PreviewCodeTabs>
-
-## Preset 5: Cyan accent
-
-Good for product hero sections and launch pages.
-
-<PreviewCodeTabs
-  language="ts"
-  code={`{
-  shadowRGB: { r: 0, g: 163, b: 224 },
-  opacity: 0.2,
-  blur: 42,
-  intensity: 1.4,
-}
-`}
->
-  <ShadowRgbPreview />
-</PreviewCodeTabs>
-
-## Preset 6: Brand-driven mapping
-
-Build from a brand hex color.
-
-<PreviewCodeTabs
-  language="ts"
-  code={`function hexToRgb(hex: string) {
-  const result = /^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i.exec(hex);
-  if (!result)
-    return { r: 0, g: 0, b: 0 };
-
-  return {
-    r: Number.parseInt(result[1], 16),
-    g: Number.parseInt(result[2], 16),
-    b: Number.parseInt(result[3], 16),
-  };
-}
-
-update({ config: { shadowRGB: hexToRgb("#1E62C9") } });
-`}
->
-  <ShadowRgbPreview />
-</PreviewCodeTabs>
-
-## Preset 7: Theme-aware toggle
-
-<PreviewCodeTabs
-  language="ts"
-  code={`const shadowRGB = prefersDarkMode
-  ? { r: 255, g: 255, b: 255 }
-  : { r: 0, g: 0, b: 0 };
-
-update({ config: { shadowRGB } });
-`}
->
-  <ShadowRgbPreview />
-</PreviewCodeTabs>
-
-## Preset 8: User color picker
+Drive `shadowRGB` from brand, theme, or user choice with one helper flow.
 
 <PreviewCodeTabs
   language="tsx"
-  code={`<input
-  type="color"
-  value={shadowColorHex}
-  onChange={(event) => {
-    const rgb = hexToRgb(event.target.value);
-    update({ config: { shadowRGB: rgb } });
-  }}
-/>
+  code={`
+  function hexToRgb(hex: string) {
+    const result = /^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i.exec(hex);
+    if (!result)
+      return { r: 0, g: 0, b: 0 };
+
+    return {
+      r: Number.parseInt(result[1], 16),
+      g: Number.parseInt(result[2], 16),
+      b: Number.parseInt(result[3], 16),
+    };
+  }
+
+  function setShadowFromHex(hex: string) {
+    update({ config: { shadowRGB: hexToRgb(hex) } });
+  }
+
+  const defaultShadowHex = prefersDarkMode ? "#F4F7FF" : "#0C1020";
+  setShadowFromHex(defaultShadowHex);
+
+  <input
+    type="color"
+    value={shadowColorHex}
+    onChange={(event) => {
+      setShadowFromHex(event.target.value);
+    }}
+  />
 `}
 >
-  <ShadowRgbPreview />
+  <ShadowRgbPreview variant="dynamic" />
 </PreviewCodeTabs>
+
+<Callout type="info" title="Inverted colors in dark mode" className="not-dark:hidden">
+  Note: In the previews, the colors are inverted in the dark mode.
+</Callout>
 
 ## Practical tuning rules
 
