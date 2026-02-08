@@ -42,7 +42,7 @@ export function TextVsChildrenPreview() {
           <p className="mb-4 text-sm font-medium text-slate-600">
             Text target (textShadow)
           </p>
-          <h3 ref={textRef} className="m-0! text-7xl font-black text-slate-200">
+          <h3 ref={textRef} className="m-0! text-4xl font-black text-slate-200 sm:text-5xl lg:text-7xl">
             Text Only
           </h3>
         </div>

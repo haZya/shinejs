@@ -58,7 +58,7 @@ export function DynamicUpdateColorPreview() {
             Updated Color
           </button>
         </div>
-        <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200 dark:invert">
+        <h2 ref={ref} className="m-0! text-center text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-black text-slate-200 dark:invert">
           Live Updates
         </h2>
       </div>

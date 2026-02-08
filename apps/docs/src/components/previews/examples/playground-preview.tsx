@@ -84,7 +84,7 @@ export function PlaygroundPreview() {
               type="text"
               value={content}
               onChange={event => setContent(event.target.value)}
-              className="rounded-md border bg-white px-3 py-2 text-sm"
+              className="rounded-md border bg-white px-3 py-2 text-sm text-black"
             />
           </label>
           <label className="flex flex-col gap-1 rounded-lg border bg-white/80 p-3">
@@ -92,7 +92,7 @@ export function PlaygroundPreview() {
             <select
               value={positionMode}
               onChange={event => setPositionMode(event.target.value as "followMouse" | "fixed")}
-              className="rounded-md border bg-white px-3 py-2 text-sm"
+              className="rounded-md border bg-white px-3 py-2 text-sm text-black"
             >
               <option value="followMouse">followMouse</option>
               <option value="fixed">fixed point</option>
@@ -229,7 +229,7 @@ export function PlaygroundPreview() {
           <span className="text-xs text-slate-600">{rgbToHex(rgb)}</span>
         </div>
 
-        <h2 ref={ref} className="mt-12! mb-6! text-center text-8xl font-black tracking-tight text-slate-200">{content || "Shine Playground"}</h2>
+        <h2 ref={ref} className="mt-12! mb-6! text-center text-4xl font-black tracking-tight text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl">{content || "Shine Playground"}</h2>
       </div>
     </PreviewFrame>
   );
