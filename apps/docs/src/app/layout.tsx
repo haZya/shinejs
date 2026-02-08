@@ -31,7 +31,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body>
-        <RootProvider>{children}</RootProvider>
+        <RootProvider
+          search={{
+            options: {
+              api: "/shinejs/api/search",
+              type: "static",
+            },
+          }}
+        >
+          {children}
+        </RootProvider>
       </body>
     </html>
   );
