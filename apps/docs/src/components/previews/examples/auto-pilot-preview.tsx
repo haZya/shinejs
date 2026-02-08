@@ -9,7 +9,15 @@ export function AutoPilotPreview() {
   const ref = useRef<HTMLHeadingElement>(null);
   const frame = useRef<number | null>(null);
   const { update } = useShine(ref, {
-    config: { blur: 38, shadowRGB: { r: 0, g: 0, b: 0 } },
+    light: {
+      intensity: 1.2,
+    },
+    config: {
+      blur: 36,
+      opacity: 0.3,
+      offset: 0.08,
+      shadowRGB: { r: 24, g: 41, b: 71 },
+    },
   });
 
   useEffect(() => {
@@ -31,7 +39,9 @@ export function AutoPilotPreview() {
 
   return (
     <PreviewFrame>
-      <h2 ref={ref} className="text-center text-4xl font-black tracking-tight text-slate-200">Auto Pilot</h2>
+      <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">
+        Shine Auto Pilot
+      </h2>
     </PreviewFrame>
   );
 }

@@ -9,32 +9,32 @@ Equivalent to the class demo route: `apps/demo/src/app/class-demo/page.tsx`.
   language="tsx"
   code={`"use client";
 
-import { useEffect, useRef } from "react";
-import { Color, Shine } from "shinejs";
+  import { useEffect, useRef } from "react";
+  import { Color, Shine } from "shinejs";
 
-export function ClassDemo() {
-  const ref = useRef<HTMLHeadingElement>(null);
+  export function ClassDemo() {
+    const ref = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    if (!ref.current)
-      return;
+    useEffect(() => {
+      if (!ref.current)
+        return;
 
-    const shine = new Shine(ref.current, {
-      config: {
-        shadowRGB: new Color(255, 255, 255),
-      },
-    });
+      const shine = new Shine(ref.current, {
+        config: {
+          shadowRGB: new Color(255, 255, 255),
+        },
+      });
 
-    shine.enableMouseTracking();
-    shine.enableAutoUpdates();
+      shine.enableMouseTracking();
+      shine.enableAutoUpdates();
 
-    return () => {
-      shine.destroy();
-    };
-  }, []);
+      return () => {
+        shine.destroy();
+      };
+    }, []);
 
-  return <h1 ref={ref}>Class API Demo</h1>;
-}
+    return <h1 ref={ref}>Class API Demo</h1>;
+  }
 `}
 >
   <DirectClassUsagePreview />

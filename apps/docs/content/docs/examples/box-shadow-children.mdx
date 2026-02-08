@@ -1,6 +1,6 @@
 ---
 title: Box Shadow with Children
-description: Apply shinejs to child-rich layouts like cards and images.
+description: Apply ShineJS to child-rich layouts like cards and images.
 ---
 
 This pattern mirrors `apps/demo/src/app/auto-pilot-children/page.tsx`.
@@ -9,28 +9,22 @@ This pattern mirrors `apps/demo/src/app/auto-pilot-children/page.tsx`.
   language="tsx"
   code={`"use client";
 
-import { useRef } from "react";
-import { useShine } from "shinejs/react";
+  import { useRef } from "react";
+  import { useShine } from "shinejs/react";
 
-export function ImageGridShadow() {
-  const ref = useRef<HTMLDivElement>(null);
+  export function ImageGridShadow() {
+    const ref = useRef<HTMLDivElement>(null);
 
-  useShine(ref, {
-    config: {
-      shadowRGB: { r: 0, g: 0, b: 0 },
-      blur: 22,
-      opacity: 0.2,
-    },
-  });
+    useShine(ref); // Will use "boxShadow" automatically
 
-  return (
-    <div ref={ref} className="grid grid-cols-3 gap-4">
-      <img src="/img-1.jpg" alt="1" />
-      <img src="/img-2.jpg" alt="2" />
-      <img src="/img-3.jpg" alt="3" />
-    </div>
-  );
-}
+    return (
+      <div ref={ref} className="grid grid-cols-3 gap-4">
+        <img src="/img-1.jpg" alt="1" />
+        <img src="/img-2.jpg" alt="2" />
+        <img src="/img-3.jpg" alt="3" />
+      </div>
+    );
+  }
 `}
 >
   <BoxShadowChildrenPreview />
