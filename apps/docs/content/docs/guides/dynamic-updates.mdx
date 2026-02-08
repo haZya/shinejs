@@ -28,9 +28,8 @@ update({ content: "Hello World" });
 ```ts
 update({
   config: {
-    blur: 48,
-    opacity: 0.22,
-    offset: 0.2,
+    offset: 0.015,
+    offsetPow: 0,
   },
 });
 ```
@@ -43,7 +42,15 @@ update({
 
 ### Usage
 
-```ts
+```ts title="Follow Mouse"
+update({
+  light: {
+    position: "followMouse",
+  },
+});
+```
+
+```ts title="Fixed Point"
 update({
   light: {
     intensity: 2,
@@ -52,7 +59,19 @@ update({
 });
 ```
 
-## Color picker flow (`shadowRGB`)
+```ts title="Auto Pilot"
+const t = Date.now() * 0.00025 * Math.PI * 2;
+update({
+  light: {
+    position: {
+      x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+      y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+    },
+  },
+});
+```
+
+## Update Color (`shadowRGB`)
 
 ### Overview
 
@@ -63,7 +82,7 @@ update({
 ```ts
 update({
   config: {
-    shadowRGB: { r: 26, g: 54, b: 93 },
+    shadowRGB: { r: 143, g: 0, b: 255 },
   },
 });
 ```

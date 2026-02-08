@@ -3,7 +3,7 @@ title: Light Position and Intensity
 description: Follow the mouse, set fixed positions, or animate custom paths.
 ---
 
-`light.position` accepts either `"followMouse"` or a fixed point.
+`light.position` accepts either `"followMouse"` or a fixed point. For auto-pilot, animate a fixed `{x, y}` path each frame.
 
 ## Follow mouse
 
@@ -15,6 +15,32 @@ description: Follow the mouse, set fixed positions, or animate custom paths.
 
 ```ts
 update({ light: { position: "followMouse" } });
+```
+
+## Auto-pilot animation
+
+### Overview
+
+<LightPositionAutoPilotPreview />
+
+### Usage
+
+```ts
+const animate = () => {
+  const t = Date.now() * 0.00025 * Math.PI * 2;
+  update({
+    light: {
+      position: {
+        x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+        y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+      },
+    },
+  });
+
+  requestAnimationFrame(animate);
+};
+
+requestAnimationFrame(animate);
 ```
 
 ## Fixed point
@@ -38,11 +64,7 @@ update({ light: { position: { x: 480, y: 220 } } });
 ### Usage
 
 ```ts
-update({ light: { intensity: 1.5 } });
+update({ light: { intensity: 2 } });
 ```
 
 Higher intensity amplifies perceived depth. Start around `1.0` and increase gradually.
-
-## Auto-pilot animation
-
-Use `requestAnimationFrame` and set `{x, y}` each frame for cinematic sweep effects.

@@ -12,7 +12,59 @@ description: Understand automatic shadow mode selection and when to override it.
 
 ### Overview
 
-<TextVsChildrenPreview />
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
+
+  import { useRef } from "react";
+  import { useShine } from "shinejs/react";
+
+  export function TextVsChildrenPreview() {
+    const ref = useRef<HTMLHeadingElement>(null);
+
+    useShine(ref, {
+      light: {
+        intensity: 1.2,
+        position: "followMouse",
+      },
+      config: {
+        blur: 36,
+        opacity: 0.3,
+        offset: 0.08,
+        shadowRGB: { r: 24, g: 41, b: 71 },
+      },
+    });
+
+    return (
+      <div className="rounded-xl border p-6 dark:invert">
+        <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
+          <div className="flex w-full max-w-3xl flex-col gap-8">
+            <div>
+              <p className="mb-4 text-sm font-medium text-slate-600">
+                Text target (textShadow)
+              </p>
+              <h3 ref={textRef} className="m-0! text-7xl font-black text-slate-200">
+                Text Only
+              </h3>
+            </div>
+            <div>
+              <p className="mb-4 text-sm font-medium text-slate-600">
+                Children target (boxShadow)
+              </p>
+              <div ref={childrenRef} className="grid grid-cols-2 gap-6">
+                <div className="h-16 rounded-xl bg-slate-200" />
+                <div className="h-16 rounded-xl bg-slate-200" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+`}
+>
+  <TextVsChildrenPreview />
+</PreviewCodeTabs>
 
 ### Usage
 
@@ -27,7 +79,49 @@ You can always force behavior with `shadowProperty`.
 
 ### Overview
 
-<TextVsChildrenPreview />
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
+
+  import { useRef } from "react";
+  import { useShine } from "shinejs/react";
+
+  export function ChildrenBoxShadowPreview() {
+    const ref = useRef<HTMLHeadingElement>(null);
+
+    useShine(ref, {
+      light: {
+        intensity: 1.2,
+        position: "followMouse",
+      },
+      config: {
+        blur: 36,
+        opacity: 0.3,
+        offset: 0.08,
+        shadowRGB: { r: 24, g: 41, b: 71 },
+      },
+    });
+
+    return (
+      <div className="rounded-xl border p-6 dark:invert">
+        <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
+          <div className="w-full max-w-3xl">
+            <p className="mb-4 text-sm font-medium text-slate-600">
+              Children target (boxShadow)
+            </p>
+            <div ref={childrenRef} className="grid grid-cols-2 gap-6">
+              <div className="h-16 rounded-xl bg-slate-200" />
+              <div className="h-16 rounded-xl bg-slate-200" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+`}
+>
+  <ChildrenBoxShadowPreview />
+</PreviewCodeTabs>
 
 ### Usage
 

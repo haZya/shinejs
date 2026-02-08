@@ -36,7 +36,9 @@ export function DirectClassUsagePreview() {
 
   return (
     <PreviewFrame>
-      <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">Class API Demo</h2>
+      <h2 ref={ref} className="m-0! text-center text-8xl font-black text-slate-200">
+        Class API Demo
+      </h2>
     </PreviewFrame>
   );
 }

@@ -10,28 +10,81 @@ export function TextVsChildrenPreview() {
   const childrenRef = useRef<HTMLDivElement>(null);
 
   useShine(textRef, {
-    light: { position: "followMouse" },
-    config: { shadowRGB: { r: 0, g: 0, b: 0 } },
+    light: {
+      intensity: 1.2,
+      position: "followMouse",
+    },
+    config: {
+      blur: 36,
+      offset: 0.08,
+      opacity: 0.3,
+      shadowRGB: { r: 24, g: 41, b: 71 },
+    },
   });
 
   useShine(childrenRef, {
-    light: { position: "followMouse" },
-    config: { shadowRGB: { r: 0, g: 0, b: 0 }, blur: 20 },
+    light: {
+      intensity: 1.2,
+      position: "followMouse",
+    },
+    config: {
+      blur: 36,
+      offset: 0.08,
+      opacity: 0.3,
+      shadowRGB: { r: 24, g: 41, b: 71 },
+    },
   });
 
   return (
     <PreviewFrame>
-      <div className="grid w-full max-w-3xl gap-6 md:grid-cols-2">
+      <div className="flex w-full max-w-3xl flex-col gap-8">
         <div>
-          <p className="mb-2 text-sm font-medium text-slate-600">Text target (textShadow)</p>
-          <h3 ref={textRef} className="text-3xl font-black text-slate-200">Text Only</h3>
+          <p className="mb-4 text-sm font-medium text-slate-600">
+            Text target (textShadow)
+          </p>
+          <h3 ref={textRef} className="m-0! text-7xl font-black text-slate-200">
+            Text Only
+          </h3>
         </div>
         <div>
-          <p className="mb-2 text-sm font-medium text-slate-600">Children target (boxShadow)</p>
-          <div ref={childrenRef} className="grid grid-cols-2 gap-2">
-            <div className="h-16 rounded-lg bg-linear-to-br from-indigo-100 to-indigo-300" />
-            <div className="h-16 rounded-lg bg-linear-to-br from-amber-100 to-orange-300" />
+          <p className="mb-4 text-sm font-medium text-slate-600">
+            Children target (boxShadow)
+          </p>
+          <div ref={childrenRef} className="grid grid-cols-2 gap-6">
+            <div className="h-16 rounded-xl bg-slate-200" />
+            <div className="h-16 rounded-xl bg-slate-200" />
           </div>
+        </div>
+      </div>
+    </PreviewFrame>
+  );
+}
+
+export function ChildrenBoxShadowPreview() {
+  const childrenRef = useRef<HTMLDivElement>(null);
+
+  useShine(childrenRef, {
+    light: {
+      intensity: 1.2,
+      position: "followMouse",
+    },
+    config: {
+      blur: 36,
+      offset: 0.08,
+      opacity: 0.3,
+      shadowRGB: { r: 24, g: 41, b: 71 },
+    },
+  });
+
+  return (
+    <PreviewFrame>
+      <div className="w-full max-w-3xl">
+        <p className="mb-4 text-sm font-medium text-slate-600">
+          Children target (boxShadow)
+        </p>
+        <div ref={childrenRef} className="grid grid-cols-2 gap-6">
+          <div className="h-16 rounded-xl bg-slate-200" />
+          <div className="h-16 rounded-xl bg-slate-200" />
         </div>
       </div>
     </PreviewFrame>
