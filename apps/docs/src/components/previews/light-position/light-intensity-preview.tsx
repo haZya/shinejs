@@ -22,7 +22,7 @@ export function LightIntensityPreview() {
 
   return (
     <PreviewFrame>
-      <h2 ref={ref} className="m-0! text-center text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-black text-slate-200">
+      <h2 ref={ref} className="m-0! text-center text-4xl font-black text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl">
         High Intensity
       </h2>
     </PreviewFrame>
