@@ -21,14 +21,26 @@ export type ShineOptions = {
   config?: ShineConfigSettings;
   /** Light source configuration. */
   light?: {
-    /** Fixed position {x, y} or "followMouse" to track the cursor. */
+    /**
+     * Fixed position {x, y} or "followMouse" to track the cursor.
+     * @default { x: 0, y: 0 }
+     */
     position?: { x: number; y: number } | "followMouse";
-    /** Light intensity. */
+    /**
+     * Light intensity.
+     * @default 1.0
+     */
     intensity?: number;
   };
-  /** Prefix for CSS classes injected by the library. Defaults to "shine-". */
+  /**
+   * Prefix for CSS classes injected by the library.
+   * @default "shine-"
+   */
   classPrefix?: string;
-  /** Explicitly set the shadow property ("textShadow" or "boxShadow"). Auto-detected if omitted. */
+  /**
+   * Explicitly set the shadow property ("textShadow" or "boxShadow").
+   * @default Auto
+   */
   shadowProperty?: ShadowProperty;
   /** Content text to display. If provided, replaces the element's content. */
   content?: string;
