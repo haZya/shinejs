@@ -6,6 +6,10 @@
 
 A modern monorepo for `shinejs`, a library for creating beautiful, interactive text and box shadows.
 
+## Links
+
+[Getting Started](https://shinejs.vercel.app/docs/getting-started/react-quick-start) | [Docs](https://shinejs.vercel.app/docs) | [Demo](https://shinejs-demo.vercel.app) | [NPM](https://www.npmjs.com/package/@hazya/shinejs)
+
 ## Project Structure
 
 This repository is managed as an npm workspace:

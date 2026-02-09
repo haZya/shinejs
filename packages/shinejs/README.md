@@ -6,6 +6,10 @@ A modern ESM-only TypeScript library based on [bigspaceship/shine.js](https://gi
   <img src="https://github.com/user-attachments/assets/8e200840-1ec7-4894-95a8-06098b992f4c" alt="Shinejs demo" />
 </p>
 
+## Links
+
+[Getting Started](https://shinejs.vercel.app/docs/getting-started/react-quick-start) | [Docs](https://shinejs.vercel.app/docs) | [Demo](https://shinejs-demo.vercel.app) | [NPM](https://www.npmjs.com/package/@hazya/shinejs)
+
 ## Features
 
 - **🚀 Performance:** Uses `requestAnimationFrame` and CSS hardware acceleration.

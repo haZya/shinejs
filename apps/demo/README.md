@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Links
+
+[Getting Started](https://shinejs.vercel.app/docs/getting-started/react-quick-start) | [Docs](https://shinejs.vercel.app/docs) | [Demo](https://shinejs-demo.vercel.app) | [NPM](https://www.npmjs.com/package/@hazya/shinejs)
+
 ## Getting Started
 
 First, run the development server:

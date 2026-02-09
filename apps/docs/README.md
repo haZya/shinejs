@@ -2,6 +2,10 @@
 
 The `docs` workspace is the ShineJS documentation site, built with Next.js 16, Fumadocs, and MDX.
 
+## Links
+
+[Getting Started](https://shinejs.vercel.app/docs/getting-started/react-quick-start) | [Docs](https://shinejs.vercel.app/docs) | [Demo](https://shinejs-demo.vercel.app) | [NPM](https://www.npmjs.com/package/@hazya/shinejs)
+
 ## Run locally
 
 From the monorepo root:
