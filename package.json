@@ -34,12 +34,17 @@
     "box-shadow"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build:packages && npm run build:apps",
+    "build:packages": "npm -w packages/eslint-config run build && npm -w packages/shinejs run build",
+    "build:apps": "npm run build:demo && npm run build:docs",
+    "dev:demo": "npm run build:packages && npm -w apps/demo run dev",
+    "build:demo": "npm run build:packages && npm -w apps/demo run build",
+    "dev:docs": "npm run build:packages && npm -w apps/docs run dev",
+    "build:docs": "npm run build:packages && npm -w apps/docs run build",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint . --max-warnings 0 && npm run lint --workspaces --if-present",
     "lint:fix": "eslint . --fix && npm run lint:fix --workspaces --if-present",
-    "clean": "npm run clean --workspaces --if-present",
-    "dev": "npm run build && npm -w apps/demo run dev"
+    "clean": "npm run clean --workspaces --if-present"
   },
   "workspaces": [
     "packages/*",

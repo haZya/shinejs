@@ -2,7 +2,7 @@
   <img src="https://github.com/user-attachments/assets/8e200840-1ec7-4894-95a8-06098b992f4c" alt="Shinejs demo" />
 </p>
 
-# shinejs
+# ShineJS
 
 A modern monorepo for `shinejs`, a library for creating beautiful, interactive text and box shadows.
 

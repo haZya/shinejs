@@ -1,0 +1,29 @@
+---
+title: ShineConfigSettings
+description: Full list of tunable visual parameters and defaults.
+---
+
+## Type
+
+```ts
+type ShineConfigSettings = {
+  numSteps?: number; // default 5
+  opacity?: number; // default 0.15
+  opacityPow?: number; // default 1.2
+  offset?: number; // default 0.15
+  offsetPow?: number; // default 1.8
+  blur?: number; // default 40
+  blurPow?: number; // default 1.0
+  shadowRGB?: { r: number; g: number; b: number }; // default {0,0,0}
+};
+```
+
+## Practical ranges
+
+- `numSteps`: `4` to `12`
+- `opacity`: `0.08` to `0.35`
+- `offset`: `0.08` to `0.35`
+- `blur`: `12` to `64`
+- `light.intensity`: `0.5` to `2.5`
+
+Tune values as a set, not independently.

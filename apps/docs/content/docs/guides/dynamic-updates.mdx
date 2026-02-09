@@ -1,0 +1,88 @@
+---
+title: Dynamic Updates
+description: Update content, color, and shadow parameters at runtime.
+---
+
+Use `update()` for live changes.
+
+## Update content text
+
+### Overview
+
+<DynamicUpdateContentPreview />
+
+### Usage
+
+```ts
+update({ content: "Hello World" });
+```
+
+## Update config values
+
+### Overview
+
+<DynamicUpdateConfigPreview />
+
+### Usage
+
+```ts
+update({
+  config: {
+    offset: 0.015,
+    offsetPow: 0,
+  },
+});
+```
+
+## Update light behavior
+
+### Overview
+
+<DynamicUpdateLightPreview />
+
+### Usage
+
+```ts title="Follow Mouse"
+update({
+  light: {
+    position: "followMouse",
+  },
+});
+```
+
+```ts title="Fixed Point"
+update({
+  light: {
+    intensity: 2,
+    position: { x: 320, y: 140 },
+  },
+});
+```
+
+```ts title="Auto Pilot"
+const t = Date.now() * 0.00025 * Math.PI * 2;
+update({
+  light: {
+    position: {
+      x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+      y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+    },
+  },
+});
+```
+
+## Update Color (`shadowRGB`)
+
+### Overview
+
+<DynamicUpdateColorPreview />
+
+### Usage
+
+```ts
+update({
+  config: {
+    shadowRGB: { r: 143, g: 0, b: 255 },
+  },
+});
+```

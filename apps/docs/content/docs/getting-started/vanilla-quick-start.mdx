@@ -1,0 +1,85 @@
+---
+title: Vanilla Quick Start
+description: Use ShineJS without React via the Shine class.
+---
+
+## Example
+
+If you are not using React, instantiate [`Shine`](/docs/guides/class-api) directly.
+
+### Overview
+
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
+
+  import { useEffect, useRef } from "react";
+  import { Color, Shine } from "@hazya/shinejs";
+
+  export function DirectClassUsagePreview() {
+    const ref = useRef<HTMLHeadingElement>(null);
+
+    useEffect(() => {
+      if (!ref.current) {
+        return;
+      }
+
+      const shine = new Shine(ref.current, {
+        light: {
+          intensity: 1.2,
+          position: "followMouse",
+        },
+        config: {
+          blur: 36,
+          offset: 0.08,
+          opacity: 0.3,
+          shadowRGB: new Color(24, 41, 71),
+        },
+      });
+
+      shine.enableMouseTracking();
+      shine.enableAutoUpdates();
+
+      return () => {
+        shine.destroy();
+      };
+    }, []);
+
+    return (
+      <div className="rounded-xl border p-6 dark:invert">
+        <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
+          <h2 ref={ref} className="text-center text-8xl font-black text-slate-200">
+            Class API Demo
+          </h2>
+        </div>
+      </div>
+    );
+  }
+`}
+>
+  <DirectClassUsagePreview />
+</PreviewCodeTabs>
+
+### Basic Usage
+
+```ts
+import { Shine } from "@hazya/shinejs";
+
+const element = document.getElementById("hero-title");
+
+if (element) {
+  const shine = new Shine(element, { light: { position: "followMouse" } });
+
+  // Later, when unmounting/changing views:
+  // shine.destroy();
+}
+```
+
+## Common class methods
+
+- `update(options)`
+- `updateContent(text)`
+- `enableMouseTracking()` / `disableMouseTracking()`
+- `enableAutoUpdates()` / `disableAutoUpdates()`
+- `recalculatePositions()`
+- `destroy()`

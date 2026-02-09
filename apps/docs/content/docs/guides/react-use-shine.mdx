@@ -1,0 +1,100 @@
+---
+title: React useShine Guide
+description: Deep dive on useShine patterns, options, and safe update flows.
+---
+
+## Example
+
+`useShine(ref, options)` creates and manages a `Shine` instance for your element.
+
+### Overview
+
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
+
+  import { useRef, useState } from "react";
+  import { useShine } from "@hazya/shinejs/react";
+
+  export function ReactUseShineGuidePreview() {
+    const ref = useRef<HTMLHeadingElement>(null);
+    const [opacity, setOpacity] = useState(0.24);
+
+    const { update } = useShine(ref, {
+      light: { position: "followMouse" },
+      config: {
+        blur: 36,
+        offset: 0.08,
+        opacity,
+        shadowRGB: { r: 24, g: 41, b: 71 },
+      },
+    });
+
+    const changeOpacity = () => {
+      const nextOpacity = opacity === 0.24 ? 0.4 : 0.24;
+      setOpacity(nextOpacity);
+      update({ config: { opacity: nextOpacity } });
+    };
+
+    return (
+      <div className="rounded-xl border p-6 dark:invert">
+        <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-center">
+              <button
+                className="rounded-md border bg-white px-3 py-1.5 text-sm font-medium"
+                onClick={changeOpacity}
+              >
+                {opacity === 0.24 ? "Increase Opacity (0.4)" : "Decrease Opacity (0.24)"}
+              </button>
+            </div>
+            <h2
+              ref={ref}
+              className="text-center text-7xl font-black tracking-tight text-slate-200"
+            >
+              Adjust Me
+            </h2>
+          </div>
+        </div>  
+      </div>
+    );
+  }
+`}
+>
+  <ReactUseShineGuidePreview />
+</PreviewCodeTabs>
+
+### Basic usage
+
+```tsx
+"use client";
+
+import { useRef } from "react";
+import { useShine } from "@hazya/shinejs/react";
+
+export function InteractiveTitle() {
+  const ref = useRef<HTMLHeadingElement>(null);
+
+  const { update } = useShine(ref, {
+    light: { position: "followMouse" },
+    config: { opacity: 0.24 },
+  });
+
+  return (
+    <button onClick={() => update({ config: { opacity: 0.4 } })}>
+      <h1 ref={ref}>Adjust Me</h1>
+    </button>
+  );
+}
+```
+
+## Returned values
+
+- `shine`: The underlying `Shine` instance (or `null` before mount).
+- `update(newOptions)`: Merge updates at runtime without re-creating your component tree.
+
+## Important behavior
+
+- The hook initializes once the `ref.current` element exists.
+- When the hook unmounts, it automatically calls `destroy()`.
+- Changing initial config object identity may recreate the instance; use `update()` for frequent runtime changes.

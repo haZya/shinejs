@@ -1,0 +1,75 @@
+---
+title: Next.js Client Components
+description: Correctly use ShineJS in the Next.js App Router.
+---
+
+## Example
+
+`shinejs` interacts with the DOM, so use it in Client Components.
+
+### Overview
+
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
+
+  import { useRef } from "react";
+  import { useShine } from "@hazya/shinejs/react";
+
+  export function MouseFollowPreview() {
+    const ref = useRef<HTMLHeadingElement>(null);
+
+    useShine(ref, {
+      light: {
+        intensity: 1.2,
+        position: "followMouse",
+      },
+      config: {
+        blur: 36,
+        opacity: 0.3,
+        offset: 0.08,
+        shadowRGB: { r: 24, g: 41, b: 71 },
+      },
+    });
+
+    return (
+      <div className="rounded-xl border p-6 dark:invert">
+        <div className="flex justify-center rounded-lg bg-white/45 p-16 shadow-inner">
+          <h2 ref={ref} className="text-center text-8xl font-black text-slate-200">
+            Shine Mouse Follow
+          </h2>
+        </div>
+      </div>
+    );
+  }
+`}
+>
+  <MouseFollowPreview />
+</PreviewCodeTabs>
+
+### Basic Usage
+
+```tsx
+"use client";
+
+import { useRef } from "react";
+import { useShine } from "@hazya/shinejs/react";
+
+export function DemoHeadline() {
+  const ref = useRef<HTMLHeadingElement>(null);
+  
+  useShine(ref, { light: { position: "followMouse" } });
+
+  return <h1 ref={ref}>Next.js + ShineJS</h1>;
+}
+```
+
+## Rules to follow
+
+- Add `"use client"` at the top of components that call `useShine` or instantiate `Shine`.
+- Attach `ref` to a real DOM node (`h1`, `div`, etc.).
+- Keep docs/static pages server-rendered, and isolate shine usage in client islands.
+
+<Callout type="warn" title="Server Components">
+  Do not call `useShine` in Server Components. Wrap shine behavior in a dedicated Client Component.
+</Callout>

@@ -1,0 +1,48 @@
+---
+title: Playground
+description: Interactive controls to tune Shine options in real time.
+---
+
+This recreates the dynamic playground from [`apps/demo/src/app/dynamic-demo/page.tsx`](https://github.com/haZya/shinejs/tree/6d200502eb25859aea4bcf17b2cd6f4340d2c1fa/apps/demo/src/app/dynamic-demo).
+
+## Interactive playground
+
+Use this page to test how option combinations behave before copying values into production components.
+
+<PlaygroundPreview />
+
+<Callout type="info" title="Inverted colors in dark mode" className="not-dark:hidden">
+  Note: In the previews, the colors are inverted in the dark mode.
+</Callout>
+
+## Starter usage
+
+```tsx
+"use client";
+
+import { useRef } from "react";
+import { useShine } from "@hazya/shinejs/react";
+
+export function PlaygroundStarter() {
+  const ref = useRef<HTMLHeadingElement>(null);
+
+  useShine(ref, {
+    light: {
+      position: "followMouse",
+      intensity: 1,
+    },
+    config: {
+      numSteps: 5,
+      opacity: 0.15,
+      opacityPow: 1.2,
+      offset: 0.15,
+      offsetPow: 1.8,
+      blur: 40,
+      blurPow: 1,
+      shadowRGB: { r: 0, g: 0, b: 0 },
+    },
+  });
+
+  return <h1 ref={ref}>Shine Playground</h1>;
+}
+```

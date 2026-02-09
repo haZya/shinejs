@@ -1,0 +1,134 @@
+---
+title: Shadow Color Cookbook
+description: Multiple production-ready shadowRGB palettes and tuning combinations.
+---
+
+Use `shadowRGB` to control shadow color with `{ r, g, b }`.
+
+<PreviewCodeTabs
+  language="ts"
+  code={`
+  update({
+    config: {
+      shadowRGB: { r, g, b, },
+    },
+  });
+`}
+>
+  <ShadowRgbPreview variant="starter" />
+</PreviewCodeTabs>
+
+<Callout type="info" title="Inverted colors in dark mode" className="not-dark:hidden">
+  Note: In the previews, the colors are inverted in the dark mode.
+</Callout>
+
+## Vibrant preset map
+
+Use a single preset dictionary to avoid repeating the same object shape in every example.
+
+<PreviewCodeTabs
+  language="ts"
+  code={`
+  const shadowPresets = {
+    neonAzure: {
+      shadowRGB: { r: 0, g: 195, b: 255 },
+      opacity: 0.22,
+      blur: 44,
+      intensity: 1.45,
+    },
+    solarCoral: {
+      shadowRGB: { r: 255, g: 98, b: 72 },
+      opacity: 0.2,
+      blur: 40,
+      intensity: 1.35,
+    },
+    electricViolet: {
+      shadowRGB: { r: 123, g: 75, b: 255 },
+      opacity: 0.19,
+      blur: 38,
+      intensity: 1.3,
+    },
+    limePulse: {
+      shadowRGB: { r: 112, g: 214, b: 78 },
+      opacity: 0.17,
+      blur: 34,
+      intensity: 1.2,
+    },
+    rubyDepth: {
+      shadowRGB: { r: 205, g: 32, b: 78 },
+      opacity: 0.21,
+      blur: 42,
+      intensity: 1.4,
+    },
+  } as const;
+
+  function applyShadowPreset(name: keyof typeof shadowPresets) {
+    update({ config: shadowPresets[name] });
+  }
+
+  applyShadowPreset("neonAzure");
+`}
+>
+  <ShadowRgbPreview variant="vibrant" />
+</PreviewCodeTabs>
+
+<Callout type="info" title="Inverted colors in dark mode" className="not-dark:hidden">
+  Note: In the previews, the colors are inverted in the dark mode.
+</Callout>
+
+### Suggested pairings
+
+- `neonAzure`: product hero sections and launch pages.
+- `solarCoral`: creator tools, media, and lifestyle interfaces.
+- `electricViolet`: feature callouts and premium states.
+- `limePulse`: success-heavy dashboards and growth metrics.
+- `rubyDepth`: alerts, sales surfaces, and dramatic branding.
+
+## Dynamic color sources
+
+Drive `shadowRGB` from brand, theme, or user choice with one helper flow.
+
+<PreviewCodeTabs
+  language="tsx"
+  code={`
+  function hexToRgb(hex: string) {
+    const result = /^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i.exec(hex);
+    if (!result)
+      return { r: 0, g: 0, b: 0 };
+
+    return {
+      r: Number.parseInt(result[1], 16),
+      g: Number.parseInt(result[2], 16),
+      b: Number.parseInt(result[3], 16),
+    };
+  }
+
+  function setShadowFromHex(hex: string) {
+    update({ config: { shadowRGB: hexToRgb(hex) } });
+  }
+
+  const defaultShadowHex = prefersDarkMode ? "#F4F7FF" : "#0C1020";
+  setShadowFromHex(defaultShadowHex);
+
+  <input
+    type="color"
+    value={shadowColorHex}
+    onChange={(event) => {
+      setShadowFromHex(event.target.value);
+    }}
+  />
+`}
+>
+  <ShadowRgbPreview variant="dynamic" />
+</PreviewCodeTabs>
+
+<Callout type="info" title="Inverted colors in dark mode" className="not-dark:hidden">
+  Note: In the previews, the colors are inverted in the dark mode.
+</Callout>
+
+## Practical tuning rules
+
+- Strong color (`shadowRGB`) -> lower `opacity` first.
+- High `intensity` -> lower `blur` to avoid haze.
+- Large typography -> higher `blur`, lower `offset`.
+- Dense UI cards -> moderate `numSteps` (`5` to `8`) for good cost/quality balance.

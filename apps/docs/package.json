@@ -1,0 +1,56 @@
+{
+  "name": "docs",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "name": "Hasitha Wickramasinghe",
+    "url": "https://hazya.dev"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/haZya/shinejs#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haZya/shinejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/haZya/shinejs/issues"
+  },
+  "keywords": [
+    "shinejs",
+    "documentation",
+    "fumadocs",
+    "nextjs",
+    "react",
+    "typescript"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@fumadocs/mdx-remote": "^1.4.1",
+    "@hazya/shinejs": "*",
+    "clsx": "^2.1.1",
+    "fumadocs-core": "16.5.1",
+    "fumadocs-mdx": "14.2.6",
+    "fumadocs-ui": "16.5.1",
+    "lucide-react": "^0.544.0",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^16.1.6",
+    "@shinejs/eslint-config": "*",
+    "@tailwindcss/postcss": "^4",
+    "@types/mdx": "^2.0.13",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint-plugin-better-tailwindcss": "^4.1.1",
+    "tailwindcss": "^4"
+  }
+}

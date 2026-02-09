@@ -1,0 +1,28 @@
+---
+title: ShineOptions
+description: Complete option object for Shine constructor and update calls.
+---
+
+## Type
+
+```ts
+type ShineOptions = {
+  config?: ShineConfigSettings;
+  light?: {
+    position?: { x: number; y: number } | "followMouse";
+    intensity?: number;
+  };
+  classPrefix?: string;
+  shadowProperty?: "textShadow" | "boxShadow";
+  content?: string;
+};
+```
+
+## Field details
+
+- `config`: visual controls (blur, opacity, offset, color, etc.).
+- `light.position`: fixed point or follow mouse.
+- `light.intensity`: strength multiplier.
+- `classPrefix`: class prefix for injected helper elements.
+- `shadowProperty`: force text or box shadow strategy.
+- `content`: replace current content text.
