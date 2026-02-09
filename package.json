@@ -36,7 +36,7 @@
   "scripts": {
     "build": "npm run build:packages && npm run build:apps",
     "build:packages": "npm -w packages/eslint-config run build && npm -w packages/shinejs run build",
-    "build:apps": "npm run build:demo && npm run docs:build",
+    "build:apps": "npm run build:demo && npm run build:docs",
     "dev:demo": "npm run build:packages && npm -w apps/demo run dev",
     "build:demo": "npm run build:packages && npm -w apps/demo run build",
     "dev:docs": "npm run build:packages && npm -w apps/docs run dev",
