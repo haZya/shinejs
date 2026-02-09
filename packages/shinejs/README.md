@@ -18,18 +18,18 @@ A modern ESM-only TypeScript library based on [bigspaceship/shine.js](https://gi
 ## Installation
 
 ```bash
-npm install shinejs
+npm install @hazya/shinejs
 ```
 
 ## Usage
 
 ### React
 
-The easiest way to use `shinejs` in a React application is with the `useShine` hook.
+The easiest way to use `@hazya/shinejs` in a React application is with the `useShine` hook.
 
 ```tsx
+import { useShine } from "@hazya/shinejs/react";
 import { useRef } from "react";
-import { useShine } from "shinejs/react";
 
 export function App() {
   const textRef = useRef<HTMLHeadingElement>(null);
@@ -57,7 +57,7 @@ export function App() {
 For non-React projects, use the `Shine` class directly.
 
 ```javascript
-import { Shine } from "shinejs";
+import { Shine } from "@hazya/shinejs";
 
 const element = document.getElementById("my-element");
 const shine = new Shine(element, {

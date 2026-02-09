@@ -4,7 +4,7 @@
   "packages": {
     "packages/shinejs": {
       "release-type": "node",
-      "package-name": "shinejs"
+      "package-name": "@hazya/shinejs"
     }
   },
   "changelog-sections": [

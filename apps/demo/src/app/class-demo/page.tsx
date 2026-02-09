@@ -1,8 +1,8 @@
 "use client";
 
+import { Color, Shine } from "@hazya/shinejs";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { Color, Shine } from "shinejs";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 

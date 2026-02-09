@@ -2,9 +2,9 @@
 
 import type { ChangeEvent } from "react";
 
+import { useShine } from "@hazya/shinejs/react";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { useShine } from "shinejs/react";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 
