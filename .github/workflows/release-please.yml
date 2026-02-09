@@ -49,6 +49,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Install NPM latest for trusted publishing
+        run: npm install -g npm@latest # Ensure npm 11.5.1 or later for trusted publishing
+
       - name: Publish Released Packages
         run: |
           PATHS='${{ needs.release-please.outputs.paths_released }}'
@@ -83,6 +86,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Install NPM latest for trusted publishing
+        run: npm install -g npm@latest # Ensure npm 11.5.1 or later for trusted publishing
 
       - name: Publish Selected Package If Missing
         run: |
