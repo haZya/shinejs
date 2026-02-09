@@ -67,8 +67,6 @@ jobs:
               fi
             fi
           done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-once:
     if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -111,5 +109,3 @@ jobs:
 
           echo "Publishing $PACKAGE_NAME@$PACKAGE_VERSION from $PACKAGE_PATH..."
           npm publish -w "$PACKAGE_PATH" --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
