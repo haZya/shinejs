@@ -43,14 +43,11 @@ jobs:
       - name: Setup Node + Install
         uses: ./.github/actions/setup-node
         with:
-          node-version: 22.x
+          node-version: 24.x # Ensure npm 11.5.1 or later for trusted publishing
           registry-url: "https://registry.npmjs.org"
 
       - name: Build
         run: npm run build
-
-      - name: Install NPM latest for trusted publishing
-        run: npm install -g npm@latest # Ensure npm 11.5.1 or later for trusted publishing
 
       - name: Publish Released Packages
         run: |
@@ -81,14 +78,11 @@ jobs:
       - name: Setup Node + Install
         uses: ./.github/actions/setup-node
         with:
-          node-version: 22.x
+          node-version: 24.x # Ensure npm 11.5.1 or later for trusted publishing
           registry-url: "https://registry.npmjs.org"
 
       - name: Build
         run: npm run build
-
-      - name: Install NPM latest for trusted publishing
-        run: npm install -g npm@latest # Ensure npm 11.5.1 or later for trusted publishing
 
       - name: Publish Selected Package If Missing
         run: |
