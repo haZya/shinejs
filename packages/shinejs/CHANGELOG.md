@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/haZya/shinejs/compare/shinejs-v1.0.0...shinejs-v1.1.0) (2026-02-09)
+
+
+### Features
+
+* **docs:** add documentation ([#8](https://github.com/haZya/shinejs/issues/8)) ([0d50f1b](https://github.com/haZya/shinejs/commit/0d50f1b6974dffd72c36637abd0a004a9a7534e4))
+* **docs:** add links to docs, demo and npm ([a5f067c](https://github.com/haZya/shinejs/commit/a5f067c0f952b1af2f9e225b23c5e199837e49c0))
+
+
+### Chores
+
+* add default value comments to ShineOptions ([a03b23f](https://github.com/haZya/shinejs/commit/a03b23ff70e1d5d4c9fe8dfa8b1afbffa9c2c021))
+* **shinejs:** rename and scope package to @hazya/shinejs ([ce9fd5d](https://github.com/haZya/shinejs/commit/ce9fd5d69fd77f5f73de49446b7b4fb2a66ab4c9))
+
 ## 1.0.0 (2026-02-07)
 
 

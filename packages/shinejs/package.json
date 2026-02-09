@@ -1,7 +1,7 @@
 {
   "name": "@hazya/shinejs",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Create pretty text-shadows and box-shadows with neumorphic aesthetics and React support",
   "author": {
     "name": "Hasitha Wickramasinghe",
