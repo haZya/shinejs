@@ -1,7 +1,7 @@
 "use client";
 
+import { useShine } from "@hazya/shinejs/react";
 import { useRef } from "react";
-import { useShine } from "shinejs/react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
 

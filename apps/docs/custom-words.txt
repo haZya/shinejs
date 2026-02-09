@@ -2,6 +2,7 @@ shinejs
 fumadocs
 Hasitha
 Wickramasinghe
+hazya
 neumorphic
 neumorphism
 rgb

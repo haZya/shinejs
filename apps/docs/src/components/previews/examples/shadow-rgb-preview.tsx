@@ -1,7 +1,7 @@
 "use client";
 
+import { useShine } from "@hazya/shinejs/react";
 import { useMemo, useRef, useState } from "react";
-import { useShine } from "shinejs/react";
 
 import type { Rgb } from "@/components/previews/shared/color-utils";
 

@@ -1,9 +1,9 @@
 "use client";
 
-import type { ShineOptions } from "shinejs";
+import type { ShineOptions } from "@hazya/shinejs";
 
+import { useShine } from "@hazya/shinejs/react";
 import { useRef, useState } from "react";
-import { useShine } from "shinejs/react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
 import { cn } from "@/lib/utils";

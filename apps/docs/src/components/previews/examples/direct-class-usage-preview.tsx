@@ -1,7 +1,7 @@
 "use client";
 
+import { Color, Shine } from "@hazya/shinejs";
 import { useEffect, useRef } from "react";
-import { Color, Shine } from "shinejs";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
 
