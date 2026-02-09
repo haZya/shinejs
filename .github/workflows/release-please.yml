@@ -5,6 +5,12 @@ on:
     branches:
       - main
       - master
+  workflow_dispatch:
+    inputs:
+      package_path:
+        description: Workspace path to publish
+        required: true
+        default: packages/shinejs
 
 permissions:
   contents: write
@@ -13,9 +19,10 @@ permissions:
 
 jobs:
   release-please:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
+      releases_created: ${{ steps.release.outputs.releases_created }}
       paths_released: ${{ steps.release.outputs.paths_released }}
     steps:
       - uses: googleapis/release-please-action@v4
@@ -27,7 +34,7 @@ jobs:
 
   publish:
     needs: release-please
-    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    if: ${{ github.event_name == 'push' && needs.release-please.outputs.releases_created == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -60,5 +67,49 @@ jobs:
               fi
             fi
           done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-once:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node + Install
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: 22.x
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish Selected Package If Missing
+        run: |
+          PACKAGE_PATH='${{ github.event.inputs.package_path }}'
+
+          if [ ! -f "$PACKAGE_PATH/package.json" ]; then
+            echo "No package.json found at $PACKAGE_PATH"
+            exit 1
+          fi
+
+          PACKAGE_NAME=$(jq -r '.name' "$PACKAGE_PATH/package.json")
+          PACKAGE_VERSION=$(jq -r '.version' "$PACKAGE_PATH/package.json")
+          IS_PRIVATE=$(jq -r '.private' "$PACKAGE_PATH/package.json")
+
+          if [ "$IS_PRIVATE" = "true" ]; then
+            echo "Skipping private package $PACKAGE_NAME at $PACKAGE_PATH"
+            exit 0
+          fi
+
+          if npm view "$PACKAGE_NAME@$PACKAGE_VERSION" version > /dev/null 2>&1; then
+            echo "$PACKAGE_NAME@$PACKAGE_VERSION is already on npm. Skipping publish."
+            exit 0
+          fi
+
+          echo "Publishing $PACKAGE_NAME@$PACKAGE_VERSION from $PACKAGE_PATH..."
+          npm publish -w "$PACKAGE_PATH" --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
