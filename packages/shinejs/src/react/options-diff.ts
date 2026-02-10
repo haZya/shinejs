@@ -1,5 +1,11 @@
 import type { ShineOptions } from "../index";
 
+/**
+ * Builds a minimal update object by comparing previous and next Shine options.
+ *
+ * Returns `null` when there is nothing to update, so callers can skip
+ * unnecessary `shine.update(...)` calls.
+ */
 export function createUpdatePayload(
   previousOptions: ShineOptions | undefined,
   nextOptions: ShineOptions | undefined,
@@ -41,6 +47,9 @@ export function createUpdatePayload(
   return Object.keys(payload).length ? payload : null;
 }
 
+/**
+ * Deep equality for plain data objects used in Shine options.
+ */
 function deepEqual(a: unknown, b: unknown): boolean {
   if (Object.is(a, b)) {
     return true;

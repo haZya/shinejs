@@ -10,12 +10,21 @@ import { createUpdatePayload } from "./options-diff";
 type ShineTagName = keyof HTMLElementTagNameMap;
 
 export type ShineProps = {
+  /** HTML tag to render, for example `h1`, `h2`, `p`, or `div`. */
   as?: ShineTagName;
+  /** Shine configuration applied on mount and via diffed updates. */
   config?: ShineOptions;
+  /** Element content. Text/number children are mapped to `config.content`. */
   children?: ReactNode;
   ref?: Ref<HTMLElement>;
 } & Omit<HTMLAttributes<HTMLElement>, "children">;
 
+/**
+ * React component wrapper for Shine that keeps a single imperative instance.
+ *
+ * It creates `Shine` once when mounted, destroys on unmount, and applies
+ * prop changes through diffed `shine.update(...)` calls.
+ */
 export function Shine({ as = "div", config, children, ref, ...props }: ShineProps): ReactElement {
   const [element, setElement] = useState<HTMLElement | null>(null);
   const shineRef = useRef<ShineCore | null>(null);
@@ -35,14 +44,29 @@ export function Shine({ as = "div", config, children, ref, ...props }: ShineProp
 
   const setRefs = useCallback((node: HTMLElement | null) => {
     setElement(node);
+  }, []);
+
+  useEffect(() => {
+    if (!ref) {
+      return;
+    }
 
     if (typeof ref === "function") {
-      ref(node);
+      ref(element);
     }
-    else if (ref) {
-      ref.current = node;
+    else {
+      ref.current = element;
     }
-  }, [ref]);
+
+    return () => {
+      if (typeof ref === "function") {
+        ref(null);
+      }
+      else {
+        ref.current = null;
+      }
+    };
+  }, [ref, element]);
 
   latestOptionsRef.current = mergedConfig;
 

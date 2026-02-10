@@ -10,6 +10,9 @@ import { createUpdatePayload } from "./options-diff";
 /**
  * React hook to apply the Shine effect to an element.
  *
+ * Creates one `Shine` instance for the lifetime of the attached element,
+ * then applies subsequent config changes via diffed `shine.update(...)` calls.
+ *
  * @param ref Reference to the target HTML element.
  * @param config Optional configuration for the Shine effect.
  * @returns An object containing the Shine instance and an update function.
