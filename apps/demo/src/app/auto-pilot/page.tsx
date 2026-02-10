@@ -10,8 +10,12 @@ function AutoPilotDemo() {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const { shine, update } = useShine(headlineRef, {
+    light: { intensity: 1.2 },
     config: {
-      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 },
+      blur: 36,
+      opacity: 0.3,
+      offset: 0.08,
+      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 24, g: 41, b: 71 },
     },
   });
   const animationFrameId = useRef<number>(null);

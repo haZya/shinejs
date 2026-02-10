@@ -1,6 +1,6 @@
 "use client";
 
-import { Color, Shine } from "@hazya/shinejs";
+import { Shine } from "@hazya/shinejs";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
@@ -14,8 +14,12 @@ function ClassDirectUsageDemo() {
     if (headlineRef.current) {
       // Direct instantiation of Shine class
       const shine = new Shine(headlineRef.current, {
+        light: { intensity: 1.2 },
         config: {
-          shadowRGB: isDarkMode ? new Color(255, 255, 255) : new Color(),
+          blur: 36,
+          opacity: 0.3,
+          offset: 0.08,
+          shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 24, g: 41, b: 71 },
         },
       });
 

@@ -14,9 +14,11 @@ function AutoPilotChildrenDemo() {
   const isDarkMode = usePrefersDarkMode();
   const headlineRef = useRef<HTMLDivElement>(null);
   const { shine, update } = useShine(headlineRef, {
-    light: { intensity: isDarkMode ? 1 : 3 },
+    light: { intensity: isDarkMode ? 0.6 : 2 },
     config: {
-      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 },
+      blur: 36,
+      opacity: 0.3,
+      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 24, g: 41, b: 71 },
     },
   });
   const animationFrameId = useRef<number | null>(null);

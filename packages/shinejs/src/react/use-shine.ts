@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { ShineOptions } from "../index";
 
 import { Shine } from "../index";
+import { createUpdatePayload } from "./options-diff";
 
 /**
  * React hook to apply the Shine effect to an element.
@@ -19,36 +20,61 @@ export function useShine(
 ): { shine: Shine | null; update: (newConfig: ShineOptions) => void } {
   const [shineInstance, setShineInstance] = useState<Shine | null>(null);
   const shineInstanceRef = useRef<Shine | null>(null);
+  const latestOptionsRef = useRef<ShineOptions | undefined>(config);
+  const previousOptionsRef = useRef<ShineOptions | undefined>(undefined);
 
-  // Simple deep-ish compare for config to prevent unnecessary re-initializations
-  const configJson = config ? JSON.stringify(config) : "{}";
+  latestOptionsRef.current = config;
 
   useEffect(() => {
-    if (ref.current) {
-      const shineConfig: ShineOptions = JSON.parse(configJson);
-      const instance = new Shine(ref.current, shineConfig);
+    const element = ref.current;
+    if (!element || !element.ownerDocument?.defaultView) {
+      return;
+    }
 
-      shineInstanceRef.current = instance;
-      setShineInstance(instance);
+    const instance = new Shine(element, latestOptionsRef.current);
+    shineInstanceRef.current = instance;
+    previousOptionsRef.current = latestOptionsRef.current;
+    setShineInstance(instance);
 
-      return () => {
-        if (shineInstanceRef.current === instance) {
-          shineInstanceRef.current = null;
-        }
-        instance.destroy();
-        setShineInstance(prev => (prev === instance ? null : prev));
+    return () => {
+      if (shineInstanceRef.current) {
+        shineInstanceRef.current.destroy();
+        shineInstanceRef.current = null;
+      }
+      previousOptionsRef.current = undefined;
+      setShineInstance(null);
+    };
+  }, [ref]);
+
+  useEffect(() => {
+    const instance = shineInstanceRef.current;
+    if (!instance) {
+      return;
+    }
+
+    const previousOptions = previousOptionsRef.current;
+    const updatePayload = createUpdatePayload(previousOptions, config);
+
+    if (updatePayload) {
+      instance.update(updatePayload);
+    }
+
+    if (previousOptions?.content !== undefined && config?.content === undefined) {
+      instance.updateContent();
+    }
+
+    previousOptionsRef.current = config;
+  }, [config]);
+
+  const update = useCallback((newConfig: ShineOptions) => {
+    if (shineInstanceRef.current) {
+      shineInstanceRef.current.update(newConfig);
+      previousOptionsRef.current = {
+        ...previousOptionsRef.current,
+        ...newConfig,
       };
     }
-  }, [configJson, ref]);
-
-  const update = useCallback(
-    (newConfig: ShineOptions) => {
-      if (shineInstanceRef.current) {
-        shineInstanceRef.current.update(newConfig);
-      }
-    },
-    [],
-  );
+  }, []);
 
   return { shine: shineInstance, update };
 }

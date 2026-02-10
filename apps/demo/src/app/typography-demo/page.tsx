@@ -88,7 +88,7 @@ function TypographyDemo() {
   const [content, setContent] = useState<ContentKey>("english");
 
   const { update } = useShine(headlineRef, {
-    light: { position: "followMouse", intensity: 1.2 },
+    light: { intensity: 1.2, position: "followMouse" },
     config: {
       blur: 36,
       opacity: 0.3,

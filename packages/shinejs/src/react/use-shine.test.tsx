@@ -74,27 +74,18 @@ describe("useShine", () => {
 
   it("should update Shine when config changes", async () => {
     await act(async () => {
-      root.render(<TestComponent config={{ numSteps: 5 }} />);
+      root.render(<TestComponent config={{ config: { numSteps: 5 } }} />);
     });
 
-    expect(Shine).toHaveBeenCalledWith(expect.any(HTMLElement), { numSteps: 5 });
+    expect(Shine).toHaveBeenCalledWith(expect.any(HTMLElement), { config: { numSteps: 5 } });
 
-    // Render with new config
     await act(async () => {
-      root.render(<TestComponent config={{ numSteps: 10 }} />);
+      root.render(<TestComponent config={{ config: { numSteps: 10 } }} />);
     });
 
-    // Check if new instance created or updated?
-    // Implementation of useShine:
-    // useEffect depends on [configJson, ref].
-    // If config changes, it destroys old and creates new instance.
-
-    expect(Shine).toHaveBeenCalledTimes(2);
-    expect(Shine).toHaveBeenLastCalledWith(expect.any(HTMLElement), { numSteps: 10 });
-
-    // The previous instance should be destroyed
+    expect(Shine).toHaveBeenCalledTimes(1);
     const firstInstance = (Shine as any).mock.results[0].value;
-    expect(firstInstance.destroy).toHaveBeenCalled();
+    expect(firstInstance.update).toHaveBeenCalledWith({ config: { numSteps: 10 } });
   });
 
   it("should provide an update method that calls shine.update", async () => {
@@ -112,25 +103,23 @@ describe("useShine", () => {
     expect(shineInstance.update).toHaveBeenCalledWith(newConfig);
   });
 
-  it("should always update the latest Shine instance", async () => {
+  it("should keep a single instance and support imperative updates", async () => {
     await act(async () => {
-      root.render(<TestComponent config={{ numSteps: 5 }} />);
+      root.render(<TestComponent config={{ config: { numSteps: 5 } }} />);
     });
 
-    const firstInstance = (Shine as any).mock.results[0].value;
+    const instance = (Shine as any).mock.results[0].value;
     const initialUpdate = hookResult.update;
 
     await act(async () => {
-      root.render(<TestComponent config={{ numSteps: 10 }} />);
+      root.render(<TestComponent config={{ config: { numSteps: 10 } }} />);
     });
-
-    const secondInstance = (Shine as any).mock.results[1].value;
 
     act(() => {
       initialUpdate({ config: { opacity: 0.2 } });
     });
 
-    expect(firstInstance.update).not.toHaveBeenCalledWith({ config: { opacity: 0.2 } });
-    expect(secondInstance.update).toHaveBeenCalledWith({ config: { opacity: 0.2 } });
+    expect(Shine).toHaveBeenCalledTimes(1);
+    expect(instance.update).toHaveBeenCalledWith({ config: { opacity: 0.2 } });
   });
 });
