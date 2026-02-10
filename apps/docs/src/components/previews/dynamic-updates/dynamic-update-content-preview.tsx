@@ -4,7 +4,7 @@ import { useShine } from "@hazya/shinejs/react";
 import { useRef, useState } from "react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
-import { cn } from "@/lib/utils";
+import { PreviewOptionButton } from "@/components/previews/shared/preview-option-button";
 
 export function DynamicUpdateContentPreview() {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -33,30 +33,16 @@ export function DynamicUpdateContentPreview() {
     setIsUpdated(true);
   };
 
-  const buttonClassName = (isActive: boolean) =>
-    cn(
-      "rounded-md border-2 border-slate-300 px-3 py-1.5 text-sm font-semibold text-black transition",
-      isActive
-        ? "bg-slate-200 text-slate-400"
-        : "cursor-pointer text-slate-900 hover:border-slate-400 hover:bg-slate-300",
-    );
-
   return (
     <PreviewFrame>
       <div className="flex w-full max-w-4xl flex-col gap-8">
         <div className="flex justify-center gap-2">
-          <button
-            className={buttonClassName(!isUpdated)}
-            onClick={setDefaultContent}
-          >
+          <PreviewOptionButton isActive={!isUpdated} onClick={setDefaultContent}>
             Default Content
-          </button>
-          <button
-            className={buttonClassName(isUpdated)}
-            onClick={setUpdatedContent}
-          >
+          </PreviewOptionButton>
+          <PreviewOptionButton isActive={isUpdated} onClick={setUpdatedContent}>
             Updated Content
-          </button>
+          </PreviewOptionButton>
         </div>
         <h2 ref={ref} className="m-0! text-center text-4xl font-black text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl">
           Live Updates

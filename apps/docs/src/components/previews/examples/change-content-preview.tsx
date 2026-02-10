@@ -4,7 +4,7 @@ import { useShine } from "@hazya/shinejs/react";
 import { useRef, useState } from "react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
-import { cn } from "@/lib/utils";
+import { PreviewOptionButton } from "@/components/previews/shared/preview-option-button";
 
 type ContentKey = "change" | "hello" | "lorem";
 
@@ -30,36 +30,19 @@ export function ChangeContentPreview() {
     setActiveContent(key);
   };
 
-  const buttonClassName = (isActive: boolean) =>
-    cn(
-      "rounded-md border-2 border-slate-300 px-3 py-1.5 text-sm font-semibold text-black transition",
-      isActive
-        ? "bg-slate-200 text-slate-400"
-        : "cursor-pointer text-slate-900 hover:border-slate-400 hover:bg-slate-300",
-    );
-
   return (
     <PreviewFrame>
       <div className="flex w-full max-w-4xl flex-col gap-8">
         <div className="flex flex-wrap justify-center gap-2">
-          <button
-            className={buttonClassName(activeContent === "change")}
-            onClick={() => updateContent("change", "Change Text Demo")}
-          >
+          <PreviewOptionButton isActive={activeContent === "change"} onClick={() => updateContent("change", "Change Text Demo")}>
             Change Text Demo
-          </button>
-          <button
-            className={buttonClassName(activeContent === "hello")}
-            onClick={() => updateContent("hello", "Hello World")}
-          >
+          </PreviewOptionButton>
+          <PreviewOptionButton isActive={activeContent === "hello"} onClick={() => updateContent("hello", "Hello World")}>
             Hello World
-          </button>
-          <button
-            className={buttonClassName(activeContent === "lorem")}
-            onClick={() => updateContent("lorem", "Lorem Ipsum")}
-          >
+          </PreviewOptionButton>
+          <PreviewOptionButton isActive={activeContent === "lorem"} onClick={() => updateContent("lorem", "Lorem Ipsum")}>
             Lorem Ipsum
-          </button>
+          </PreviewOptionButton>
         </div>
         <h2 ref={ref} className="m-0! text-center text-4xl font-black text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl">
           Change Text Demo

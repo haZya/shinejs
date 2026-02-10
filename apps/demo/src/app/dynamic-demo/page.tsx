@@ -92,9 +92,9 @@ function DynamicDemo() {
       <Link href="/" className="absolute top-16 left-16 font-medium text-blue-500 hover:text-blue-700">
         ← Back to Home
       </Link>
-      <div className="mt-16 grid w-full gap-6 sm:grid-cols-2">
+      <div className="mt-16 grid w-full max-w-5xl gap-6 rounded-xl border border-slate-200 bg-white/70 p-5 shadow-sm sm:grid-cols-2 sm:p-8 dark:bg-white/5">
         <div className="flex flex-col space-y-2">
-          <label htmlFor="blur" className="font-medium">
+          <label htmlFor="blur" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">
             Blur:
             {blur}
           </label>
@@ -109,7 +109,7 @@ function DynamicDemo() {
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <label htmlFor="blurPow" className="font-medium">
+          <label htmlFor="blurPow" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">
             Blur Power:
             {blurPow.toFixed(2)}
           </label>
@@ -125,7 +125,7 @@ function DynamicDemo() {
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <label htmlFor="opacity" className="font-medium">
+          <label htmlFor="opacity" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">
             Opacity:
             {opacity.toFixed(2)}
           </label>
@@ -141,7 +141,7 @@ function DynamicDemo() {
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <label htmlFor="opacityPow" className="font-medium">
+          <label htmlFor="opacityPow" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">
             Opacity Power:
             {opacityPow.toFixed(2)}
           </label>
@@ -157,7 +157,7 @@ function DynamicDemo() {
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <label htmlFor="offset" className="font-medium">
+          <label htmlFor="offset" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">
             Offset:
             {offset.toFixed(2)}
           </label>
@@ -173,7 +173,7 @@ function DynamicDemo() {
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <label htmlFor="offsetPow" className="font-medium">
+          <label htmlFor="offsetPow" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">
             Offset Power:
             {offsetPow.toFixed(2)}
           </label>
@@ -189,7 +189,7 @@ function DynamicDemo() {
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <label htmlFor="intensity" className="font-medium">
+          <label htmlFor="intensity" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">
             Intensity:
             {intensity.toFixed(2)}
           </label>
@@ -205,7 +205,7 @@ function DynamicDemo() {
           />
         </div>
         <div className="flex flex-col space-y-2">
-          <label htmlFor="color" className="font-medium">Shadow Color</label>
+          <label htmlFor="color" className="text-xs font-bold tracking-[0.14em] text-slate-600 uppercase dark:text-slate-300">Shadow Color</label>
           <input
             id="color"
             type="color"

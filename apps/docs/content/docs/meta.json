@@ -23,6 +23,7 @@
     "examples/shadow-color-cookbook",
     "examples/change-content",
     "examples/direct-class-usage",
+    "examples/typography-options",
     "examples/playground",
     "---API Reference---",
     "api/use-shine-hook",

@@ -1,0 +1,46 @@
+---
+title: Typography Options
+description: Try different font families, weights, and styles with the shine effect.
+---
+
+Use this example to quickly compare how typography choices interact with `useShine`.
+
+It also includes a content language switcher so you can test updates with English, Chinese, Hindi, Japanese, and Arabic text.
+
+<PreviewCodeTabs
+  language="tsx"
+  code={`"use client";
+
+  import { useRef } from "react";
+  import { useShine } from "@hazya/shinejs/react";
+
+  export function TypographyExample() {
+    const ref = useRef<HTMLHeadingElement>(null);
+
+    useShine(ref, {
+      light: { position: "followMouse", intensity: 1.15 },
+      config: {
+        blur: 38,
+        offset: 0.12,
+        opacity: 0.32,
+        shadowRGB: { r: 17, g: 24, b: 39 },
+      },
+    });
+
+    return (
+      <h1
+        ref={ref}
+        style={{
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          fontWeight: 700,
+          fontStyle: "italic",
+        }}
+      >
+        Typography Shine
+      </h1>
+    );
+  }
+`}
+>
+  <TypographyOptionsPreview />
+</PreviewCodeTabs>

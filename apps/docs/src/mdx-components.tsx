@@ -22,6 +22,7 @@ import {
   ReactUseShineGuidePreview,
   ShadowRgbPreview,
   TextVsChildrenPreview,
+  TypographyOptionsPreview,
 } from "@/components/previews";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -45,6 +46,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ReactUseShineGuidePreview,
     ShadowRgbPreview,
     TextVsChildrenPreview,
+    TypographyOptionsPreview,
     ChildrenBoxShadowPreview,
     ...components,
   };

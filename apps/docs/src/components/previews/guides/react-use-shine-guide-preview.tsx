@@ -4,6 +4,7 @@ import { useShine } from "@hazya/shinejs/react";
 import { useRef, useState } from "react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
+import { PreviewOptionButton } from "@/components/previews/shared/preview-option-button";
 
 export function ReactUseShineGuidePreview() {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -28,12 +29,9 @@ export function ReactUseShineGuidePreview() {
   return (
     <PreviewFrame>
       <div className="flex flex-col items-center gap-8">
-        <button
-          className="w-fit cursor-pointer rounded-md border-2 border-slate-300 bg-slate-200 px-3 py-1.5 text-sm font-medium text-black hover:border-slate-400"
-          onClick={changeOpacity}
-        >
+        <PreviewOptionButton isActive onClick={changeOpacity}>
           {opacity === 0.24 ? "Increase Opacity (0.4)" : "Decrease Opacity (0.24)"}
-        </button>
+        </PreviewOptionButton>
         <h2
           ref={ref}
           className="text-center text-4xl font-black tracking-tight text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl"

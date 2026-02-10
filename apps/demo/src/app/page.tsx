@@ -27,6 +27,11 @@ export default function Home() {
             </Link>
           </li>
           <li>
+            <Link href="/typography-demo" className="text-blue-400 hover:text-blue-600">
+              Typography Options Demo
+            </Link>
+          </li>
+          <li>
             <Link href="/dynamic-demo" className="text-blue-400 hover:text-blue-600">
               Dynamic Properties Demo
             </Link>

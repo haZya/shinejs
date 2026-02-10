@@ -9,6 +9,7 @@ export { DirectClassUsagePreview } from "@/components/previews/examples/direct-c
 export { MouseFollowPreview } from "@/components/previews/examples/mouse-follow-preview";
 export { PlaygroundPreview } from "@/components/previews/examples/playground-preview";
 export { ShadowRgbPreview } from "@/components/previews/examples/shadow-rgb-preview";
+export { TypographyOptionsPreview } from "@/components/previews/examples/typography-options-preview";
 export { ReactUseShineGuidePreview } from "@/components/previews/guides/react-use-shine-guide-preview";
 export { ChildrenBoxShadowPreview, TextVsChildrenPreview } from "@/components/previews/guides/text-vs-children-preview";
 export { LightIntensityPreview } from "@/components/previews/light-position/light-intensity-preview";
