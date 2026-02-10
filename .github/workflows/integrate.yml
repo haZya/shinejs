@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node + Install
         uses: ./.github/actions/setup-node
         with:
-          node-version: 22.x
+          node-version: 24.x
       - name: Build ESLint config
         run: npm -w packages/eslint-config run build
       - name: Run ESLint
@@ -37,7 +37,7 @@ jobs:
       - name: Setup Node + Install
         uses: ./.github/actions/setup-node
         with:
-          node-version: 22.x
+          node-version: 24.x
       - name: Run Test
         run: npm run test
 
@@ -50,6 +50,6 @@ jobs:
       - name: Setup Node + Install
         uses: ./.github/actions/setup-node
         with:
-          node-version: 22.x
+          node-version: 24.x
       - name: Build packages and apps
         run: npm run build
