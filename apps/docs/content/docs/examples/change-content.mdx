@@ -6,8 +6,32 @@ description: Replace target text at runtime with update({ content }).
 Recreate the behavior from [`apps/demo/src/app/change-text/page.tsx`](https://github.com/haZya/shinejs/tree/6d200502eb25859aea4bcf17b2cd6f4340d2c1fa/apps/demo/src/app/change-text).
 
 <PreviewCodeTabs
-  language="tsx"
-  code={`"use client";
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `"use client";
+
+  import { Shine } from "@hazya/shinejs/react";
+  import { useState } from "react";
+
+  export function ContentSwap() {
+    const [content, setContent] = useState("Change Text Demo");
+
+    return (
+      <>
+        <button onClick={() => setContent("Change Text Demo")}>Change Text Demo</button>
+        <button onClick={() => setContent("Hello World")}>Hello World</button>
+        <button onClick={() => setContent("Lorem Ipsum")}>Lorem Ipsum</button>
+        <Shine as="h1">{content}</Shine>
+      </>
+    );
+  }`,
+    },
+    {
+      title: "useShine Hook",
+      language: "tsx",
+      code: `"use client";
 
   import { useRef } from "react";
   import { useShine } from "@hazya/shinejs/react";
@@ -18,20 +42,13 @@ Recreate the behavior from [`apps/demo/src/app/change-text/page.tsx`](https://gi
 
     return (
       <>
-        <button onClick={() => update({ content: "Change Text Demo" })}>
-          Change Text Demo
-        </button>
-        <button onClick={() => update({ content: "Hello World" })}>
-          Hello World
-        </button>
-        <button onClick={() => update({ content: "Lorem Ipsum" })}>
-          Lorem Ipsum
-        </button>
+        <button onClick={() => update({ content: "Hello World" })}>Hello World</button>
         <h1 ref={ref}>Change Text Demo</h1>
       </>
     );
-  }
-`}
+  }`,
+    },
+  ]}
 >
   <ChangeContentPreview />
 </PreviewCodeTabs>

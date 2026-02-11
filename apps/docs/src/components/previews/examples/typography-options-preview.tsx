@@ -2,8 +2,8 @@
 
 import type { CSSProperties } from "react";
 
-import { useShine } from "@hazya/shinejs/react";
-import { useRef, useState } from "react";
+import { Shine } from "@hazya/shinejs/react";
+import { useState } from "react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
 import { PreviewOptionButton } from "@/components/previews/shared/preview-option-button";
@@ -83,27 +83,12 @@ const localizedContent = {
 type ContentKey = keyof typeof localizedContent;
 
 export function TypographyOptionsPreview() {
-  const ref = useRef<HTMLHeadingElement>(null);
   const [fontFamily, setFontFamily] = useState<FontFamilyKey>("sans");
   const [fontWeight, setFontWeight] = useState<FontWeightKey>("black");
   const [fontStyle, setFontStyle] = useState<FontStyleKey>("normal");
   const [content, setContent] = useState<ContentKey>("english");
 
-  const { update } = useShine(ref, {
-    light: {
-      intensity: 1.2,
-      position: "followMouse",
-    },
-    config: {
-      blur: 36,
-      opacity: 0.3,
-      offset: 0.08,
-      shadowRGB: { r: 24, g: 41, b: 71 },
-    },
-  });
-
   const updateContent = (nextContent: ContentKey) => {
-    update({ content: localizedContent[nextContent].value });
     setContent(nextContent);
   };
 
@@ -178,9 +163,25 @@ export function TypographyOptionsPreview() {
           </div>
         </div>
 
-        <h2 ref={ref} style={headingStyle} className="m-0! text-center text-4xl/tight text-slate-200 lg:text-7xl/tight">
-          {localizedContent.english.value}
-        </h2>
+        <Shine
+          as="h2"
+          style={headingStyle}
+          className="m-0! text-center text-4xl/tight text-slate-200 lg:text-7xl/tight"
+          options={{
+            light: {
+              intensity: 1.2,
+              position: "followMouse",
+            },
+            config: {
+              blur: 36,
+              opacity: 0.3,
+              offset: 0.08,
+              shadowRGB: { r: 24, g: 41, b: 71 },
+            },
+          }}
+        >
+          {localizedContent[content].value}
+        </Shine>
       </div>
     </PreviewFrame>
   );

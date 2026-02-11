@@ -1,0 +1,48 @@
+---
+title: Shine Component
+description: Recommended React API for declarative ShineJS usage.
+---
+
+## Signature
+
+```tsx
+<Shine as?: keyof HTMLElementTagNameMap options?: ShineOptions>
+  {children}
+</Shine>
+```
+
+## Props
+
+- `as`: optional HTML tag to render (defaults to `"div"`).
+- `options`: optional `ShineOptions` object.
+- `children`: rendered content. String/number children are synced to `options.content`.
+- Other standard HTML attributes are forwarded to the rendered element.
+
+## Behavior
+
+- Creates one imperative `Shine` instance on mount.
+- Destroys the instance on unmount.
+- Applies prop changes using diffed `shine.update(...)` calls instead of re-creating the instance.
+- Safe for SSR because DOM work runs after mount in Client Components.
+
+## Example
+
+```tsx
+"use client";
+
+import { Shine } from "@hazya/shinejs/react";
+
+export function HeroTitle() {
+  return (
+    <Shine
+      as="h1"
+      options={{
+        light: { position: "followMouse" },
+        config: { opacity: 0.24, blur: 36 },
+      }}
+    >
+      Shining Bright
+    </Shine>
+  );
+}
+```

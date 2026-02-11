@@ -26,6 +26,7 @@
     "examples/typography-options",
     "examples/playground",
     "---API Reference---",
+    "api/shine-component",
     "api/use-shine-hook",
     "api/shine-options",
     "api/shine-config-settings",

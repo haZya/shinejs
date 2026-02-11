@@ -14,7 +14,7 @@ A modern monorepo for `shinejs`, a library for creating beautiful, interactive t
 
 This repository is managed as an npm workspace:
 
-- **`packages/shinejs`**: The core library, including the React hook. [Read more](./packages/shinejs/README.md).
+- **`packages/shinejs`**: The core library, including the React `Shine` component and `useShine` hook. [Read more](./packages/shinejs/README.md).
 - **`apps/demo`**: A Next.js application showcasing various use cases and examples.
 - **`packages/eslint-config`**: Shared ESLint configuration used across the project.
 

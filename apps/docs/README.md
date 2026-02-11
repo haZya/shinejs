@@ -2,6 +2,8 @@
 
 The `docs` workspace is the ShineJS documentation site, built with Next.js 16, Fumadocs, and MDX.
 
+React docs in this site prefer the `Shine` component as the default integration path, with `useShine` documented for advanced imperative use cases.
+
 ## Links
 
 [Getting Started](https://shinejs.vercel.app/docs/getting-started/react-quick-start) | [Docs](https://shinejs.vercel.app/docs) | [Demo](https://shinejs-demo.vercel.app) | [NPM](https://www.npmjs.com/package/@hazya/shinejs)

@@ -64,7 +64,7 @@ describe("shine component", () => {
   it("merges text children into config content", async () => {
     await act(async () => {
       root!.render(
-        <Shine config={{ config: { numSteps: 12 }, light: { intensity: 0.5 } }}>
+        <Shine options={{ config: { numSteps: 12 }, light: { intensity: 0.5 } }}>
           Shine Text
         </Shine>,
       );
@@ -80,7 +80,7 @@ describe("shine component", () => {
   it("creates a single Shine instance and sends diffed updates", async () => {
     await act(async () => {
       root!.render(
-        <Shine config={{ config: { numSteps: 12 }, light: { intensity: 0.5 } }}>
+        <Shine options={{ config: { numSteps: 12 }, light: { intensity: 0.5 } }}>
           Shine Text
         </Shine>,
       );
@@ -90,7 +90,7 @@ describe("shine component", () => {
 
     await act(async () => {
       root!.render(
-        <Shine config={{ config: { numSteps: 20 }, light: { intensity: 0.5 } }}>
+        <Shine options={{ config: { numSteps: 20 }, light: { intensity: 0.5 } }}>
           Shine Text
         </Shine>,
       );

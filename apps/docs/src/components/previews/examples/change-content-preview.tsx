@@ -1,7 +1,7 @@
 "use client";
 
-import { useShine } from "@hazya/shinejs/react";
-import { useRef, useState } from "react";
+import { Shine } from "@hazya/shinejs/react";
+import { useState } from "react";
 
 import { PreviewFrame } from "@/components/previews/shared/preview-frame";
 import { PreviewOptionButton } from "@/components/previews/shared/preview-option-button";
@@ -9,24 +9,11 @@ import { PreviewOptionButton } from "@/components/previews/shared/preview-option
 type ContentKey = "change" | "hello" | "lorem";
 
 export function ChangeContentPreview() {
-  const ref = useRef<HTMLHeadingElement>(null);
   const [activeContent, setActiveContent] = useState<ContentKey>("change");
-
-  const { update } = useShine(ref, {
-    light: {
-      intensity: 1.2,
-      position: "followMouse",
-    },
-    config: {
-      blur: 36,
-      offset: 0.08,
-      opacity: 0.3,
-      shadowRGB: { r: 24, g: 41, b: 71 },
-    },
-  });
+  const [content, setContent] = useState("Change Text Demo");
 
   const updateContent = (key: ContentKey, content: string) => {
-    update({ content });
+    setContent(content);
     setActiveContent(key);
   };
 
@@ -44,9 +31,24 @@ export function ChangeContentPreview() {
             Lorem Ipsum
           </PreviewOptionButton>
         </div>
-        <h2 ref={ref} className="m-0! text-center text-4xl font-black text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl">
-          Change Text Demo
-        </h2>
+        <Shine
+          as="h2"
+          className="m-0! text-center text-4xl font-black text-slate-200 sm:text-5xl lg:text-7xl xl:text-8xl"
+          options={{
+            light: {
+              intensity: 1.2,
+              position: "followMouse",
+            },
+            config: {
+              blur: 36,
+              offset: 0.08,
+              opacity: 0.3,
+              shadowRGB: { r: 24, g: 41, b: 71 },
+            },
+          }}
+        >
+          {content}
+        </Shine>
       </div>
     </PreviewFrame>
   );

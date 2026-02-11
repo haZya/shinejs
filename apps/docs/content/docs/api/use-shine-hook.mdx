@@ -1,7 +1,11 @@
 ---
 title: useShine Hook
-description: API contract and behavior of the React integration.
+description: Imperative React hook API for advanced ShineJS update flows.
 ---
+
+<Callout type="info" title="Default React API">
+  For most React apps, prefer [`Shine`](/docs/api/shine-component). Use `useShine` when you need direct imperative control (`update`, direct instance access, custom ref lifecycle handling).
+</Callout>
 
 ## Signature
 
@@ -24,5 +28,5 @@ useShine(
 
 ## Notes
 
-- Automatically constructs and destroys `Shine` with component lifecycle.
-- Suitable for most React and Next.js use cases.
+- Automatically constructs and destroys a single `Shine` instance with component lifecycle.
+- Applies config changes via diffed `update(...)` calls.

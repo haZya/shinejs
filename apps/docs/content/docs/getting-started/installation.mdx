@@ -19,16 +19,20 @@ yarn add shinejs
 
 ## Import paths
 
-- Core class API: `shinejs`
-- React hook API: `shinejs/react`
+- Core class API: `@hazya/shinejs`
+- React API (component + hook): `@hazya/shinejs/react`
 
 ```ts
-import { Shine } from "@hazya/shinejs";
-import { useShine } from "@hazya/shinejs/react";
+import { Shine, useShine } from "@hazya/shinejs/react";
+import { Shine as ShineCore } from "@hazya/shinejs";
 ```
+
+<Callout type="info" title="Recommendation">
+  `Shine` is the recommended default for React. Use `useShine` for imperative update flows.
+</Callout>
 
 ## Requirements
 
 - Modern browser environment.
 - ESM-compatible tooling.
-- React + Next.js optional (only for [`useShine`](/docs/guides/react-use-shine)).
+- React + Next.js optional (for [`Shine`](/docs/api/shine-component) or [`useShine`](/docs/guides/react-use-shine)).

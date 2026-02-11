@@ -20,29 +20,31 @@ Use this page to test how option combinations behave before copying values into 
 ```tsx
 "use client";
 
-import { useRef } from "react";
-import { useShine } from "@hazya/shinejs/react";
+import { Shine } from "@hazya/shinejs/react";
 
 export function PlaygroundStarter() {
-  const ref = useRef<HTMLHeadingElement>(null);
-
-  useShine(ref, {
-    light: {
-      position: "followMouse",
-      intensity: 1,
-    },
-    config: {
-      numSteps: 5,
-      opacity: 0.15,
-      opacityPow: 1.2,
-      offset: 0.15,
-      offsetPow: 1.8,
-      blur: 40,
-      blurPow: 1,
-      shadowRGB: { r: 0, g: 0, b: 0 },
-    },
-  });
-
-  return <h1 ref={ref}>Shine Playground</h1>;
+  return (
+    <Shine
+      as="h1"
+      options={{
+        light: {
+          position: "followMouse",
+          intensity: 1,
+        },
+        config: {
+          numSteps: 5,
+          opacity: 0.15,
+          opacityPow: 1.2,
+          offset: 0.15,
+          offsetPow: 1.8,
+          blur: 40,
+          blurPow: 1,
+          shadowRGB: { r: 0, g: 0, b: 0 },
+        },
+      }}
+    >
+      Shine Playground
+    </Shine>
+  );
 }
 ```

@@ -16,13 +16,10 @@ description: Understand automatic shadow mode selection and when to override it.
   language="tsx"
   code={`"use client";
 
-  import { useRef } from "react";
-  import { useShine } from "@hazya/shinejs/react";
+  import { Shine } from "@hazya/shinejs/react";
 
   export function TextVsChildrenPreview() {
-    const ref = useRef<HTMLHeadingElement>(null);
-
-    useShine(ref, {
+    const options = {
       light: {
         intensity: 1.2,
         position: "followMouse",
@@ -33,7 +30,7 @@ description: Understand automatic shadow mode selection and when to override it.
         offset: 0.08,
         shadowRGB: { r: 24, g: 41, b: 71 },
       },
-    });
+    };
 
     return (
       <div className="rounded-xl border p-6 dark:invert">
@@ -43,18 +40,18 @@ description: Understand automatic shadow mode selection and when to override it.
               <p className="mb-4 text-sm font-medium text-slate-600">
                 Text target (textShadow)
               </p>
-              <h3 ref={textRef} className="m-0! text-7xl font-black text-slate-200">
+              <Shine as="h3" className="m-0! text-7xl font-black text-slate-200" options={options}>
                 Text Only
-              </h3>
+              </Shine>
             </div>
             <div>
               <p className="mb-4 text-sm font-medium text-slate-600">
                 Children target (boxShadow)
               </p>
-              <div ref={childrenRef} className="grid grid-cols-2 gap-6">
+              <Shine as="div" className="grid grid-cols-2 gap-6" options={options}>
                 <div className="h-16 rounded-xl bg-slate-200" />
                 <div className="h-16 rounded-xl bg-slate-200" />
-              </div>
+              </Shine>
             </div>
           </div>
         </div>
@@ -68,10 +65,34 @@ description: Understand automatic shadow mode selection and when to override it.
 
 ### Usage
 
-```ts
-new Shine(textOnlyElement); // textShadow
-new Shine(containerWithImages); // boxShadow
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  <Shine as="h3">Text Only</Shine>
+  <Shine as="div">
+    <img src="/hero-1.png" alt="" />
+    <img src="/hero-2.png" alt="" />
+  </Shine>;`,
+    },
+    {
+      title: "useShine Hook",
+      language: "tsx",
+      code: `
+  useShine(textOnlyRef); // textShadow
+  useShine(containerWithChildrenRef); // boxShadow`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `
+  new Shine(textOnlyElement); // textShadow
+  new Shine(containerWithImages); // boxShadow`,
+    },
+  ]}
+/>
 
 ## Manual override
 
@@ -83,13 +104,10 @@ You can always force behavior with `shadowProperty`.
   language="tsx"
   code={`"use client";
 
-  import { useRef } from "react";
-  import { useShine } from "@hazya/shinejs/react";
+  import { Shine } from "@hazya/shinejs/react";
 
   export function ChildrenBoxShadowPreview() {
-    const ref = useRef<HTMLHeadingElement>(null);
-
-    useShine(ref, {
+    const options = {
       light: {
         intensity: 1.2,
         position: "followMouse",
@@ -100,7 +118,8 @@ You can always force behavior with `shadowProperty`.
         offset: 0.08,
         shadowRGB: { r: 24, g: 41, b: 71 },
       },
-    });
+      shadowProperty: "boxShadow",
+    };
 
     return (
       <div className="rounded-xl border p-6 dark:invert">
@@ -109,10 +128,10 @@ You can always force behavior with `shadowProperty`.
             <p className="mb-4 text-sm font-medium text-slate-600">
               Children target (boxShadow)
             </p>
-            <div ref={childrenRef} className="grid grid-cols-2 gap-6">
+            <Shine as="div" className="grid grid-cols-2 gap-6" options={options}>
               <div className="h-16 rounded-xl bg-slate-200" />
               <div className="h-16 rounded-xl bg-slate-200" />
-            </div>
+            </Shine>
           </div>
         </div>
       </div>
@@ -125,11 +144,35 @@ You can always force behavior with `shadowProperty`.
 
 ### Usage
 
-```ts
-new Shine(element, {
-  shadowProperty: "boxShadow",
-});
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  <Shine as="div" options={{ shadowProperty: "boxShadow" }}>
+    <div className="card" />
+    <div className="card" />
+  </Shine>;`,
+    },
+    {
+      title: "useShine Hook",
+      language: "tsx",
+      code: `
+  useShine(ref, {
+    shadowProperty: "boxShadow",
+  });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `
+  new Shine(element, {
+    shadowProperty: "boxShadow",
+  });`,
+    },
+  ]}
+/>
 
 <Callout type="info" title="Children grid pattern">
   For card/image grids, point `Shine` at the parent container and let box-shadow mode style each split child wrapper.

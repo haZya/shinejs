@@ -1,7 +1,11 @@
 ---
 title: React useShine Guide
-description: Deep dive on useShine patterns, options, and safe update flows.
+description: Advanced hook patterns, options, and imperative update flows.
 ---
+
+<Callout type="info" title="Default React path">
+  Prefer [`Shine`](/docs/api/shine-component) for most React usage. This guide focuses on cases where the `useShine` hook gives you extra imperative control.
+</Callout>
 
 ## Example
 
@@ -97,4 +101,4 @@ export function InteractiveTitle() {
 
 - The hook initializes once the `ref.current` element exists.
 - When the hook unmounts, it automatically calls `destroy()`.
-- Changing initial config object identity may recreate the instance; use `update()` for frequent runtime changes.
+- Config changes are diffed and applied with `update(...)` on the same instance.

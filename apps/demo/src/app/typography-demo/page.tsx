@@ -1,8 +1,8 @@
 "use client";
 
-import { useShine } from "@hazya/shinejs/react";
+import { Shine } from "@hazya/shinejs/react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import usePrefersDarkMode from "../hooks/use-dark-mode";
 
@@ -81,24 +81,12 @@ type ContentKey = keyof typeof localizedContent;
 
 function TypographyDemo() {
   const isDarkMode = usePrefersDarkMode();
-  const headlineRef = useRef<HTMLHeadingElement>(null);
   const [fontFamily, setFontFamily] = useState<FontFamilyKey>("sans");
   const [fontWeight, setFontWeight] = useState<FontWeightKey>("black");
   const [fontStyle, setFontStyle] = useState<FontStyleKey>("normal");
   const [content, setContent] = useState<ContentKey>("english");
 
-  const { update } = useShine(headlineRef, {
-    light: { intensity: 1.2, position: "followMouse" },
-    config: {
-      blur: 36,
-      opacity: 0.3,
-      offset: 0.08,
-      shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 24, g: 41, b: 71 },
-    },
-  });
-
   const setContentLanguage = (nextContent: ContentKey) => {
-    update({ content: localizedContent[nextContent].value });
     setContent(nextContent);
   };
 
@@ -163,18 +151,27 @@ function TypographyDemo() {
         </div>
       </div>
 
-      <h1
+      <Shine
+        as="h1"
         id="headline"
-        ref={headlineRef}
         style={{
           fontFamily: fontFamilies[fontFamily].value,
           fontStyle: fontStyles[fontStyle].value,
           fontWeight: fontWeights[fontWeight].value,
         }}
         className="mt-16 text-center text-5xl font-extrabold uppercase sm:text-7xl lg:text-9xl"
+        options={{
+          light: { intensity: 1.2, position: "followMouse" },
+          config: {
+            blur: 36,
+            opacity: 0.3,
+            offset: 0.08,
+            shadowRGB: isDarkMode ? { r: 255, g: 255, b: 255 } : { r: 24, g: 41, b: 71 },
+          },
+        }}
       >
-        {localizedContent.english.value}
-      </h1>
+        {localizedContent[content].value}
+      </Shine>
     </div>
   );
 }

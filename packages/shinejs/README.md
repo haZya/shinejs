@@ -13,7 +13,7 @@ A modern ESM-only TypeScript library based on [bigspaceship/shine.js](https://gi
 ## Features
 
 - **🚀 Performance:** Uses `requestAnimationFrame` and CSS hardware acceleration.
-- **⚛️ React First:** Built-in `useShine` hook for seamless integration.
+- **⚛️ React First:** Built-in `Shine` component (recommended) and `useShine` hook.
 - **🎨 Neumorphism Ready:** Easily create soft, interactive neumorphic-text and box shadows.
 - **✨ Interactive:** Shadows can follow the mouse or be animated programmatically.
 - **🛠️ Customizable:** Fine-tune every aspect of the shadow effect.
@@ -29,32 +29,32 @@ npm install @hazya/shinejs
 
 ### React
 
-The easiest way to use `@hazya/shinejs` in a React application is with the `useShine` hook.
+The easiest way to use `@hazya/shinejs` in React is with the `Shine` component.
 
 ```tsx
-import { useShine } from "@hazya/shinejs/react";
-import { useRef } from "react";
+import { Shine } from "@hazya/shinejs/react";
 
 export function App() {
-  const textRef = useRef<HTMLHeadingElement>(null);
-
-  // Initialize the effect
-  useShine(textRef, {
-    light: { position: "followMouse" },
-    config: {
-      numSteps: 8,
-      opacity: 0.3,
-      blur: 40
-    }
-  });
-
   return (
-    <h1 ref={textRef} style={{ fontSize: "4rem", color: "#fff" }}>
+    <Shine
+      as="h1"
+      options={{
+        light: { position: "followMouse" },
+        config: {
+          numSteps: 8,
+          opacity: 0.3,
+          blur: 40
+        }
+      }}
+      style={{ fontSize: "4rem", color: "#fff" }}
+    >
       Shining Bright
-    </h1>
+    </Shine>
   );
 }
 ```
+
+Use `useShine` when you need imperative control over lifecycle or runtime updates.
 
 ### Vanilla JavaScript
 
@@ -74,9 +74,17 @@ const shine = new Shine(element, {
 
 ## API Reference
 
+### `<Shine as? options?>`
+
+Recommended React API.
+
+- Renders a semantic HTML element with `as` (`"h1"`, `"p"`, `"div"`, etc.).
+- Creates one Shine instance on mount and destroys on unmount.
+- Applies prop changes through diffed `update(...)` calls.
+
 ### `useShine(ref, options)`
 
-React hook to apply the effect to a DOM element.
+Advanced React hook to apply the effect to a specific DOM ref.
 
 - `ref`: `React.RefObject<HTMLElement>`
 - `options`: `ShineOptions` (optional)

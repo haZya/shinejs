@@ -5,6 +5,39 @@ description: Update content, color, and shadow parameters at runtime.
 
 Use `update()` for live changes.
 
+`useShine` is the imperative React path. If you prefer declarative React, update `<Shine options={...}>` props from state.
+
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  const [text, setText] = useState("Live Updates");
+
+  <Shine as="h2" options={{ light: { position: "followMouse" } }}>
+    {text}
+  </Shine>;`,
+    },
+    {
+      title: "useShine Hook",
+      language: "tsx",
+      code: `
+  const ref = useRef<HTMLHeadingElement>(null);
+  const { update } = useShine(ref, { light: { position: "followMouse" } });
+
+  update({ content: "Live Updates" });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `
+  const shine = new Shine(element, { light: { position: "followMouse" } });
+  shine.update({ content: "Live Updates" });`,
+    },
+  ]}
+/>
+
 ## Update content text
 
 ### Overview
@@ -13,9 +46,30 @@ Use `update()` for live changes.
 
 ### Usage
 
-```ts
-update({ content: "Hello World" });
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  const [text, setText] = useState("Live Updates");
+
+  <Shine as="h2">{text}</Shine>;
+
+  setText("Hello World");`,
+    },
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `update({ content: "Hello World" });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `shine.update({ content: "Hello World" });`,
+    },
+  ]}
+/>
 
 ## Update config values
 
@@ -25,14 +79,47 @@ update({ content: "Hello World" });
 
 ### Usage
 
-```ts
-update({
-  config: {
-    offset: 0.015,
-    offsetPow: 0,
-  },
-});
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  const [options, setOptions] = useState<ShineOptions>({
+    config: { offset: 0.08, offsetPow: 1.8 },
+  });
+
+  <Shine as="h2" options={options}>Live Updates</Shine>;
+
+  setOptions(prev => ({
+    ...prev,
+    config: { ...prev.config, offset: 0.015, offsetPow: 0 },
+  }));`,
+    },
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `
+  update({
+    config: {
+      offset: 0.015,
+      offsetPow: 0,
+    },
+  });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `
+  shine.update({
+    config: {
+      offset: 0.015,
+      offsetPow: 0,
+    },
+  });`,
+    },
+  ]}
+/>
 
 ## Update light behavior
 
@@ -42,34 +129,73 @@ update({
 
 ### Usage
 
-```ts title="Follow Mouse"
-update({
-  light: {
-    position: "followMouse",
-  },
-});
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  const [mode, setMode] = useState<"followMouse" | "fixed">("followMouse");
 
-```ts title="Fixed Point"
-update({
-  light: {
-    intensity: 2,
-    position: { x: 320, y: 140 },
-  },
-});
-```
-
-```ts title="Auto Pilot"
-const t = Date.now() * 0.00025 * Math.PI * 2;
-update({
-  light: {
-    position: {
-      x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
-      y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+  <Shine
+    as="h2"
+    options={{
+      light: mode === "followMouse"
+        ? { position: "followMouse" }
+        : { intensity: 2, position: { x: 320, y: 140 } },
+    }}
+  >
+    Live Updates
+  </Shine>;`,
     },
-  },
-});
-```
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `
+  update({ light: { position: "followMouse" } });
+
+  update({
+    light: {
+      intensity: 2,
+      position: { x: 320, y: 140 },
+    },
+  });
+
+  const t = Date.now() * 0.00025 * Math.PI * 2;
+  update({
+    light: {
+      position: {
+        x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+        y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+      },
+    },
+  });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `
+  shine.update({ light: { position: "followMouse" } });
+
+  shine.update({
+    light: {
+      intensity: 2,
+      position: { x: 320, y: 140 },
+    },
+  });
+
+  const t = Date.now() * 0.00025 * Math.PI * 2;
+  shine.update({
+    light: {
+      position: {
+        x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+        y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+      },
+    },
+  });`,
+    },
+  ]}
+/>
 
 ## Update Color (`shadowRGB`)
 
@@ -79,10 +205,42 @@ update({
 
 ### Usage
 
-```ts
-update({
-  config: {
-    shadowRGB: { r: 143, g: 0, b: 255 },
-  },
-});
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  const [options, setOptions] = useState<ShineOptions>({
+    config: { shadowRGB: { r: 255, g: 0, b: 63 } },
+  });
+
+  <Shine as="h2" options={options}>Live Updates</Shine>;
+
+  setOptions(prev => ({
+    ...prev,
+    config: { ...prev.config, shadowRGB: { r: 143, g: 0, b: 255 } },
+  }));`,
+    },
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `
+  update({
+    config: {
+      shadowRGB: { r: 143, g: 0, b: 255 },
+    },
+  });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `
+  shine.update({
+    config: {
+      shadowRGB: { r: 143, g: 0, b: 255 },
+    },
+  });`,
+    },
+  ]}
+/>

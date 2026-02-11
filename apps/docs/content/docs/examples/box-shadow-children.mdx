@@ -9,20 +9,15 @@ This pattern mirrors [`apps/demo/src/app/auto-pilot-children/page.tsx`](https://
   language="tsx"
   code={`"use client";
 
-  import { useRef } from "react";
-  import { useShine } from "@hazya/shinejs/react";
+  import { Shine } from "@hazya/shinejs/react";
 
   export function ImageGridShadow() {
-    const ref = useRef<HTMLDivElement>(null);
-
-    useShine(ref); // Will use "boxShadow" automatically
-
     return (
-      <div ref={ref} className="grid grid-cols-3 gap-4">
+      <Shine as="div" className="grid grid-cols-3 gap-4">
         <img src="/img-1.jpg" alt="1" />
         <img src="/img-2.jpg" alt="2" />
         <img src="/img-3.jpg" alt="3" />
-      </div>
+      </Shine>
     );
   }
 `}

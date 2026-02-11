@@ -13,9 +13,28 @@ description: Follow the mouse, set fixed positions, or animate custom paths.
 
 ### Usage
 
-```ts
-update({ light: { position: "followMouse" } });
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  <Shine as="h2" options={{ light: { position: "followMouse" } }}>
+    Follow Mouse
+  </Shine>;`,
+    },
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `update({ light: { position: "followMouse" } });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `shine.update({ light: { position: "followMouse" } });`,
+    },
+  ]}
+/>
 
 ## Auto-pilot animation
 
@@ -25,23 +44,66 @@ update({ light: { position: "followMouse" } });
 
 ### Usage
 
-```ts
-const animate = () => {
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  const [lightPosition, setLightPosition] = useState({ x: 0, y: 0 });
+
+  <Shine as="h2" options={{ light: { position: lightPosition } }}>
+    Auto Pilot
+  </Shine>;
+
   const t = Date.now() * 0.00025 * Math.PI * 2;
-  update({
-    light: {
-      position: {
-        x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
-        y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
-      },
+  setLightPosition({
+    x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+    y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+  });`,
     },
-  });
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `
+  const animate = () => {
+    const t = Date.now() * 0.00025 * Math.PI * 2;
+    update({
+      light: {
+        position: {
+          x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+          y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+        },
+      },
+    });
 
-  requestAnimationFrame(animate);
-};
+    requestAnimationFrame(animate);
+  };
 
-requestAnimationFrame(animate);
-```
+  requestAnimationFrame(animate);`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `
+  const animate = () => {
+    const t = Date.now() * 0.00025 * Math.PI * 2;
+    shine.update({
+      light: {
+        position: {
+          x: window.innerWidth * 0.5 + window.innerWidth * 0.4 * Math.cos(t),
+          y: window.innerHeight * 0.5 + window.innerHeight * 0.4 * Math.sin(t * 0.7),
+        },
+      },
+    });
+
+    requestAnimationFrame(animate);
+  };
+
+  requestAnimationFrame(animate);`,
+    },
+  ]}
+/>
 
 ## Fixed point
 
@@ -51,9 +113,28 @@ requestAnimationFrame(animate);
 
 ### Usage
 
-```ts
-update({ light: { position: { x: 480, y: 220 } } });
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  <Shine as="h2" options={{ light: { position: { x: 480, y: 220 } } }}>
+    Fixed Point
+  </Shine>;`,
+    },
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `update({ light: { position: { x: 480, y: 220 } } });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `shine.update({ light: { position: { x: 480, y: 220 } } });`,
+    },
+  ]}
+/>
 
 ## Intensity
 
@@ -63,8 +144,29 @@ update({ light: { position: { x: 480, y: 220 } } });
 
 ### Usage
 
-```ts
-update({ light: { intensity: 2 } });
-```
+<PreviewCodeTabs
+  codes={[
+    {
+      title: "Shine Component",
+      language: "tsx",
+      code: `
+  <Shine as="h2" options={{ light: { intensity: 2, position: "followMouse" } }}>
+    High Intensity
+  </Shine>;`,
+    },
+    {
+      title: "useShine Hook",
+      language: "ts",
+      code: `update({ light: { intensity: 2 } });`,
+    },
+    {
+      title: "Shine Class",
+      language: "ts",
+      code: `shine.update({ light: { intensity: 2 } });`,
+    },
+  ]}
+/>
 
-Higher intensity amplifies perceived depth. Start around `1.0` and increase gradually.
+<Callout type="info" title="Recommendation">
+  Higher intensity amplifies perceived depth. Start around `1.0` and increase gradually.
+</Callout>

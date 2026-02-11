@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactElement, ReactNode, Ref } from "react";
+import type { ComponentPropsWithoutRef, ReactElement, ReactNode, Ref } from "react";
 
 import { createElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -9,15 +9,15 @@ import { createUpdatePayload } from "./options-diff";
 
 type ShineTagName = keyof HTMLElementTagNameMap;
 
-export type ShineProps = {
+export type ShineProps<T extends ShineTagName = "div"> = {
   /** HTML tag to render, for example `h1`, `h2`, `p`, or `div`. */
-  as?: ShineTagName;
-  /** Shine configuration applied on mount and via diffed updates. */
-  config?: ShineOptions;
-  /** Element content. Text/number children are mapped to `config.content`. */
+  as?: T;
+  /** Shine options applied on mount and via diffed updates. */
+  options?: ShineOptions;
+  /** Element content. Text/number children are mapped to `options.content`. */
   children?: ReactNode;
-  ref?: Ref<HTMLElement>;
-} & Omit<HTMLAttributes<HTMLElement>, "children">;
+  ref?: Ref<HTMLElementTagNameMap[T]>;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "children" | "ref">;
 
 /**
  * React component wrapper for Shine that keeps a single imperative instance.
@@ -25,7 +25,13 @@ export type ShineProps = {
  * It creates `Shine` once when mounted, destroys on unmount, and applies
  * prop changes through diffed `shine.update(...)` calls.
  */
-export function Shine({ as = "div", config, children, ref, ...props }: ShineProps): ReactElement {
+export function Shine<T extends ShineTagName = "div">({
+  as = "div" as T,
+  options,
+  children,
+  ref,
+  ...props
+}: ShineProps<T>): ReactElement {
   const [element, setElement] = useState<HTMLElement | null>(null);
   const shineRef = useRef<ShineCore | null>(null);
   const latestOptionsRef = useRef<ShineOptions | undefined>(undefined);
@@ -34,13 +40,13 @@ export function Shine({ as = "div", config, children, ref, ...props }: ShineProp
   const mergedConfig = useMemo<ShineOptions | undefined>(() => {
     if (typeof children === "string" || typeof children === "number") {
       return {
-        ...config,
+        ...options,
         content: String(children),
       };
     }
 
-    return config;
-  }, [config, children]);
+    return options;
+  }, [options, children]);
 
   const setRefs = useCallback((node: HTMLElement | null) => {
     setElement(node);
@@ -52,10 +58,10 @@ export function Shine({ as = "div", config, children, ref, ...props }: ShineProp
     }
 
     if (typeof ref === "function") {
-      ref(element);
+      ref(element as HTMLElementTagNameMap[T] | null);
     }
     else {
-      ref.current = element;
+      ref.current = element as HTMLElementTagNameMap[T] | null;
     }
 
     return () => {
@@ -109,7 +115,7 @@ export function Shine({ as = "div", config, children, ref, ...props }: ShineProp
   }, [mergedConfig]);
 
   return createElement(as, {
-    ...props,
+    ...(props as ComponentPropsWithoutRef<T>),
     ref: setRefs,
     children,
   });
