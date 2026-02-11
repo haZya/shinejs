@@ -10,20 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24.x
       - name: Install commitlint
         run: npm install conventional-changelog-conventionalcommits commitlint@latest
       - name: Validate PR Title
         run: |
-          # Simulate commit message from PR title and body
+          # Simulate commit message from PR title only
           echo "$PR_TITLE" > commit-msg
-          echo "" >> commit-msg  # Add empty line between subject and body
-          echo "$PR_BODY" >> commit-msg
           npx commitlint --verbose --edit commit-msg
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
-          PR_BODY: ${{ github.event.pull_request.body }}
