@@ -40,8 +40,8 @@ export const sharedRules: TypedFlatConfigItem = {
     "ts/consistent-type-definitions": ["error", "type"],
     "no-console": ["warn", { allow: ["info", "warn", "error"] }],
     "antfu/no-top-level-await": ["off"],
-    "node/prefer-global/process": ["off"],
-    "node/no-process-env": ["error"],
+    "n/prefer-global/process": ["off"],
+    "n/no-process-env": ["error"],
     "perfectionist/sort-imports": [
       "error",
       {
