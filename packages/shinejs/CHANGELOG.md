@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.2.0](https://github.com/haZya/shinejs/compare/shinejs-v1.1.0...shinejs-v1.2.0) (2026-02-11)
+
+
+### Features
+
+* add Shine component as the preferred way to use shinejs with react ([00bf815](https://github.com/haZya/shinejs/commit/00bf815de4b7320997bf1be8f3e20bed06cfec29))
+
+
+### Bug Fixes
+
+* unintended updateContent() call after rerender ([e9fe99c](https://github.com/haZya/shinejs/commit/e9fe99cbbd3a54746d2b1af8c99cf0590af6baa0))
+
+
+### Refactors
+
+* improve shinejs/react ([c438664](https://github.com/haZya/shinejs/commit/c438664c4bfc13c0e547600a902b2303e0002d05))
+
+
+### Docs
+
+* update docs and demos to add new Shine component usage ([217cc8e](https://github.com/haZya/shinejs/commit/217cc8ea7af86463578c75effcdb9c43cffe2c85))
+
 ## [1.1.0](https://github.com/haZya/shinejs/compare/shinejs-v1.0.0...shinejs-v1.1.0) (2026-02-09)
 
 
