@@ -14,6 +14,7 @@ vi.mock("../index", async (importOriginal) => {
     Shine: vi.fn(function (this: any) {
       this.update = vi.fn();
       this.destroy = vi.fn();
+      this.updateContent = vi.fn();
     }),
   };
 });
@@ -121,5 +122,24 @@ describe("useShine", () => {
 
     expect(Shine).toHaveBeenCalledTimes(1);
     expect(instance.update).toHaveBeenCalledWith({ config: { opacity: 0.2 } });
+  });
+
+  it("should not call updateContent after imperative content update on rerender", async () => {
+    await act(async () => {
+      root.render(<TestComponent config={{ light: { position: "followMouse" } }} />);
+    });
+
+    const instance = (Shine as any).mock.results[0].value;
+
+    act(() => {
+      hookResult.update({ content: "Hello World" });
+    });
+
+    await act(async () => {
+      root.render(<TestComponent config={{ light: { position: "followMouse" } }} />);
+    });
+
+    expect(instance.update).toHaveBeenCalledWith({ content: "Hello World" });
+    expect(instance.updateContent).not.toHaveBeenCalled();
   });
 });

@@ -72,10 +72,6 @@ export function useShine(
   const update = useCallback((newConfig: ShineOptions) => {
     if (shineInstanceRef.current) {
       shineInstanceRef.current.update(newConfig);
-      previousOptionsRef.current = {
-        ...previousOptionsRef.current,
-        ...newConfig,
-      };
     }
   }, []);
 
