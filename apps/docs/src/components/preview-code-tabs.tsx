@@ -47,8 +47,8 @@ export async function PreviewCodeTabs({
         </Tab>
       )}
       {highlightedCodes.map((highlightedCode, index) => (
-        <Tab key={codeItems[index].title}>
-          <div className="bg-fd-secondary/35 relative overflow-auto [&_.shiki]:m-0 [&_.shiki]:rounded-none [&_.shiki]:border-0 [&_.shiki]:p-4 [&_.shiki]:text-sm">
+        <Tab key={codeItems[index].title} className="relative">
+          <div className="bg-fd-secondary/35 overflow-auto [&_.shiki]:m-0 [&_.shiki]:rounded-none [&_.shiki]:border-0 [&_.shiki]:p-4 [&_.shiki]:text-sm">
             <CopyCodeButton code={codeItems[index].code.trim()} />
             {highlightedCode}
           </div>
