@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { highlight } from "fumadocs-core/highlight";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 
+import { CopyCodeButton } from "@/components/copy-code-button";
+
 type PreviewCodeTabsProps = {
   code?: string;
   language?: string;
@@ -46,7 +48,8 @@ export async function PreviewCodeTabs({
       )}
       {highlightedCodes.map((highlightedCode, index) => (
         <Tab key={codeItems[index].title}>
-          <div className="bg-fd-secondary/35 overflow-auto [&_.shiki]:m-0 [&_.shiki]:rounded-none [&_.shiki]:border-0 [&_.shiki]:p-4 [&_.shiki]:text-sm">
+          <div className="bg-fd-secondary/35 relative overflow-auto [&_.shiki]:m-0 [&_.shiki]:rounded-none [&_.shiki]:border-0 [&_.shiki]:p-4 [&_.shiki]:text-sm">
+            <CopyCodeButton code={codeItems[index].code.trim()} />
             {highlightedCode}
           </div>
         </Tab>
