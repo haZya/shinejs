@@ -31,13 +31,13 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@fumadocs/mdx-remote": "^1.4.1",
+    "@fumadocs/mdx-remote": "^1.4.6",
     "@hazya/shinejs": "*",
     "clsx": "^2.1.1",
-    "fumadocs-core": "16.5.1",
-    "fumadocs-mdx": "14.2.6",
-    "fumadocs-ui": "16.5.1",
-    "lucide-react": "^0.544.0",
+    "fumadocs-core": "16.6.8",
+    "fumadocs-mdx": "14.2.9",
+    "fumadocs-ui": "16.6.8",
+    "lucide-react": "^0.575.0",
     "next": "16.1.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -50,7 +50,7 @@
     "@types/mdx": "^2.0.13",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint-plugin-better-tailwindcss": "^4.1.1",
+    "eslint-plugin-better-tailwindcss": "^4.3.1",
     "tailwindcss": "^4"
   }
 }
