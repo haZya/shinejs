@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.1](https://github.com/haZya/shinejs/compare/shinejs-v1.2.0...shinejs-v1.2.1) (2026-06-19)
+
+
+### Chores
+
+* **deps:** bump the npm_and_yarn group across 2 directories with 1 update ([#22](https://github.com/haZya/shinejs/issues/22)) ([aae6be3](https://github.com/haZya/shinejs/commit/aae6be3a80e3434b3ae7bb02893bfde96328d1d2))
+* **tsconfig:** add moduleResolution option to compilerOptions ([4ac7373](https://github.com/haZya/shinejs/commit/4ac737332b4bc387ec69141a50f3a38cba4ffebb))
+* update dependencies and improve eslint configuration ([0a29fed](https://github.com/haZya/shinejs/commit/0a29fede3ee4d7119445d8c5bbb45b170390ae1b))
+
 ## [1.2.0](https://github.com/haZya/shinejs/compare/shinejs-v1.1.0...shinejs-v1.2.0) (2026-02-11)
 
 
