@@ -34,16 +34,16 @@
   "dependencies": {
     "@hazya/shinejs": "*",
     "next": "16.2.9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^16.1.6",
+    "@next/eslint-plugin-next": "^16.2.9",
     "@shinejs/eslint-config": "*",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.3.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint-plugin-better-tailwindcss": "^4.1.1",
+    "eslint-plugin-better-tailwindcss": "^4.6.0",
     "tailwindcss": "^4"
   }
 }
