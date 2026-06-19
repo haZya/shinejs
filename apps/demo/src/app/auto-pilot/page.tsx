@@ -23,7 +23,7 @@ function AutoPilotDemo() {
   useEffect(() => {
     if (shine && update) {
       const animate = () => {
-        const time = new Date().getTime();
+        const time = Date.now();
         const speed = 0.00025; // 1 = 1000 rotations/s
         const phase = time * speed * 2.0 * Math.PI;
         const radiusX = window.innerWidth * 0.5;

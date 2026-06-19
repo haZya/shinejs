@@ -117,6 +117,5 @@ export function Shine<T extends ShineTagName = "div">({
   return createElement(as, {
     ...(props as ComponentPropsWithoutRef<T>),
     ref: setRefs,
-    children,
-  });
+  }, children);
 }

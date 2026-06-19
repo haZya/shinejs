@@ -26,7 +26,7 @@ function AutoPilotChildrenDemo() {
   useEffect(() => {
     if (shine) {
       const animate = () => {
-        const time = new Date().getTime();
+        const time = Date.now();
         const speed = 0.00025;
         const phase = time * speed * 2.0 * Math.PI;
         const radiusX = window.innerWidth * 0.5;

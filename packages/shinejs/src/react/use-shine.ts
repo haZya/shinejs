@@ -37,6 +37,7 @@ export function useShine(
     const instance = new Shine(element, latestOptionsRef.current);
     shineInstanceRef.current = instance;
     previousOptionsRef.current = latestOptionsRef.current;
+    // eslint-disable-next-line react/set-state-in-effect -- Exposes the mounted imperative instance to hook consumers.
     setShineInstance(instance);
 
     return () => {

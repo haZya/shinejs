@@ -91,7 +91,7 @@ export class Splitter {
         this.wordElements.push(wordElement);
       }
 
-      if (letter.match(/\s/)) {
+      if (/\s/.test(letter)) {
         const spacerElement = document.createElement("span");
         spacerElement.className = `${this.classPrefix}spacer`;
         spacerElement.innerHTML = letter;
@@ -106,7 +106,7 @@ export class Splitter {
       this.elements.push(letterElement);
       wordElement.appendChild(letterElement);
 
-      if (letter.match(/\W/)) {
+      if (/\W/.test(letter)) {
         wordElement = null;
       }
     }
