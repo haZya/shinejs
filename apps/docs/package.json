@@ -35,7 +35,7 @@
     "@hazya/shinejs": "*",
     "clsx": "^2.1.1",
     "fumadocs-core": "16.5.1",
-    "fumadocs-mdx": "14.2.6",
+    "fumadocs-mdx": "14.3.2",
     "fumadocs-ui": "16.5.1",
     "lucide-react": "^0.544.0",
     "next": "16.2.9",
